@@ -1,11 +1,14 @@
 
 package domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -38,6 +41,10 @@ public class Chorbi extends Actor {
 		super();
 		// TODO Auto-generated constructor stub
 		this.banned = false;
+		this.receivedChirps = new ArrayList<Chirp>();
+		this.sentChirps = new ArrayList<Chirp>();
+		this.sentLikes = new ArrayList<Likes>();
+		this.receivedLikes = new ArrayList<Likes>();
 	}
 
 
@@ -101,4 +108,58 @@ public class Chorbi extends Actor {
 		this.banned = banned;
 	}
 
+
+	private CreditCard	creditCard;
+
+
+	@OneToOne
+	public CreditCard getCreditCard() {
+		return this.creditCard;
+	}
+
+	public void setCreditCard(final CreditCard creditCard) {
+		this.creditCard = creditCard;
+	}
+
+
+	private Collection<Likes>	sentLikes;
+	private Collection<Likes>	receivedLikes;
+	private Collection<Chirp>	sentChirps;
+	private Collection<Chirp>	receivedChirps;
+
+
+	public Collection<Likes> getSentLikes() {
+		return this.sentLikes;
+	}
+
+	public void setSentLikes(final Collection<Likes> sentLikes) {
+		this.sentLikes = sentLikes;
+	}
+
+	public Collection<Likes> getReceivedLikes() {
+		return this.receivedLikes;
+	}
+
+	public void setReceivedLikes(final Collection<Likes> receivedLikes) {
+		this.receivedLikes = receivedLikes;
+	}
+
+	public Collection<Chirp> getSentChirps() {
+		return this.sentChirps;
+	}
+
+	public void setSentChirps(final Collection<Chirp> sentChirps) {
+		this.sentChirps = sentChirps;
+	}
+
+	public Collection<Chirp> getReceivedChirps() {
+		return this.receivedChirps;
+	}
+
+	public void setReceivedChirps(final Collection<Chirp> receivedChirps) {
+		this.receivedChirps = receivedChirps;
+	}
+
+
+	private Collection<Results>	results;
 }
