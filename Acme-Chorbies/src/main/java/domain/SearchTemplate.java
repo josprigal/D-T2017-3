@@ -1,6 +1,8 @@
 
 package domain;
 
+import javax.persistence.OneToOne;
+
 import domain.Chorbi.Gender;
 import domain.Chorbi.Relationship;
 
@@ -48,6 +50,19 @@ public class SearchTemplate extends DomainEntity {
 
 	public void setKeyword(final String keyword) {
 		this.keyword = keyword;
+	}
+
+
+	private Results	results;
+
+
+	@OneToOne
+	public Results getResults() {
+		return this.results;
+	}
+
+	public void setResults(final Results results) {
+		this.results = results;
 	}
 
 }

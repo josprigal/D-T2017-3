@@ -161,5 +161,26 @@ public class Chorbi extends Actor {
 	}
 
 
-	private Collection<Results>	results;
+	private Coordinates		coordinates;
+	private SearchTemplate	searchTemplate;
+
+
+	@OneToOne
+	public Coordinates getCoordinates() {
+		return this.coordinates;
+	}
+
+	public void setCoordinates(final Coordinates coordinates) {
+		this.coordinates = coordinates;
+	}
+
+	@OneToOne
+	public SearchTemplate getSearchTemplate() {
+		return this.searchTemplate;
+	}
+
+	public void setSearchTemplate(final SearchTemplate searchTemplate) {
+		this.searchTemplate = searchTemplate;
+	}
+
 }
