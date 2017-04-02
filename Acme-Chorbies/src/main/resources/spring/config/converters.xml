@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * converters.xml
- *
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * converters.xml * * Copyright (C) 2017 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
+	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
@@ -18,10 +12,38 @@
 	">
 
 	<util:list id="converters">
-		<!-- 
-			Add your own converters using entries of the following form: 
-			<bean class="converters.Class1ToClass2" /> 
-		-->
-	</util:list>
 	
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		
+		<bean class="converters.ChirpToStringConverter" />
+		<bean class="converters.StringToChirpConverter" />
+
+		<bean class="converters.ChorbiToStringConverter" />
+		<bean class="converters.StringToChorbiConverter" />
+
+		<bean class="converters.ConfigurationToStringConverter" />
+		<bean class="converters.StringToConfigurationConverter" />
+
+		<bean class="converters.CoordinatesToStringConverter" />
+		<bean class="converters.StringToCoordinatesConverter" />
+	
+		<bean class="converters.CreditCardToStringConverter" />
+		<bean class="converters.StringToCreditCardConverter" />
+
+		<bean class="converters.LikesToStringConverter" />
+		<bean class="converters.StringToLikesConverter" />
+
+		<bean class="converters.ResultsToStringConverter" />
+		<bean class="converters.StringToResultsConverter" />
+
+		<bean class="converters.SearchTemplateToStringConverter" />
+		<bean class="converters.StringToSearchTemplateConverter" />
+
+
+	</util:list>
+
 </beans>
