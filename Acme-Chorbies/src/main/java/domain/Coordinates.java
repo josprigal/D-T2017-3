@@ -1,4 +1,3 @@
-
 package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -10,12 +9,10 @@ public class Coordinates extends DomainEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	private String	city;
-	private String	country;
-	private String	state;
-	private String	province;
-
+	private String city;
+	private String country;
+	private String state;
+	private String province;
 
 	@NotBlank
 	public String getCity() {
@@ -25,6 +22,7 @@ public class Coordinates extends DomainEntity {
 	public void setCity(final String city) {
 		this.city = city;
 	}
+
 	@NotBlank
 	public String getCountry() {
 		return this.country;
@@ -33,6 +31,7 @@ public class Coordinates extends DomainEntity {
 	public void setCountry(final String country) {
 		this.country = country;
 	}
+
 	@NotBlank
 	public String getState() {
 		return this.state;

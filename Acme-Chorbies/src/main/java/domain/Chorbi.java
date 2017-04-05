@@ -1,4 +1,3 @@
-
 package domain;
 
 import java.util.ArrayList;
@@ -36,7 +35,6 @@ public class Chorbi extends Actor {
 		}
 	}
 
-
 	public Chorbi() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -47,14 +45,12 @@ public class Chorbi extends Actor {
 		this.receivedLikes = new ArrayList<Likes>();
 	}
 
-
-	private String			description;
-	private Date			birth;
-	private boolean			banned;
-	private String			picture;
-	private Relationship	relationship;
-	private Gender			gender;
-
+	private String description;
+	private Date birth;
+	private boolean banned;
+	private String picture;
+	private Relationship relationship;
+	private Gender gender;
 
 	@NotNull
 	public String getDescription() {
@@ -73,6 +69,7 @@ public class Chorbi extends Actor {
 	public void setBirth(final Date birth) {
 		this.birth = birth;
 	}
+
 	@NotBlank
 	@URL
 	public String getPicture() {
@@ -82,6 +79,7 @@ public class Chorbi extends Actor {
 	public void setPicture(final String picture) {
 		this.picture = picture;
 	}
+
 	@NotNull
 	public Relationship getRelationship() {
 		return this.relationship;
@@ -99,6 +97,7 @@ public class Chorbi extends Actor {
 	public void setGender(final Gender gender) {
 		this.gender = gender;
 	}
+
 	@NotNull
 	public boolean isBanned() {
 		return this.banned;
@@ -108,9 +107,7 @@ public class Chorbi extends Actor {
 		this.banned = banned;
 	}
 
-
-	private CreditCard	creditCard;
-
+	private CreditCard creditCard;
 
 	@OneToOne
 	public CreditCard getCreditCard() {
@@ -121,12 +118,10 @@ public class Chorbi extends Actor {
 		this.creditCard = creditCard;
 	}
 
-
-	private Collection<Likes>	sentLikes;
-	private Collection<Likes>	receivedLikes;
-	private Collection<Chirp>	sentChirps;
-	private Collection<Chirp>	receivedChirps;
-
+	private Collection<Likes> sentLikes;
+	private Collection<Likes> receivedLikes;
+	private Collection<Chirp> sentChirps;
+	private Collection<Chirp> receivedChirps;
 
 	public Collection<Likes> getSentLikes() {
 		return this.sentLikes;
@@ -160,10 +155,8 @@ public class Chorbi extends Actor {
 		this.receivedChirps = receivedChirps;
 	}
 
-
-	private Coordinates		coordinates;
-	private SearchTemplate	searchTemplate;
-
+	private Coordinates coordinates;
+	private SearchTemplate searchTemplate;
 
 	@OneToOne
 	public Coordinates getCoordinates() {
