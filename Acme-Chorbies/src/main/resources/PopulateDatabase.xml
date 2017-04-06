@@ -49,4 +49,42 @@
 	
 	<!-- Other domain beans come here -->	
 	
+	
+	<bean id="results1" class="domain.Results">
+		<property name="moment" value="11/11/2016" />
+		
+	</bean>
+	
+	<bean id="results2" class="domain.Results">
+		<property name="moment" value="2/2/2017" />
+		
+	</bean>
+	
+	<bean id="results3" class="domain.Results">
+		<property name="moment" value="1/1/2017" />
+		
+	</bean>
+	
+	<bean id="likes1" class="domain.Likes">
+		<property name="moment" value="3/3/2017" />
+		<property name="comment" value="Comment 1" />
+	</bean>
+	
+	<bean id="likes2" class="domain.Likes">
+		<property name="moment" value="1/1/2017" />
+		<property name="comment" value="Comment 2" />
+	</bean>
+	
+	<bean id="likes3" class="domain.Likes">
+		<property name="moment" value="2/2/2017" />
+		<property name="comment" value="Comment 2" />
+	</bean>
+	
+	
+	<bean id="chirp1" class="domain.Chirp">
+		<property name="sent" value="1/1/2017" />
+		<property name="subject" value="Subject 1" />
+		<property name="text" value="Text 1" />
+		<property name="attachments" value="https://qph.ec.quoracdn.net/main-thumb-t-1800-200-lOn8kKfhqfcTcKdt2GwaLfGnC0jEjHmV.jpeg" />
+	</bean>
 </beans>
