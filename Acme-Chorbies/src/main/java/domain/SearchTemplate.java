@@ -1,11 +1,16 @@
 
 package domain;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 import domain.Chorbi.Gender;
 import domain.Chorbi.Relationship;
 
+@Entity
+@Access(AccessType.PROPERTY)
 public class SearchTemplate extends DomainEntity {
 
 	public SearchTemplate() {

@@ -1,7 +1,14 @@
+
 package domain;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+@Entity
+@Access(AccessType.PROPERTY)
 public class Coordinates extends DomainEntity {
 
 	public Coordinates() {
@@ -9,10 +16,12 @@ public class Coordinates extends DomainEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	private String city;
-	private String country;
-	private String state;
-	private String province;
+
+	private String	city;
+	private String	country;
+	private String	state;
+	private String	province;
+
 
 	@NotBlank
 	public String getCity() {
