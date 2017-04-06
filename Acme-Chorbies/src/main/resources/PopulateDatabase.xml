@@ -21,12 +21,12 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
+		<property name="username" value="chorbi" />
 		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="CHORBI" />
 				</bean>
 			</list>
 		</property>
@@ -41,7 +41,7 @@
 					<property name="authority" value="ADMIN" />
 				</bean>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="CHORBI" />
 				</bean>
 			</list>
 		</property>
@@ -155,6 +155,129 @@
 		<property name="results" ref="results3" />
 	</bean>
 	
+	
+	
+	<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="Administrator" />
+		<property name="surname" value="Administrator" />
+		<property name="email" value="admin@admin.com" />
+		<property name="phone" value="123456789" />
+		<property name="userAccount" ref="userAccount1" />
+		
+	</bean>
+	
+	
+	
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="brandName" value="VISA" />
+		<property name="holderName" value="Holder Name 1" />
+		<property name="number" value="4916410161778424" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="1999" />
+		<property name="cvvCode" value="103" />
+		<property name="chorbi" ref="chorbi1" />
+		
+
+	</bean>
+	
+	<bean id="creditCard2" class="domain.CreditCard">
+		
+		<property name="brandName" value="VISA" />
+		<property name="holderName" value="Holder Name 1" />
+		<property name="number" value="4916410161778424" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="1999" />
+		<property name="cvvCode" value="103" />
+		
+		
+
+	</bean>
+	
+	<bean id="chorbi1" class="domain.Chorbi">
+		<property name="name" value="John" />
+		<property name="birth" value="1/1/1990" />
+		<property name="surname" value="Cena" />
+		<property name="email" value="john@love.com" />
+		<property name="phone" value="123456789" />
+		<property name="userAccount" ref="userAccount2" />
+		<property name="picture" value="https://upload.wikimedia.org/wikipedia/commons/7/77/John_Cena_May_2016.jpg" />
+		<property name="description" value="You Can't See Me!" />
+		<property name="relationship" value="LOVE" />
+		<property name="gender" value="MALE" />
+		<property name="banned" value="false" />
+		<!-- <property name="sentChirps">
+			<list>
+			<ref bean="chirp3" />
+			</list>
+		</property>
+		<property name="receivedChirps">
+			<list>
+				<ref bean="chirp1" />
+				<ref bean="chirp2" />
+			</list>
+		</property>
+		
+		<property name="sentLikes">
+			<list>
+			<ref bean="likes3" />
+			</list>
+		</property>
+		<property name="receivedLikes">
+			<list>
+				<ref bean="likes1" />
+				<ref bean="likes2" />
+			</list>
+		</property> -->
+		<property name="creditCard" ref="creditCard2" />
+		<property name="coordinates" ref="coordinates1" />
+		<property name="searchTemplate" ref="searchTemplate1" />
+		
+		
+		
+	</bean>
+	
+	<bean id="chorbi2" class="domain.Chorbi">
+		<property name="name" value="Leticia" />
+		<property name="birth" value="1/1/1990" />
+		<property name="surname" value="Sabater" />
+		<property name="email" value="leticia@love.com" />
+		<property name="phone" value="123456789" />
+		<property name="userAccount" ref="userAccount3" />
+		<property name="picture" value="http://www.diariosur.es/noticias/201505/25/media/cortadas/leticia-sabater--575x323.jpg" />
+		<property name="description" value="Salchipapa" />
+		<property name="relationship" value="LOVE" />
+		<property name="gender" value="FEMALE" />
+		<property name="banned" value="false" />
+		<!-- <property name="sentChirps">
+			<list>
+			<ref bean="chirp3" />
+			</list>
+		</property>
+		<property name="receivedChirps">
+			<list>
+				<ref bean="chirp1" />
+				<ref bean="chirp2" />
+			</list>
+		</property>
+		
+		<property name="sentLikes">
+			<list>
+			<ref bean="likes3" />
+			</list>
+		</property>
+		<property name="receivedLikes">
+			<list>
+				<ref bean="likes1" />
+				<ref bean="likes2" />
+			</list>
+		</property> -->
+		<property name="creditCard" ref="creditCard1" />
+		<property name="coordinates" ref="coordinates2" />
+		<property name="searchTemplate" ref="searchTemplate2" />
+		
+		
+		
+	</bean>
 	
 	
 </beans>

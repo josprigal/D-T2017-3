@@ -39,7 +39,7 @@ public class CreditCard extends DomainEntity {
 	private Integer		cvvCode;
 
 
-	@NotBlank
+	@NotNull
 	public BrandName getBrandName() {
 		return this.brandName;
 	}
