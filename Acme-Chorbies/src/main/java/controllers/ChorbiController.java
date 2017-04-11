@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.ArrayList;
@@ -27,10 +28,23 @@ import domain.CreditCard.BrandName;
 public class ChorbiController {
 
 	@Autowired
-	UserDetailsService userDetailsService;
+	UserDetailsService	userDetailsService;
 
 	@Autowired
-	ChorbiService chorbiService;
+	ChorbiService		chorbiService;
+
+
+	@RequestMapping(value = "/chorbies", method = RequestMethod.GET)
+	public ModelAndView listOffer() {
+		final ModelAndView result = new ModelAndView("actor/chorbies");
+
+		final Collection<Chorbi> chorbies = this.chorbiService.findAll();
+
+		result.addObject("chorbies", chorbies);
+		result.addObject("requestURI", "actor/chorbies.do");
+
+		return result;
+	}
 
 	@RequestMapping(value = "/register")
 	public ModelAndView index() {
@@ -38,8 +52,7 @@ public class ChorbiController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "register")
-	public ModelAndView create(@ModelAttribute("chorbi") final Chorbi chorbi,
-			final BindingResult binding) {
+	public ModelAndView create(@ModelAttribute("chorbi") final Chorbi chorbi, final BindingResult binding) {
 
 		ModelAndView result;
 		if (binding.hasErrors()) {
@@ -60,14 +73,11 @@ public class ChorbiController {
 
 				this.chorbiService.create(chorbi);
 
-				final UserDetails userDetails = this.userDetailsService
-						.loadUserByUsername(chorbi.getUserAccount()
-								.getUsername());
+				final UserDetails userDetails = this.userDetailsService.loadUserByUsername(chorbi.getUserAccount().getUsername());
 
 				final UsernamePasswordAuthenticationToken auth =
 
-				new UsernamePasswordAuthenticationToken(userDetails, chorbi
-						.getUserAccount().getPassword(),
+				new UsernamePasswordAuthenticationToken(userDetails, chorbi.getUserAccount().getPassword(),
 
 				userDetails.getAuthorities());
 				if (auth.isAuthenticated())
@@ -82,12 +92,10 @@ public class ChorbiController {
 
 	}
 
-	protected ModelAndView createEditModelAndView(final Chorbi chorbi,
-			final String message) {
+	protected ModelAndView createEditModelAndView(final Chorbi chorbi, final String message) {
 
 		ModelAndView result;
-		Collection<BrandName> brandNames = new ArrayList<BrandName>(
-				Arrays.asList(BrandName.values()));
+		final Collection<BrandName> brandNames = new ArrayList<BrandName>(Arrays.asList(BrandName.values()));
 
 		result = new ModelAndView("chorbi/register");
 		result.addObject("chorbi", chorbi);
