@@ -53,19 +53,23 @@
 		<form:errors cssClass="error" path="name" />
 		<br>
 
-		<form:label path="surnames">
+
+
+		<form:label path="surname">
 			<spring:message code="surnames" />:
         </form:label>
-		<form:input path="surnames" required="required" />
-		<form:errors cssClass="error" path="surnames" />
+		<form:input path="surname" required="required" />
+		<form:errors cssClass="error" path="surname" />
 		<br>
 
-		<form:label path="surnames">
-			<spring:message code="surnames" />:
+		<form:label path="birth">
+			<spring:message code="chorbie.birth" />:
         </form:label>
-		<form:input path="surnames" required="required" />
-		<form:errors cssClass="error" path="surnames" />
+		<form:input path="birth" required="required" />
+		<form:errors cssClass="error" path="birth" />
 		<br>
+
+
 
 		<form:label path="phone">
 			<spring:message code="phone" />:
@@ -75,58 +79,45 @@
 		<form:errors cssClass="error" path="phone" />
 		<br>
 
-	</div>
-	<!-- 
-	<h2>
-		<spring:message code="register.creditcard" />
-	</h2>
-	<div>
-		<form:label path="holderName">
-			<spring:message code="holdername" />:
+		<form:label path="picture">
+			<spring:message code="chorbie.picture" />:
         </form:label>
-		<form:input path="holderName" />
-		<form:errors cssClass="error" path="holderName" />
+		<br>
+		<form:textarea path="picture" required="required" />
+		<form:errors cssClass="error" path="picture" />
 		<br>
 
-
-		<form:label path="brandName">
-			<spring:message code="brandname" />:
+		<form:label path="description">
+			<spring:message code="chorbie.description" />:
         </form:label>
-		<form:select path="brandName" style="width:50%">
-			<form:options items="${brandnames}" itemValue="id" itemLabel="name" />
+		<br>
+		<form:textarea path="description" required="required" />
+		<form:errors cssClass="error" path="description" />
+		<br>
+
+		<form:label path="relationship">
+			<spring:message code="chorbie.relationship" />:
+        </form:label>
+		<form:select path="relationship" style="width:50%">
+			<form:options items="${relationships}" />
 		</form:select>
-		<form:errors cssClass="error" path="brandName" />
+		<form:errors cssClass="error" path="relationship" />
+
 		<br>
 
-		<form:label path="number">
-			<spring:message code="number" />:
+		<form:label path="gender">
+			<spring:message code="chorbie.gender" />:
         </form:label>
-		<form:input path="number" />
-		<form:errors cssClass="error" path="number" />
+		<form:select path="gender" style="width:50%">
+			<form:options items="${genders}" />
+		</form:select>
+		<form:errors cssClass="error" path="gender" />
+
 		<br>
 
-		<form:label path="cvvCode">
-			CVV:
-        </form:label>
-		<form:input path="cvvCode" />
-		<form:errors cssClass="error" path="cvvCode" />
-		<br>
 
-		<form:label path="expirationMonth">
-			<spring:message code="expirationmonth" />:
-        </form:label>
-		<form:input path="expirationMonth" />
-		<form:errors cssClass="error" path="expirationMonth" />
-		<br>
-
-		<form:label path="expirationYear">
-			<spring:message code="expirationyear" />:
-        </form:label>
-		<form:input path="expirationYear" />
-		<form:errors cssClass="error" path="expirationYear" />
-		<br>
 	</div>
- -->
+
 	<input name="register" type="submit"
-		value="<spring:message code="submit" />" />
+		value="<spring:message code="register.submit" />" />
 </form:form>

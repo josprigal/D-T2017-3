@@ -1,10 +1,9 @@
-
 package controllers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -21,18 +20,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ChorbiService;
 import domain.Chorbi;
-import domain.CreditCard.BrandName;
+import domain.Chorbi.Gender;
+import domain.Chorbi.Relationship;
 
 @Controller
 @RequestMapping("/chorbi")
 public class ChorbiController {
 
 	@Autowired
-	UserDetailsService	userDetailsService;
+	UserDetailsService userDetailsService;
 
 	@Autowired
-	ChorbiService		chorbiService;
-
+	ChorbiService chorbiService;
 
 	@RequestMapping(value = "/chorbies", method = RequestMethod.GET)
 	public ModelAndView listOffer() {
@@ -52,9 +51,13 @@ public class ChorbiController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "register")
-	public ModelAndView create(@ModelAttribute("chorbi") final Chorbi chorbi, final BindingResult binding) {
+	public ModelAndView create(@ModelAttribute("chorbi") final Chorbi chorbi,
+			final BindingResult binding) {
 
 		ModelAndView result;
+		if (DateTime.now().getYear() - chorbi.getBirth().getYear() < 18) {
+			result = this.createEditModelAndView(chorbi, "wrongbirth");
+		}
 		if (binding.hasErrors()) {
 			for (final ObjectError e : binding.getAllErrors()) {
 				System.out.println(e.getDefaultMessage());
@@ -62,6 +65,7 @@ public class ChorbiController {
 				System.out.println(e.getCodes());
 			}
 			result = this.createEditModelAndView(chorbi, "wrong");
+
 		} else
 			try {
 
@@ -73,11 +77,14 @@ public class ChorbiController {
 
 				this.chorbiService.create(chorbi);
 
-				final UserDetails userDetails = this.userDetailsService.loadUserByUsername(chorbi.getUserAccount().getUsername());
+				final UserDetails userDetails = this.userDetailsService
+						.loadUserByUsername(chorbi.getUserAccount()
+								.getUsername());
 
 				final UsernamePasswordAuthenticationToken auth =
 
-				new UsernamePasswordAuthenticationToken(userDetails, chorbi.getUserAccount().getPassword(),
+				new UsernamePasswordAuthenticationToken(userDetails, chorbi
+						.getUserAccount().getPassword(),
 
 				userDetails.getAuthorities());
 				if (auth.isAuthenticated())
@@ -92,15 +99,16 @@ public class ChorbiController {
 
 	}
 
-	protected ModelAndView createEditModelAndView(final Chorbi chorbi, final String message) {
+	protected ModelAndView createEditModelAndView(final Chorbi chorbi,
+			final String message) {
 
 		ModelAndView result;
-		final Collection<BrandName> brandNames = new ArrayList<BrandName>(Arrays.asList(BrandName.values()));
 
 		result = new ModelAndView("chorbi/register");
 		result.addObject("chorbi", chorbi);
 		result.addObject("message", message);
-		result.addObject("brandnames", brandNames);
+		result.addObject("relationships", Arrays.asList(Relationship.values()));
+		result.addObject("genders", Arrays.asList(Gender.values()));
 		return result;
 
 	}

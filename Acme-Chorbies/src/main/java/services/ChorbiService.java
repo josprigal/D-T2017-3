@@ -58,6 +58,7 @@ public class ChorbiService {
 		a.setAuthority("CHORBI");
 		authorities.add(a);
 		chorbi.getUserAccount().setAuthorities(authorities);
+		chorbi.setBanned(false);
 		Assert.notNull(chorbi);
 		this.chorbiRepository.save(chorbi);
 	}
