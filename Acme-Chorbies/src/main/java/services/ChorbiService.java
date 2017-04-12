@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ import domain.Chorbi;
 public class ChorbiService {
 
 	@Autowired
-	ChorbiRepository chorbiRepository;
+	ChorbiRepository	chorbiRepository;
+
 
 	public ChorbiService() {
 		super();
@@ -61,6 +63,111 @@ public class ChorbiService {
 		chorbi.setBanned(false);
 		Assert.notNull(chorbi);
 		this.chorbiRepository.save(chorbi);
+	}
+
+	public Integer minimunAgeChorbies() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer maximunAgeChorbies() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double avgAgeChorbies() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double ratioNotCreditCard() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double ratioLove() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double ratioFriendship() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double ratioActivities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer minLikesChorbi() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer maxLikesChorbi() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double avgLikesChorbi() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer minChirpsChorbiSent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer maxChirpsChorbiSent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double avgChirpsChorbiSent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer minChirpsChorbiReceived() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double avgChirpsChorbiReceived() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer maxChirpsChorbiReceived() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer numberOfChorbiesPerCity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer numberOfChorbiesPerCountry() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Collection<Chorbi> listChorbiesNumberOfLikes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Collection<Chorbi> listChorbiesMoreChirpsReceived() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Collection<Chorbi> listChorbiesMoreChirpsSent() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
