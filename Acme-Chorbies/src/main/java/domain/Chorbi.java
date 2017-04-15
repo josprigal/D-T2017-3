@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -39,6 +43,7 @@ public class Chorbi extends Actor {
 		}
 	}
 
+
 	public Chorbi() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -49,12 +54,14 @@ public class Chorbi extends Actor {
 		this.receivedLikes = new ArrayList<Likes>();
 	}
 
-	private String description;
-	private Date birth;
-	private boolean banned;
-	private String picture;
-	private Relationship relationship;
-	private Gender gender;
+
+	private String			description;
+	private Date			birth;
+	private boolean			banned;
+	private String			picture;
+	private Relationship	relationship;
+	private Gender			gender;
+
 
 	@NotNull
 	public String getDescription() {
@@ -70,6 +77,7 @@ public class Chorbi extends Actor {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getBirth() {
 		return this.birth;
+
 	}
 
 	public void setBirth(final Date birth) {
@@ -113,7 +121,9 @@ public class Chorbi extends Actor {
 		this.banned = banned;
 	}
 
-	private CreditCard creditCard;
+
+	private CreditCard	creditCard;
+
 
 	@OneToOne
 	public CreditCard getCreditCard() {
@@ -124,10 +134,12 @@ public class Chorbi extends Actor {
 		this.creditCard = creditCard;
 	}
 
-	private Collection<Likes> sentLikes;
-	private Collection<Likes> receivedLikes;
-	private Collection<Chirp> sentChirps;
-	private Collection<Chirp> receivedChirps;
+
+	private Collection<Likes>	sentLikes;
+	private Collection<Likes>	receivedLikes;
+	private Collection<Chirp>	sentChirps;
+	private Collection<Chirp>	receivedChirps;
+
 
 	@ManyToMany
 	public Collection<Likes> getSentLikes() {
@@ -165,8 +177,10 @@ public class Chorbi extends Actor {
 		this.receivedChirps = receivedChirps;
 	}
 
-	private Coordinates coordinates;
-	private SearchTemplate searchTemplate;
+
+	private Coordinates		coordinates;
+	private SearchTemplate	searchTemplate;
+
 
 	@OneToOne
 	public Coordinates getCoordinates() {
@@ -186,4 +200,14 @@ public class Chorbi extends Actor {
 		this.searchTemplate = searchTemplate;
 	}
 
+	public Integer getAge() {
+		final LocalDate birthdate = new LocalDate(this.birth);          //Birth date
+		final LocalDate now = new LocalDate();                    //Today's date
+		final Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
+		//Now access the values as below
+		return period.getYears();
+	}
+	public void setAge(final int age) {
+
+	}
 }

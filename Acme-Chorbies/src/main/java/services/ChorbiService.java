@@ -67,107 +67,107 @@ public class ChorbiService {
 
 	public Integer minimunAgeChorbies() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.minimunAgeChorbies();
 	}
 
 	public Integer maximunAgeChorbies() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.maximunAgeChorbies();
 	}
 
 	public Double avgAgeChorbies() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.avgAgeChorbies();
 	}
 
 	public Double ratioNotCreditCard() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.ratioNotCreditCard();
 	}
 
 	public Double ratioLove() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.ratioLove();
 	}
 
 	public Double ratioFriendship() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.ratioFriendship();
 	}
 
 	public Double ratioActivities() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.ratioActivities();
 	}
 
 	public Integer minLikesChorbi() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.minLikesChorbi();
 	}
 
 	public Integer maxLikesChorbi() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.maxLikesChorbi();
 	}
 
 	public Double avgLikesChorbi() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.avgLikesChorbi();
 	}
 
 	public Integer minChirpsChorbiSent() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.minChirpsChorbiSent();
 	}
 
 	public Integer maxChirpsChorbiSent() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.maxChirpsChorbiSent();
 	}
 
 	public Double avgChirpsChorbiSent() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.avgChirpsChorbiSent();
 	}
 
 	public Integer minChirpsChorbiReceived() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.minChirpsChorbiReceived();
 	}
 
 	public Double avgChirpsChorbiReceived() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.avgChirpsChorbiReceived();
 	}
 
 	public Integer maxChirpsChorbiReceived() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.maxChirpsChorbiReceived();
 	}
 
 	public Integer numberOfChorbiesPerCity() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.numberOfChorbiesPerCity();
 	}
 
 	public Integer numberOfChorbiesPerCountry() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.numberOfChorbiesPerCountry();
 	}
 
 	public Collection<Chorbi> listChorbiesNumberOfLikes() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.listChorbiesNumberOfLikes();
 	}
 
 	public Collection<Chorbi> listChorbiesMoreChirpsReceived() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.listChorbiesMoreChirpsReceived();
 	}
 
 	public Collection<Chorbi> listChorbiesMoreChirpsSent() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.listChorbiesMoreChirpsSent();
 	}
 
 }
