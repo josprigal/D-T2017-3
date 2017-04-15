@@ -1,9 +1,9 @@
 package controllers;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -54,10 +54,13 @@ public class ChorbiController {
 	public ModelAndView create(@ModelAttribute("chorbi") final Chorbi chorbi,
 			final BindingResult binding) {
 
+		Calendar actual = Calendar.getInstance();
+
+		Calendar nacimiento = Calendar.getInstance();
+		nacimiento.setTime(chorbi.getBirth());
+
 		ModelAndView result;
-		if (DateTime.now().getYear() - chorbi.getBirth().getYear() < 18) {
-			result = this.createEditModelAndView(chorbi, "wrongbirth");
-		}
+
 		if (binding.hasErrors()) {
 			for (final ObjectError e : binding.getAllErrors()) {
 				System.out.println(e.getDefaultMessage());
@@ -66,7 +69,11 @@ public class ChorbiController {
 			}
 			result = this.createEditModelAndView(chorbi, "wrong");
 
-		} else
+		} else if (actual.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR) < 18) {
+			result = this.createEditModelAndView(chorbi, "wrongbirth");
+		}
+
+		else
 			try {
 
 				final Md5PasswordEncoder md5PasswordEncoder = new Md5PasswordEncoder();
@@ -87,6 +94,7 @@ public class ChorbiController {
 						.getUserAccount().getPassword(),
 
 				userDetails.getAuthorities());
+
 				if (auth.isAuthenticated())
 					SecurityContextHolder.getContext().setAuthentication(auth);
 				result = new ModelAndView("redirect:../");
