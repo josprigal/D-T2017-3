@@ -16,6 +16,9 @@
 		<bean class="converters.ActorToStringConverter" />
 		<bean class="converters.StringToActorConverter" />
 
+		<bean class="converters.BannerToStringConverter"/>
+		<bean class="converters.StringToBannerConverter" />
+
 		<bean class="converters.AdministratorToStringConverter" />
 		<bean class="converters.StringToAdministratorConverter" />
 		

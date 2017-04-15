@@ -9,6 +9,8 @@ import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
 import domain.Actor;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -56,11 +58,11 @@ public class ActorService {
 	}
 
 
-	//
-	// public Actor findActorByPrincipal() {
-	// final UserAccount userAccount = LoginService.getPrincipal();
-	// return this.actorRepository.findByUserAccountId(userAccount.getId());
-	// }
+
+	 public Actor findActorByPrincipal() {
+	 final UserAccount userAccount = LoginService.getPrincipal();
+	 return this.actorRepository.findActorByUserAccount(userAccount);
+	 }
 
 	
 }

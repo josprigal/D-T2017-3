@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -117,6 +118,60 @@ public class ChorbiController {
 		result.addObject("message", message);
 		result.addObject("relationships", Arrays.asList(Relationship.values()));
 		result.addObject("genders", Arrays.asList(Gender.values()));
+		return result;
+
+	}
+
+	protected ModelAndView createEditView(final Chorbi chorbi,
+												  final String message) {
+
+		ModelAndView result;
+
+		result = new ModelAndView("chorbi/edit");
+		result.addObject("chorbi", chorbi);
+		result.addObject("message", message);
+		result.addObject("relationships", Arrays.asList(Relationship.values()));
+		result.addObject("genders", Arrays.asList(Gender.values()));
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit")
+	public ModelAndView editView(){
+	    Chorbi chorbi = chorbiService.findByPrincipal();
+	    Assert.notNull(chorbi);
+	    return createEditView(chorbi,null);
+    }
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public ModelAndView edit(@ModelAttribute("chorbi") final Chorbi chorbi,
+							   final BindingResult binding) {
+
+		Calendar actual = Calendar.getInstance();
+
+		Calendar nacimiento = Calendar.getInstance();
+		nacimiento.setTime(chorbi.getBirth());
+
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			result = this.createEditModelAndView(chorbi, "wrong");
+
+		} else if (actual.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR) < 18) {
+			result = this.createEditView(chorbi, "wrongbirth");
+		}
+
+		else
+			try {
+
+				Chorbi chorbi1 = this.chorbiService.reconstruct(chorbi);
+
+				result = createEditView(chorbi1,null);
+			} catch (final Throwable oops) {
+				System.out.println(oops.getMessage());
+				result = this.createEditModelAndView(chorbi, "wrong");
+			}
+
 		return result;
 
 	}

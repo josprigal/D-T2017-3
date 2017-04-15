@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import domain.Actor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import repositories.ActorRepository;
 import repositories.ChorbiRepository;
 import security.Authority;
 import domain.Chorbi;
@@ -20,6 +22,9 @@ public class ChorbiService {
 
 	@Autowired
 	ChorbiRepository	chorbiRepository;
+
+	@Autowired
+	ActorService actorService;
 
 
 	public ChorbiService() {
@@ -41,9 +46,9 @@ public class ChorbiService {
 		return result;
 	}
 
-	public void save(final Chorbi chorbi) {
+	public Chorbi save(final Chorbi chorbi) {
 		Assert.notNull(this.chorbiRepository);
-		this.chorbiRepository.save(chorbi);
+		return this.chorbiRepository.save(chorbi);
 	}
 
 	public void delete(final Chorbi chorbi) {
@@ -80,25 +85,25 @@ public class ChorbiService {
 		return this.chorbiRepository.avgAgeChorbies();
 	}
 
-	public Double ratioNotCreditCard() {
-		// TODO Auto-generated method stub
-		return this.chorbiRepository.ratioNotCreditCard();
-	}
-
-	public Double ratioLove() {
-		// TODO Auto-generated method stub
-		return this.chorbiRepository.ratioLove();
-	}
-
-	public Double ratioFriendship() {
-		// TODO Auto-generated method stub
-		return this.chorbiRepository.ratioFriendship();
-	}
-
-	public Double ratioActivities() {
-		// TODO Auto-generated method stub
-		return this.chorbiRepository.ratioActivities();
-	}
+//	public Double ratioNotCreditCard() {
+//		// TODO Auto-generated method stub
+//		return this.chorbiRepository.ratioNotCreditCard();
+//	}
+//
+//	public Double ratioLove() {
+//		// TODO Auto-generated method stub
+//		return this.chorbiRepository.ratioLove();
+//	}
+//
+//	public Double ratioFriendship() {
+//		// TODO Auto-generated method stub
+//		return this.chorbiRepository.ratioFriendship();
+//	}
+//
+//	public Double ratioActivities() {
+//		// TODO Auto-generated method stub
+//		return this.chorbiRepository.ratioActivities();
+//	}
 
 	public Integer minLikesChorbi() {
 		// TODO Auto-generated method stub
@@ -145,29 +150,57 @@ public class ChorbiService {
 		return this.chorbiRepository.maxChirpsChorbiReceived();
 	}
 
-	public Integer numberOfChorbiesPerCity() {
-		// TODO Auto-generated method stub
-		return this.chorbiRepository.numberOfChorbiesPerCity();
+	public Chorbi reconstruct(Chorbi chorbi) {
+		Actor a = actorService.findActorByPrincipal();
+		Assert.notNull(a);
+		Assert.isTrue(a instanceof Chorbi);
+		Chorbi chor = (Chorbi) a;
+		chor.setAge(chorbi.getAge());
+		chor.setBirth(chorbi.getBirth());
+		chor.setDescription(chorbi.getDescription());
+		chor.setCoordinates(chorbi.getCoordinates());
+		chor.setRelationship(chorbi.getRelationship());
+		chor.setGender(chorbi.getGender());
+		chor.setEmail(chorbi.getEmail());
+		chor.setName(chorbi.getName());
+		chor.setPhone(chorbi.getPhone());
+		chor.setPicture(chorbi.getPicture());
+
+		return save(chor);
 	}
 
-	public Integer numberOfChorbiesPerCountry() {
-		// TODO Auto-generated method stub
-		return this.chorbiRepository.numberOfChorbiesPerCountry();
-	}
+    public Chorbi findByPrincipal() {
+	    Actor result = actorService.findActorByPrincipal();
+	    Assert.isTrue(result instanceof Chorbi);
+	    Chorbi result2 = (Chorbi) result;
+	    Assert.notNull(result2);
 
-	public Collection<Chorbi> listChorbiesNumberOfLikes() {
-		// TODO Auto-generated method stub
-		return this.chorbiRepository.listChorbiesNumberOfLikes();
-	}
+	    return result2;
+    }
 
-	public Collection<Chorbi> listChorbiesMoreChirpsReceived() {
-		// TODO Auto-generated method stub
-		return this.chorbiRepository.listChorbiesMoreChirpsReceived();
-	}
-
-	public Collection<Chorbi> listChorbiesMoreChirpsSent() {
-		// TODO Auto-generated method stub
-		return this.chorbiRepository.listChorbiesMoreChirpsSent();
-	}
+//	public Integer numberOfChorbiesPerCity() {
+//		// TODO Auto-generated method stub
+//		return this.chorbiRepository.numberOfChorbiesPerCity();
+//	}
+//
+//	public Integer numberOfChorbiesPerCountry() {
+//		// TODO Auto-generated method stub
+//		return this.chorbiRepository.numberOfChorbiesPerCountry();
+//	}
+//
+//	public Collection<Chorbi> listChorbiesNumberOfLikes() {
+//		// TODO Auto-generated method stub
+//		return this.chorbiRepository.listChorbiesNumberOfLikes();
+//	}
+//
+//	public Collection<Chorbi> listChorbiesMoreChirpsReceived() {
+//		// TODO Auto-generated method stub
+//		return this.chorbiRepository.listChorbiesMoreChirpsReceived();
+//	}
+//
+//	public Collection<Chorbi> listChorbiesMoreChirpsSent() {
+//		// TODO Auto-generated method stub
+//		return this.chorbiRepository.listChorbiesMoreChirpsSent();
+//	}
 
 }

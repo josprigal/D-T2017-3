@@ -12,16 +12,22 @@ package controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import domain.Banner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import repositories.BannerRepository;
 
 @Controller
 @RequestMapping("/welcome")
 public class WelcomeController extends AbstractController {
 
+	@Autowired
+	BannerRepository bannerRepository;
 	// Constructors -----------------------------------------------------------
 	
 	public WelcomeController() {
@@ -42,7 +48,9 @@ public class WelcomeController extends AbstractController {
 		result = new ModelAndView("welcome/index");
 		result.addObject("name", name);
 		result.addObject("moment", moment);
-
+		List<Banner> banners = bannerRepository.findAll();
+		int number = (int) (Math.random() * (banners.size()));
+		result.addObject("banner",banners.get(number));
 		return result;
 	}
 }

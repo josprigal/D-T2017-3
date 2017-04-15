@@ -1,6 +1,7 @@
 
 package controllers.actor.administrator;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,15 @@ public class DashboardAdministratorController extends AbstractController {
 		final Integer minimunAgeChorbies = this.chorbiService.minimunAgeChorbies();
 		final Integer maximunAgeChorbies = this.chorbiService.maximunAgeChorbies();
 		final Double avgAgeChorbies = this.chorbiService.avgAgeChorbies();
-		final Double ratioNotCreditCard = this.chorbiService.ratioNotCreditCard();
-		final Double ratioLove = this.chorbiService.ratioLove();
-		final Double ratioFriendship = this.chorbiService.ratioFriendship();
-		final Double ratioActivities = this.chorbiService.ratioActivities();
+//		final Double ratioNotCreditCard = this.chorbiService.ratioNotCreditCard();
+//		final Double ratioLove = this.chorbiService.ratioLove();
+//		final Double ratioFriendship = this.chorbiService.ratioFriendship();
+//		final Double ratioActivities = this.chorbiService.ratioActivities();
+		final Double ratioNotCreditCard = 0.;
+		final Double ratioLove = 0.;
+		final Double ratioFriendship = 0.;
+		final Double ratioActivities = 0.;
+
 		final Integer minLikesChorbi = this.chorbiService.minLikesChorbi();
 		final Integer maxLikesChorbi = this.chorbiService.maxLikesChorbi();
 		final Double avgLikesChorbi = this.chorbiService.avgLikesChorbi();
@@ -51,13 +57,19 @@ public class DashboardAdministratorController extends AbstractController {
 		final Integer minChirpsChorbiReceived = this.chorbiService.minChirpsChorbiReceived();
 		final Integer maxChirpsChorbiReceived = this.chorbiService.maxChirpsChorbiReceived();
 		final Double avgChirpsChorbiReceived = this.chorbiService.avgChirpsChorbiReceived();
-		final Integer numberOfChorbiesPerCity = this.chorbiService.numberOfChorbiesPerCity();
-		final Integer numberOfChorbiesPerCountry = this.chorbiService.numberOfChorbiesPerCountry();
-		final Collection<Chorbi> listChorbiesNumberOfLikes = this.chorbiService.listChorbiesNumberOfLikes();
-		final Collection<Chorbi> listChorbiesMoreChirpsReceived = this.chorbiService.listChorbiesMoreChirpsReceived();
-		final Collection<Chorbi> listChorbiesMoreChirpsSent = this.chorbiService.listChorbiesMoreChirpsSent();
+//		final Integer numberOfChorbiesPerCity = this.chorbiService.numberOfChorbiesPerCity();
+//		final Integer numberOfChorbiesPerCountry = this.chorbiService.numberOfChorbiesPerCountry();
+//		final Collection<Chorbi> listChorbiesNumberOfLikes = this.chorbiService.listChorbiesNumberOfLikes();
+//		final Collection<Chorbi> listChorbiesMoreChirpsReceived = this.chorbiService.listChorbiesMoreChirpsReceived();
+//		final Collection<Chorbi> listChorbiesMoreChirpsSent = this.chorbiService.listChorbiesMoreChirpsSent();
 
-		result = this.createDashboardModelAndView(minimunAgeChorbies, maximunAgeChorbies, avgAgeChorbies, ratioNotCreditCard, ratioLove, ratioFriendship, ratioActivities, minLikesChorbi, maxLikesChorbi, avgLikesChorbi, minChirpsChorbiSent,
+        final Integer numberOfChorbiesPerCity = 1;
+        final Integer numberOfChorbiesPerCountry = 1;
+        final Collection<Chorbi> listChorbiesNumberOfLikes = new ArrayList<>();
+        final Collection<Chorbi> listChorbiesMoreChirpsReceived =  new ArrayList<>();
+        final Collection<Chorbi> listChorbiesMoreChirpsSent =  new ArrayList<>();
+
+        result = this.createDashboardModelAndView(minimunAgeChorbies, maximunAgeChorbies, avgAgeChorbies, ratioNotCreditCard, ratioLove, ratioFriendship, ratioActivities, minLikesChorbi, maxLikesChorbi, avgLikesChorbi, minChirpsChorbiSent,
 			maxChirpsChorbiSent, avgChirpsChorbiSent, minChirpsChorbiReceived, maxChirpsChorbiReceived, avgChirpsChorbiReceived, numberOfChorbiesPerCity, numberOfChorbiesPerCountry, listChorbiesNumberOfLikes, listChorbiesMoreChirpsReceived,
 			listChorbiesMoreChirpsSent);
 		return result;

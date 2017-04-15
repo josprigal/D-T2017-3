@@ -274,10 +274,18 @@
 		<property name="creditCard" ref="creditCard1" />
 		<property name="coordinates" ref="coordinates2" />
 		<property name="searchTemplate" ref="searchTemplate2" />
-		
-		
-		
+
 	</bean>
-	
-	
+
+	<bean id="banner1" class="domain.Banner">
+		<property name="url" value="http://i.imgur.com/LQKfAcY.png" />
+	</bean>
+
+	<bean id="banner2" class="domain.Banner">
+		<property name="url" value="http://i.imgur.com/fTEHXuT.png" />
+	</bean>
+
+	<bean id="banner3" class="domain.Banner">
+		<property name="url" value="http://i.imgur.com/f6qfigu.png" />
+	</bean>
 </beans>

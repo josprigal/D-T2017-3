@@ -18,7 +18,7 @@
 
 <p><spring:message code="welcome.greeting.prefix" /> ${name}<spring:message code="welcome.greeting.suffix" /></p>
 
-<p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
+<div><img src="${banner.url}" /></div>
 <div style="margin:15px;">
-    <a class="button" href="chorbi/register.do">Sign up</a> <a class="button" href="security/login.do">Login</a>
+    <a class="button" href="chorbi/register.do"><spring:message code="signup" /> </a> <a class="button" href="security/login.do">Login</a>
 </div>
