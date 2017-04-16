@@ -61,7 +61,7 @@ public class Chorbi extends Actor {
 	private String			picture;
 	private Relationship	relationship;
 	private Gender			gender;
-
+	private Integer age;
 
 	@NotNull
 	public String getDescription() {
@@ -81,7 +81,8 @@ public class Chorbi extends Actor {
 	}
 
 	public void setBirth(final Date birth) {
-		this.birth = birth;
+	    this.birth = birth;
+	    this.age = calculateAge();
 	}
 
 	@NotBlank
@@ -200,14 +201,20 @@ public class Chorbi extends Actor {
 		this.searchTemplate = searchTemplate;
 	}
 
-	public Integer getAge() {
-		final LocalDate birthdate = new LocalDate(this.birth);          //Birth date
-		final LocalDate now = new LocalDate();                    //Today's date
-		final Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
-		//Now access the values as below
-		return period.getYears();
-	}
-	public void setAge(final int age) {
 
+	public Integer getAge() {
+		return this.age;
 	}
+	public void setAge(final Integer age) {
+		this.age = age;
+	}
+
+
+    public Integer calculateAge() {
+        final LocalDate birthdate = new LocalDate(this.birth);          //Birth date
+        final LocalDate now = new LocalDate();                    //Today's date
+        final Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
+        //Now access the values as below
+        return period.getYears();
+    }
 }

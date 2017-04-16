@@ -9,10 +9,8 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<h1>
-	<spring:message code="register.title" />
-</h1>
 
 <form:form action="chorbi/register.do" modelAttribute="chorbi"
 	method="POST">
@@ -112,6 +110,14 @@
 			<form:options items="${genders}" />
 		</form:select>
 		<form:errors cssClass="error" path="gender" />
+
+		<br>
+
+		<h2><spring:message code="coordinates" /> </h2>
+		<acme:textbox path="coordinates.city" code="city" />
+		<acme:textbox path="coordinates.province" code="province" />
+		<acme:textbox path="coordinates.state" code="state" />
+		<acme:textbox path="coordinates.country" code="country" />
 
 		<br>
 

@@ -9,10 +9,8 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<h1>
-	<spring:message code="register.title" />
-</h1>
 
 <form:form  modelAttribute="chorbi"
 	method="POST">

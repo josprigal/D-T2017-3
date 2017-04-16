@@ -2,6 +2,7 @@ package services;
 
 import java.util.Collection;
 
+import domain.SearchTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,4 +49,11 @@ public class ResultsService {
 		this.resultsRepository.delete(results);
 	}
 
+	public Results findResultsBySearchTemplate(SearchTemplate searchTemplate){
+		Assert.notNull(searchTemplate);
+		Results results;
+		results = resultsRepository.findResultsBySearchTemplate(searchTemplate);
+
+		return results;
+	}
 }

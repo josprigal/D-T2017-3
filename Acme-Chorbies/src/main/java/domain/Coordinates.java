@@ -23,7 +23,6 @@ public class Coordinates extends DomainEntity {
 	private String	province;
 
 
-	@NotBlank
 	public String getCity() {
 		return this.city;
 	}
@@ -32,7 +31,6 @@ public class Coordinates extends DomainEntity {
 		this.city = city;
 	}
 
-	@NotBlank
 	public String getCountry() {
 		return this.country;
 	}
@@ -41,7 +39,7 @@ public class Coordinates extends DomainEntity {
 		this.country = country;
 	}
 
-	@NotBlank
+
 	public String getState() {
 		return this.state;
 	}

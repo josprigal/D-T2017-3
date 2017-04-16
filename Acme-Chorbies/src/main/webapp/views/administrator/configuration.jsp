@@ -12,10 +12,20 @@
 <h1>Banners</h1>
 <jstl:forEach var="var" items="${banners}" varStatus="i">
     <div>
-    <form:form method="post" modelAttribute="banner${i.index}" action="banner/edit/${var.id}.do">
+    <form:form method="post" modelAttribute="banner${i.index}" action="administrator/configuration/edit/banner/${var.id}.do">
         <acme:textbox path="url" code="url" />
         <acme:submit name="save" code="save" />
     </form:form>
     </div>
     <br />
 </jstl:forEach>
+<br />
+<h1><spring:message code="cachedtime" /> </h1>
+
+<form:form method="post" modelAttribute="configuration" action="administrator/configuration/edit/configuration.do">
+    <acme:textbox path="hours" code="hours" />
+    <acme:textbox path="minutes" code="minutes" />
+    <acme:textbox path="seconds" code="seconds" />
+    <br>
+    <acme:submit name="save" code="save" />
+</form:form>

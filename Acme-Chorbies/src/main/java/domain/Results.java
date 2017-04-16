@@ -1,11 +1,10 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -15,15 +14,16 @@ public class Results extends DomainEntity {
 
 	public Results() {
 		super();
-		// TODO Auto-generated constructor stub
+		moment = new Date();
 	}
 
 
 	private Date	moment;
+	private Collection<Chorbi> chorbis;
+	private SearchTemplate searchTemplate;
 
 
 	@NotNull
-	@Past
 	public Date getMoment() {
 		return this.moment;
 	}
@@ -32,4 +32,21 @@ public class Results extends DomainEntity {
 		this.moment = moment;
 	}
 
+	@OneToMany
+	public Collection<Chorbi> getChorbis() {
+		return chorbis;
+	}
+
+	public void setChorbis(Collection<Chorbi> chorbis) {
+		this.chorbis = chorbis;
+	}
+
+	@OneToOne
+    public SearchTemplate getSearchTemplate() {
+        return searchTemplate;
+    }
+
+    public void setSearchTemplate(SearchTemplate searchTemplate) {
+        this.searchTemplate = searchTemplate;
+    }
 }

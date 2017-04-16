@@ -288,4 +288,10 @@
 	<bean id="banner3" class="domain.Banner">
 		<property name="url" value="http://i.imgur.com/f6qfigu.png" />
 	</bean>
+
+	<bean id="configuration1" class="domain.Configuration">
+		<property name="hours" value="12"/>
+		<property name="minutes" value="0" />
+		<property name="seconds" value="0" />
+	</bean>
 </beans>

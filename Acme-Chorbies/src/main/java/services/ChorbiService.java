@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 
 import domain.Actor;
+import domain.Coordinates;
+import domain.SearchTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,9 @@ public class ChorbiService {
 
 	@Autowired
 	ActorService actorService;
+
+	@Autowired
+	SearchTemplateService searchTemplateService;
 
 
 	public ChorbiService() {
@@ -66,6 +71,9 @@ public class ChorbiService {
 		authorities.add(a);
 		chorbi.getUserAccount().setAuthorities(authorities);
 		chorbi.setBanned(false);
+		SearchTemplate searchTemplate = new SearchTemplate();
+		searchTemplate = searchTemplateService.save(searchTemplate);
+		chorbi.setSearchTemplate(searchTemplate);
 		Assert.notNull(chorbi);
 		this.chorbiRepository.save(chorbi);
 	}
@@ -158,7 +166,16 @@ public class ChorbiService {
 		chor.setAge(chorbi.getAge());
 		chor.setBirth(chorbi.getBirth());
 		chor.setDescription(chorbi.getDescription());
-		chor.setCoordinates(chorbi.getCoordinates());
+        Coordinates coordinates = chor.getCoordinates();
+        if(coordinates==null){
+            coordinates =  chorbi.getCoordinates();
+        }else{
+            coordinates.setProvince(chorbi.getCoordinates().getProvince());
+            coordinates.setState(chorbi.getCoordinates().getState());
+            coordinates.setCity(chorbi.getCoordinates().getCity());
+            coordinates.setCountry(chorbi.getCoordinates().getCountry());
+        }
+		chor.setCoordinates(coordinates);
 		chor.setRelationship(chorbi.getRelationship());
 		chor.setGender(chorbi.getGender());
 		chor.setEmail(chorbi.getEmail());

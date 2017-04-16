@@ -24,7 +24,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="banner/edit.do"><spring:message code="master.page.administrator.banner" /></a></li>
+					<li><a href="administrator/configuration/edit.do"><spring:message code="master.page.administrator.configuration" /></a></li>
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
 				</ul>
 			</li>
@@ -35,6 +35,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="chorbi/edit.do"><spring:message code="editprofile" /></a></li>
+					<li><a href="chorbi/searchtemplate/edit.do"><spring:message code="editsearchtemplate" /></a> </li>
 				</ul>
 			</li>
 		</security:authorize>

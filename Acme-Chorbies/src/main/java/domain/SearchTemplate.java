@@ -1,10 +1,7 @@
 
 package domain;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import domain.Chorbi.Gender;
 import domain.Chorbi.Relationship;
@@ -23,6 +20,7 @@ public class SearchTemplate extends DomainEntity {
 	private Gender			gender;
 	private Integer			age;
 	private String			keyword;
+	private Coordinates coordinates;
 
 
 	public Relationship getRelationship() {
@@ -70,4 +68,12 @@ public class SearchTemplate extends DomainEntity {
 		this.results = results;
 	}
 
+	@OneToOne(cascade = CascadeType.ALL)
+	public Coordinates getCoordinates() {
+		return coordinates;
+	}
+
+	public void setCoordinates(Coordinates coordinates) {
+		this.coordinates = coordinates;
+	}
 }

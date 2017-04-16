@@ -48,4 +48,11 @@ public class ConfigurationService {
 		this.configurationRepository.delete(configuration);
 	}
 
+    public void reconstruct(Configuration configuration, Configuration configuration1) {
+		configuration1.setHours(configuration.getHours());
+		configuration1.setMinutes(configuration.getMinutes());
+		configuration1.setSeconds(configuration.getSeconds());
+
+		save(configuration1);
+    }
 }
