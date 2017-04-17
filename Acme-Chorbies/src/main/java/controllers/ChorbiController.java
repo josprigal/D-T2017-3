@@ -1,5 +1,7 @@
+
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
@@ -15,6 +17,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,25 +26,44 @@ import services.ChorbiService;
 import domain.Chorbi;
 import domain.Chorbi.Gender;
 import domain.Chorbi.Relationship;
+import domain.Likes;
 
 @Controller
 @RequestMapping("/chorbi")
 public class ChorbiController {
 
 	@Autowired
-	UserDetailsService userDetailsService;
+	UserDetailsService	userDetailsService;
 
 	@Autowired
-	ChorbiService chorbiService;
+	ChorbiService		chorbiService;
+
 
 	@RequestMapping(value = "/chorbies", method = RequestMethod.GET)
 	public ModelAndView listOffer() {
-		final ModelAndView result = new ModelAndView("actor/chorbies");
+		final ModelAndView result = new ModelAndView("chorbies");
 
 		final Collection<Chorbi> chorbies = this.chorbiService.findAll();
 
 		result.addObject("chorbies", chorbies);
-		result.addObject("requestURI", "actor/chorbies.do");
+		result.addObject("requestURI", "chorbies.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/c/{chorbi}/likes", method = RequestMethod.GET)
+	public ModelAndView listLikes(@PathVariable final Chorbi chorbi) {
+		final ModelAndView result = new ModelAndView("chorbies/likes");
+
+		final Collection<Chorbi> chorbies = this.chorbiService.findAll();
+		final Collection<Chorbi> chorbiesLike = new ArrayList<Chorbi>();
+		for (final Chorbi c : chorbies)
+			for (final Likes l : chorbi.getReceivedLikes())
+				if (c.getSentLikes().contains(l))
+					chorbiesLike.add(c);
+
+		result.addObject("chorbiesLike", chorbiesLike);
+		result.addObject("requestURI", "chorbies/likes.do");
 
 		return result;
 	}
@@ -52,12 +74,11 @@ public class ChorbiController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "register")
-	public ModelAndView create(@ModelAttribute("chorbi") final Chorbi chorbi,
-			final BindingResult binding) {
+	public ModelAndView create(@ModelAttribute("chorbi") final Chorbi chorbi, final BindingResult binding) {
 
-		Calendar actual = Calendar.getInstance();
+		final Calendar actual = Calendar.getInstance();
 
-		Calendar nacimiento = Calendar.getInstance();
+		final Calendar nacimiento = Calendar.getInstance();
 		nacimiento.setTime(chorbi.getBirth());
 
 		ModelAndView result;
@@ -70,10 +91,8 @@ public class ChorbiController {
 			}
 			result = this.createEditModelAndView(chorbi, "wrong");
 
-		} else if (actual.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR) < 18) {
+		} else if (actual.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR) < 18)
 			result = this.createEditModelAndView(chorbi, "wrongbirth");
-		}
-
 		else
 			try {
 
@@ -85,14 +104,11 @@ public class ChorbiController {
 
 				this.chorbiService.create(chorbi);
 
-				final UserDetails userDetails = this.userDetailsService
-						.loadUserByUsername(chorbi.getUserAccount()
-								.getUsername());
+				final UserDetails userDetails = this.userDetailsService.loadUserByUsername(chorbi.getUserAccount().getUsername());
 
 				final UsernamePasswordAuthenticationToken auth =
 
-				new UsernamePasswordAuthenticationToken(userDetails, chorbi
-						.getUserAccount().getPassword(),
+				new UsernamePasswordAuthenticationToken(userDetails, chorbi.getUserAccount().getPassword(),
 
 				userDetails.getAuthorities());
 
@@ -108,8 +124,7 @@ public class ChorbiController {
 
 	}
 
-	protected ModelAndView createEditModelAndView(final Chorbi chorbi,
-			final String message) {
+	protected ModelAndView createEditModelAndView(final Chorbi chorbi, final String message) {
 
 		ModelAndView result;
 
@@ -122,8 +137,7 @@ public class ChorbiController {
 
 	}
 
-	protected ModelAndView createEditView(final Chorbi chorbi,
-												  final String message) {
+	protected ModelAndView createEditView(final Chorbi chorbi, final String message) {
 
 		ModelAndView result;
 
@@ -137,36 +151,32 @@ public class ChorbiController {
 	}
 
 	@RequestMapping(value = "/edit")
-	public ModelAndView editView(){
-	    Chorbi chorbi = chorbiService.findByPrincipal();
-	    Assert.notNull(chorbi);
-	    return createEditView(chorbi,null);
-    }
+	public ModelAndView editView() {
+		final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		Assert.notNull(chorbi);
+		return this.createEditView(chorbi, null);
+	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ModelAndView edit(@ModelAttribute("chorbi") final Chorbi chorbi,
-							   final BindingResult binding) {
+	public ModelAndView edit(@ModelAttribute("chorbi") final Chorbi chorbi, final BindingResult binding) {
 
-		Calendar actual = Calendar.getInstance();
+		final Calendar actual = Calendar.getInstance();
 
-		Calendar nacimiento = Calendar.getInstance();
+		final Calendar nacimiento = Calendar.getInstance();
 		nacimiento.setTime(chorbi.getBirth());
 
 		ModelAndView result;
 
-		if (binding.hasErrors()) {
+		if (binding.hasErrors())
 			result = this.createEditModelAndView(chorbi, "wrong");
-
-		} else if (actual.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR) < 18) {
+		else if (actual.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR) < 18)
 			result = this.createEditView(chorbi, "wrongbirth");
-		}
-
 		else
 			try {
 
-				Chorbi chorbi1 = this.chorbiService.reconstruct(chorbi);
+				final Chorbi chorbi1 = this.chorbiService.reconstruct(chorbi);
 
-				result = createEditView(chorbi1,null);
+				result = this.createEditView(chorbi1, null);
 			} catch (final Throwable oops) {
 				System.out.println(oops.getMessage());
 				result = this.createEditModelAndView(chorbi, "wrong");
