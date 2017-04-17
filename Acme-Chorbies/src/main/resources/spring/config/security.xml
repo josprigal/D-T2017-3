@@ -56,9 +56,12 @@
 		<security:intercept-url pattern="/chorbi/searchtemplate/**"
 								access="hasAnyRole('CHORBI')" />
 
-		<security:intercept-url pattern="/chorbi/chorbies.do"
-			access="hasAnyRole('CHORBI', 'ADMIN')" />
+		
 
+
+		<security:intercept-url pattern="/chorbi/**"
+			access="isAuthenticated()" />
+			
 		<security:intercept-url pattern="/profile/action-1.do"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/profile/action-2.do"

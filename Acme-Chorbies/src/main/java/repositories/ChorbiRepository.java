@@ -19,13 +19,15 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	@Query("select avg(c.age) from Chorbi c")
 	Double avgAgeChorbies();
 
-	//	Double ratioNotCreditCard();
+	@Query("select c from Chorbi c where c.creditCard is null")
+	Collection<Chorbi> chorbiNotCreditCard();
+	@Query("select c from Chorbi c where c.relationship='2'")
+	Collection<Chorbi> chorbiLove();
+	@Query("select c from Chorbi c where c.relationship='1'")
+	Collection<Chorbi> chorbiFriendship();
+	@Query("select c from Chorbi c where c.relationship='0'")
+	Collection<Chorbi> chorbiActivities();
 
-	//	Double ratioLove();
-
-	//	Double ratioFriendship();
-
-	//	Double ratioActivities();
 	@Query("select min(c.receivedLikes.size) from Chorbi c")
 	Integer minLikesChorbi();
 	@Query("select max(c.receivedLikes.size) from Chorbi c")

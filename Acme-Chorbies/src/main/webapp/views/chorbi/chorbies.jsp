@@ -13,6 +13,13 @@
 
 <display:table pagesize="5" class="displaytag" keepStatus="true" name="chorbies" requestURI="${requestURI}" id="row">
 
+
+	 <spring:message code="name" var="nameHeader"/>
+    <display:column property="name" title="${nameHeader}" sortable="true"/>
+
+     <spring:message code="surnames" var="surnameHeader"/>
+    <display:column property="surname" title="${surnameHeader}" sortable="true"/>
+
     <spring:message code="chorbie.description" var="descriptionHeader"/>
     <display:column property="description" title="${descriptionHeader}" sortable="true"/>
     
@@ -20,14 +27,22 @@
     <display:column property="birth" title="${birthHeader}" sortable="true"/>
     
     <spring:message code="chorbie.picture" var="picture"/>
-    <display:column property="picture" title="${picture}" sortable="false"/>
+    <display:column property="picture" title="${pictureHeader}" sortable="false"/>
     
     <spring:message code="chorbie.relationship" var="relationship"/>
-    <display:column property="relationship" title="${relationship}" sortable="false"/>
+    <display:column property="relationship" title="${relationshipHeader}" sortable="false"/>
     
      <spring:message code="chorbie.gender" var="gender"/>
+    <display:column property="gender" title="${genderHeader}" sortable="false"/>
+
+    <spring:message code="chorbie.likes" var="editHeader"/>
+    <display:column title="${editHeader }">
+			<a href="chorbi/c/${row.id}/likes.do">
+				<spring:message	code="chorbie.likes" />
+			</a>
+	</display:column>
     <display:column property="gender" title="${gender}" sortable="false"/>
 
-   		
+
 </display:table>
 

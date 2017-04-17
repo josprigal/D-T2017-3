@@ -53,6 +53,8 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
+					
+					<li><a href="chorbi/chorbies.do"><spring:message code="master.page.chorbies" /></a></li>
 					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
 					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
 					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
