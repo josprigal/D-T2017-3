@@ -13,6 +13,13 @@
 
 <display:table pagesize="5" class="displaytag" keepStatus="true" name="chorbies" requestURI="${requestURI}" id="row">
 
+
+	 <spring:message code="name" var="nameHeader"/>
+    <display:column property="name" title="${nameHeader}" sortable="true"/>
+    
+     <spring:message code="surnames" var="surnameHeader"/>
+    <display:column property="surname" title="${surnameHeader}" sortable="true"/>
+
     <spring:message code="chorbie.description" var="descriptionHeader"/>
     <display:column property="description" title="${descriptionHeader}" sortable="true"/>
     
@@ -28,6 +35,12 @@
      <spring:message code="chorbie.gender" var="gender"/>
     <display:column property="gender" title="${genderHeader}" sortable="false"/>
    
+    <spring:message code="chorbie.likes" var="editHeader"/>
+    <display:column title="${editHeader }">
+			<a href="chorbi/c/${row.id}/likes.do">
+				<spring:message	code="chorbie.likes" />
+			</a>
+	</display:column>	
    		
 </display:table>
 
