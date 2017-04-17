@@ -26,7 +26,6 @@ import services.ChorbiService;
 import domain.Chorbi;
 import domain.Chorbi.Gender;
 import domain.Chorbi.Relationship;
-import domain.Likes;
 
 @Controller
 @RequestMapping("/chorbi")
@@ -57,10 +56,12 @@ public class ChorbiController {
 
 		final Collection<Chorbi> chorbies = this.chorbiService.findAll();
 		final Collection<Chorbi> chorbiesLike = new ArrayList<Chorbi>();
-		for (final Chorbi c : chorbies)
-			for (final Likes l : chorbi.getReceivedLikes())
-				if (c.getSentLikes().contains(l))
-					chorbiesLike.add(c);
+		/*
+		 * for (final Chorbi c : chorbies)
+		 * for (final Likes l : chorbi.getReceivedLikes())
+		 * if (c.getSentLikes().contains(l))
+		 * chorbiesLike.add(c);
+		 */
 
 		result.addObject("chorbiesLike", chorbiesLike);
 		result.addObject("requestURI", "chorbies/likes.do");
