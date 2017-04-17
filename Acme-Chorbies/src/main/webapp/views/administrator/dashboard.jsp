@@ -108,7 +108,7 @@
 </p>
 <br>
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
+<%-- <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="numberOfChorbiesPerCity" requestURI="${requestURI}"
 	id="numberOfChorbiesPerCity">
 	<spring:message code="administrator.numberOfChorbiesPerCity"
@@ -122,7 +122,7 @@
 	<spring:message code="administrator.numberOfChorbiesPerCountry"
 		var="name" />
 	<display:column property="name" title="${name}" sortable="true" />
-</display:table>
+</display:table> --%>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="listChorbiesNumberOfLikes" requestURI="${requestURI}"
