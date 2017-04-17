@@ -20,14 +20,14 @@
     <display:column property="birth" title="${birthHeader}" sortable="true"/>
     
     <spring:message code="chorbie.picture" var="picture"/>
-    <display:column property="picture" title="${pictureHeader}" sortable="false"/>
+    <display:column property="picture" title="${picture}" sortable="false"/>
     
     <spring:message code="chorbie.relationship" var="relationship"/>
-    <display:column property="relationship" title="${relationshipHeader}" sortable="false"/>
+    <display:column property="relationship" title="${relationship}" sortable="false"/>
     
      <spring:message code="chorbie.gender" var="gender"/>
-    <display:column property="gender" title="${genderHeader}" sortable="false"/>
-   
+    <display:column property="gender" title="${gender}" sortable="false"/>
+
    		
 </display:table>
 

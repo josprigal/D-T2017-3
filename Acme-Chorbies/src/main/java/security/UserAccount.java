@@ -38,8 +38,8 @@ public class UserAccount extends DomainEntity implements UserDetails {
 
 	public UserAccount() {
 		super();
-
-		this.authorities = new ArrayList<Authority>();
+		this.locked = false;
+		this.authorities = new ArrayList<>();
 	}
 
 	// Attributes -------------------------------------------------------------
@@ -49,6 +49,7 @@ public class UserAccount extends DomainEntity implements UserDetails {
 	private String username;
 	private String password;
 	private Collection<Authority> authorities;
+	private Boolean locked;
 
 	@Size(min = 5, max = 32)
 	@Column(unique = true)
@@ -107,7 +108,7 @@ public class UserAccount extends DomainEntity implements UserDetails {
 	@Transient
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return !this.locked;
 	}
 
 	@Transient
@@ -122,4 +123,11 @@ public class UserAccount extends DomainEntity implements UserDetails {
 		return true;
 	}
 
+	public Boolean getLocked() {
+		return locked;
+	}
+
+	public void setLocked(Boolean locked) {
+		this.locked = locked;
+	}
 }
