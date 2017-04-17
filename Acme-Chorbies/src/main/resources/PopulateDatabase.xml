@@ -65,20 +65,7 @@
 		
 	</bean>
 	
-	<bean id="likes1" class="domain.Likes">
-		<property name="moment" value="3/3/2017" />
-		<property name="comment" value="Comment 1" />
-	</bean>
-	
-	<bean id="likes2" class="domain.Likes">
-		<property name="moment" value="1/1/2017" />
-		<property name="comment" value="Comment 2" />
-	</bean>
-	
-	<bean id="likes3" class="domain.Likes">
-		<property name="moment" value="2/2/2017" />
-		<property name="comment" value="Comment 2" />
-	</bean>
+
 	
 	
 	<bean id="chirp1" class="domain.Chirp">
@@ -205,29 +192,6 @@
 		<property name="relationship" value="LOVE" />
 		<property name="gender" value="MALE" />
 		<property name="banned" value="false" />
-		<!-- <property name="sentChirps">
-			<list>
-			<ref bean="chirp3" />
-			</list>
-		</property>
-		<property name="receivedChirps">
-			<list>
-				<ref bean="chirp1" />
-				<ref bean="chirp2" />
-			</list>
-		</property>
-		
-		<property name="sentLikes">
-			<list>
-			<ref bean="likes3" />
-			</list>
-		</property>
-		<property name="receivedLikes">
-			<list>
-				<ref bean="likes1" />
-				<ref bean="likes2" />
-			</list>
-		</property> -->
 		<property name="creditCard" ref="creditCard2" />
 		<property name="coordinates" ref="coordinates1" />
 		<property name="searchTemplate" ref="searchTemplate1" />
@@ -248,34 +212,31 @@
 		<property name="relationship" value="LOVE" />
 		<property name="gender" value="FEMALE" />
 		<property name="banned" value="false" />
-		<!-- <property name="sentChirps">
-			<list>
-			<ref bean="chirp3" />
-			</list>
-		</property>
-		<property name="receivedChirps">
-			<list>
-				<ref bean="chirp1" />
-				<ref bean="chirp2" />
-			</list>
-		</property>
 		
-		<property name="sentLikes">
-			<list>
-			<ref bean="likes3" />
-			</list>
-		</property>
-		<property name="receivedLikes">
-			<list>
-				<ref bean="likes1" />
-				<ref bean="likes2" />
-			</list>
-		</property> -->
 		<property name="creditCard" ref="creditCard1" />
 		<property name="coordinates" ref="coordinates2" />
 		<property name="searchTemplate" ref="searchTemplate2" />
 
 	</bean>
+
+	<bean id="likes1" class="domain.Likes">
+		<property name="moment" value="3/3/2017" />
+		<property name="comment" value="Comment 1" />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipent" ref="chorbi2" />
+	</bean>
+	
+	<bean id="likes2" class="domain.Likes">
+		<property name="moment" value="1/1/2017" />
+		<property name="comment" value="Comment 2" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipent" ref="chorbi1" />
+	</bean>
+	
+	<!-- <bean id="likes3" class="domain.Likes">
+		<property name="moment" value="2/2/2017" />
+		<property name="comment" value="Comment 2" />
+	</bean> -->
 
 	<bean id="banner1" class="domain.Banner">
 		<property name="url" value="http://i.imgur.com/LQKfAcY.png" />

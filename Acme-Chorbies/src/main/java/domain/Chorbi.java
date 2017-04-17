@@ -1,14 +1,11 @@
 
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -48,10 +45,7 @@ public class Chorbi extends Actor {
 		super();
 		// TODO Auto-generated constructor stub
 		this.banned = false;
-		this.receivedChirps = new ArrayList<Chirp>();
-		this.sentChirps = new ArrayList<Chirp>();
-		this.sentLikes = new ArrayList<Likes>();
-		this.receivedLikes = new ArrayList<Likes>();
+
 	}
 
 
@@ -61,7 +55,8 @@ public class Chorbi extends Actor {
 	private String			picture;
 	private Relationship	relationship;
 	private Gender			gender;
-	private Integer age;
+	private Integer			age;
+
 
 	@NotNull
 	public String getDescription() {
@@ -81,8 +76,8 @@ public class Chorbi extends Actor {
 	}
 
 	public void setBirth(final Date birth) {
-	    this.birth = birth;
-	    this.age = calculateAge();
+		this.birth = birth;
+		this.age = this.calculateAge();
 	}
 
 	@NotBlank
@@ -136,49 +131,6 @@ public class Chorbi extends Actor {
 	}
 
 
-	private Collection<Likes>	sentLikes;
-	private Collection<Likes>	receivedLikes;
-	private Collection<Chirp>	sentChirps;
-	private Collection<Chirp>	receivedChirps;
-
-
-	@ManyToMany
-	public Collection<Likes> getSentLikes() {
-		return this.sentLikes;
-	}
-
-	public void setSentLikes(final Collection<Likes> sentLikes) {
-		this.sentLikes = sentLikes;
-	}
-
-	@ManyToMany
-	public Collection<Likes> getReceivedLikes() {
-		return this.receivedLikes;
-	}
-
-	public void setReceivedLikes(final Collection<Likes> receivedLikes) {
-		this.receivedLikes = receivedLikes;
-	}
-
-	@ManyToMany
-	public Collection<Chirp> getSentChirps() {
-		return this.sentChirps;
-	}
-
-	public void setSentChirps(final Collection<Chirp> sentChirps) {
-		this.sentChirps = sentChirps;
-	}
-
-	@ManyToMany
-	public Collection<Chirp> getReceivedChirps() {
-		return this.receivedChirps;
-	}
-
-	public void setReceivedChirps(final Collection<Chirp> receivedChirps) {
-		this.receivedChirps = receivedChirps;
-	}
-
-
 	private Coordinates		coordinates;
 	private SearchTemplate	searchTemplate;
 
@@ -201,7 +153,6 @@ public class Chorbi extends Actor {
 		this.searchTemplate = searchTemplate;
 	}
 
-
 	public Integer getAge() {
 		return this.age;
 	}
@@ -209,12 +160,11 @@ public class Chorbi extends Actor {
 		this.age = age;
 	}
 
-
-    public Integer calculateAge() {
-        final LocalDate birthdate = new LocalDate(this.birth);          //Birth date
-        final LocalDate now = new LocalDate();                    //Today's date
-        final Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
-        //Now access the values as below
-        return period.getYears();
-    }
+	public Integer calculateAge() {
+		final LocalDate birthdate = new LocalDate(this.birth);          //Birth date
+		final LocalDate now = new LocalDate();                    //Today's date
+		final Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
+		//Now access the values as below
+		return period.getYears();
+	}
 }
