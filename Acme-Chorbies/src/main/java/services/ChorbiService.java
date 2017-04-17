@@ -3,7 +3,9 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -194,15 +196,25 @@ public class ChorbiService {
 		return result2;
 	}
 
-	//	public Integer numberOfChorbiesPerCity() {
-	//		// TODO Auto-generated method stub
-	//		return this.chorbiRepository.numberOfChorbiesPerCity();
-	//	}
-	//
-	//	public Integer numberOfChorbiesPerCountry() {
-	//		// TODO Auto-generated method stub
-	//		return this.chorbiRepository.numberOfChorbiesPerCountry();
-	//	}
+	public Map<String, Integer> numberOfChorbiesPerCity() {
+		final Map<String, Integer> res = new HashMap<String, Integer>();
+		for (final Chorbi c : this.findAll())
+			if (res.get(c.getCoordinates().getCity()) == null)
+				res.put(c.getCoordinates().getCity(), 1);
+			else
+				res.put(c.getCoordinates().getCity(), res.get(c.getCoordinates().getCity()) + 1);
+		return res;
+	}
+
+	public Map<String, Integer> numberOfChorbiesPerCountry() {
+		final Map<String, Integer> res = new HashMap<String, Integer>();
+		for (final Chorbi c : this.findAll())
+			if (res.get(c.getCoordinates().getCountry()) == null)
+				res.put(c.getCoordinates().getCountry(), 1);
+			else
+				res.put(c.getCoordinates().getCountry(), res.get(c.getCoordinates().getCountry()) + 1);
+		return res;
+	}
 	public Collection<Chorbi> listChorbiesNumberOfLikes() {
 		// TODO Auto-generated method stub
 		return this.chorbiRepository.listChorbiesNumberOfLikes();
@@ -216,6 +228,31 @@ public class ChorbiService {
 	public Collection<Chorbi> listChorbiesMoreChirpsSent() {
 		// TODO Auto-generated method stub
 		return this.chorbiRepository.listChorbiesMoreChirpsSent();
+	}
+	public Double ratioNotCreditCard() {
+		Double res = 0.;
+		if (!this.findAll().isEmpty())
+			res = (double) this.chorbiRepository.chorbiNotCreditCard().size() / this.findAll().size();
+		return res;
+	}
+
+	public Double ratioLove() {
+		Double res = 0.;
+		if (!this.findAll().isEmpty())
+			res = (double) this.chorbiRepository.chorbiLove().size() / this.findAll().size();
+		return res;
+	}
+	public Double ratioFriendship() {
+		Double res = 0.;
+		if (!this.findAll().isEmpty())
+			res = (double) this.chorbiRepository.chorbiFriendship().size() / this.findAll().size();
+		return res;
+	}
+	public Double ratioActivities() {
+		Double res = 0.;
+		if (!this.findAll().isEmpty())
+			res = (double) this.chorbiRepository.chorbiActivities().size() / this.findAll().size();
+		return res;
 	}
 
 }

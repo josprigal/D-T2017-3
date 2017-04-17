@@ -7,6 +7,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <p>
@@ -107,7 +108,15 @@
 	${avgChirpsChorbiReceived}
 </p>
 <br>
+<p><spring:message code="administrator.numberOfChorbiesPerCity" /></p>
+<c:forEach items="${numberOfChorbiesPerCity}" var="entry">
+<p>${entry.key} : ${entry.value}</p>
+</c:forEach>
 
+<p><spring:message code="administrator.numberOfChorbiesPerCountry" /></p>
+<c:forEach items="${numberOfChorbiesPerCountry}" var="variable">
+<p>${variable.key} : ${variable.value}</p>
+</c:forEach>
 <%-- <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="numberOfChorbiesPerCity" requestURI="${requestURI}"
 	id="numberOfChorbiesPerCity">
