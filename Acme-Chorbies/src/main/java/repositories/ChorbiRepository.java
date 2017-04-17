@@ -18,6 +18,7 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	Integer maximunAgeChorbies();
 	@Query("select avg(c.age) from Chorbi c")
 	Double avgAgeChorbies();
+
 	@Query("select c from Chorbi c where c.creditCard is null")
 	Collection<Chorbi> chorbiNotCreditCard();
 	@Query("select c from Chorbi c where c.relationship='2'")
@@ -26,6 +27,7 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	Collection<Chorbi> chorbiFriendship();
 	@Query("select c from Chorbi c where c.relationship='0'")
 	Collection<Chorbi> chorbiActivities();
+
 	@Query("select min(c.receivedLikes.size) from Chorbi c")
 	Integer minLikesChorbi();
 	@Query("select max(c.receivedLikes.size) from Chorbi c")
@@ -46,7 +48,7 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	Integer maxChirpsChorbiReceived();
 
 	//	Integer numberOfChorbiesPerCity();
-	//
+
 	//	Integer numberOfChorbiesPerCountry();
 	@Query("select u from Chorbi u order by u.receivedLikes.size")
 	Collection<Chorbi> listChorbiesNumberOfLikes();
