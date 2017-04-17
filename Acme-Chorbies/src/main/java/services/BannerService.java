@@ -1,22 +1,24 @@
+
 package services;
 
-import domain.Actor;
-import domain.Banner;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import repositories.ActorRepository;
-import repositories.BannerRepository;
 
-import java.util.Collection;
+import repositories.BannerRepository;
+import domain.Banner;
 
 @Service
 @Transactional
 public class BannerService {
 
 	@Autowired
-	BannerRepository bannerRepository;
+	BannerRepository	bannerRepository;
+
+
 	public BannerService() {
 		super();
 	}
@@ -36,10 +38,9 @@ public class BannerService {
 		return result;
 	}
 
-
-	public void save(final Banner banner) {
+	public Banner save(final Banner banner) {
 		Assert.notNull(banner);
-		this.bannerRepository.save(banner);
+		return this.bannerRepository.save(banner);
 	}
 
 	public void delete(final Banner banner) {
@@ -48,8 +49,14 @@ public class BannerService {
 		Assert.isTrue(this.bannerRepository.exists(banner.getId()));
 		this.bannerRepository.delete(banner);
 	}
+	public Banner getPrincipal() {
+		return this.bannerRepository.findAll().get(0);
+	}
 
+	public Banner changeBanner(final String image) {
+		final Banner banner = this.getPrincipal();
+		banner.setUrl(image);
+		return this.save(banner);
+	}
 
-
-	
 }

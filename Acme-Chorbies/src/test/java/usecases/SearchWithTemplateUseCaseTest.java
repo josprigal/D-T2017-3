@@ -44,7 +44,10 @@ public class SearchWithTemplateUseCaseTest extends AbstractTest {
 	/*
 	 * An actor who is authenticated as a chorbi must be able to:
 	 * 
-	 * Change his or her search template.
+	 * Browse the results of his or her search template as long as he or she's registered a
+	 * valid credit card. Note that the validity of the credit card must be checked every
+	 * time the results of the search template are displayed. The results of search templates
+	 * must be cached for at least 12 hours
 	 */
 
 	@Test

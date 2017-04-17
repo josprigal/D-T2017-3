@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Collection;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.AdministratorRepository;
+import domain.Actor;
 import domain.Administrator;
 
 @Service
@@ -15,7 +17,10 @@ import domain.Administrator;
 public class AdministratorService {
 
 	@Autowired
-	AdministratorRepository administratorRepository;
+	AdministratorRepository	administratorRepository;
+	@Autowired
+	ActorService			actorService;
+
 
 	public AdministratorService() {
 		super();
@@ -46,6 +51,14 @@ public class AdministratorService {
 		Assert.isTrue(administrator.getId() != 0);
 		Assert.isTrue(this.administratorRepository.exists(administrator.getId()));
 		this.administratorRepository.delete(administrator);
+	}
+	public Administrator findByPrincipal() {
+		final Actor result = this.actorService.findActorByPrincipal();
+		Assert.isTrue(result instanceof Administrator);
+		final Administrator result2 = (Administrator) result;
+		Assert.notNull(result2);
+
+		return result2;
 	}
 
 }
