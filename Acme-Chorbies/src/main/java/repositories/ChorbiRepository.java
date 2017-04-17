@@ -18,14 +18,14 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	Integer maximunAgeChorbies();
 	@Query("select avg(c.age) from Chorbi c")
 	Double avgAgeChorbies();
-//
-//	Double ratioNotCreditCard();
-//
-//	Double ratioLove();
-//
-//	Double ratioFriendship();
-//
-//	Double ratioActivities();
+	//
+	//	Double ratioNotCreditCard();
+	//
+	//	Double ratioLove();
+	//
+	//	Double ratioFriendship();
+	//
+	//	Double ratioActivities();
 	@Query("select min(c.receivedLikes.size) from Chorbi c")
 	Integer minLikesChorbi();
 	@Query("select max(c.receivedLikes.size) from Chorbi c")
@@ -45,14 +45,14 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	@Query("select max(c.receivedChirps.size) from Chorbi c")
 	Integer maxChirpsChorbiReceived();
 
-//	Integer numberOfChorbiesPerCity();
-//
-//	Integer numberOfChorbiesPerCountry();
-//
-//	Collection<Chorbi> listChorbiesNumberOfLikes();
-//
-//	Collection<Chorbi> listChorbiesMoreChirpsReceived();
-//
-//	Collection<Chorbi> listChorbiesMoreChirpsSent();
+	//	Integer numberOfChorbiesPerCity();
+	//
+	//	Integer numberOfChorbiesPerCountry();
+	@Query("select u from Chorbi u order by u.receivedLikes.size")
+	Collection<Chorbi> listChorbiesNumberOfLikes();
+	@Query("select u from Chorbi u order by u.receivedChirps.size")
+	Collection<Chorbi> listChorbiesMoreChirpsReceived();
+	@Query("select u from Chorbi u order by u.sentChirps.size")
+	Collection<Chorbi> listChorbiesMoreChirpsSent();
 
 }
