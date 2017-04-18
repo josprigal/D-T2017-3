@@ -93,6 +93,13 @@
 		<form:errors cssClass="error" path="gender" />
 
 		<br>
+		<h2><spring:message code="coordinates" /> </h2>
+		<acme:textbox path="coordinates.city" code="city" />
+		<acme:textbox path="coordinates.province" code="province" />
+		<acme:textbox path="coordinates.state" code="state" />
+		<acme:textbox path="coordinates.country" code="country" />
+
+		<br>
 
 
 	</div>

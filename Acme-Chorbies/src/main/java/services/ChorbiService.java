@@ -104,26 +104,6 @@ public class ChorbiService {
 		return this.chorbiRepository.avgAgeChorbies();
 	}
 
-	//	public Double ratioNotCreditCard() {
-	//		// TODO Auto-generated method stub
-	//		return this.chorbiRepository.ratioNotCreditCard();
-	//	}
-	//
-	//	public Double ratioLove() {
-	//		// TODO Auto-generated method stub
-	//		return this.chorbiRepository.ratioLove();
-	//	}
-	//
-	//	public Double ratioFriendship() {
-	//		// TODO Auto-generated method stub
-	//		return this.chorbiRepository.ratioFriendship();
-	//	}
-	//
-	//	public Double ratioActivities() {
-	//		// TODO Auto-generated method stub
-	//		return this.chorbiRepository.ratioActivities();
-	//	}
-
 	public Integer minLikesChorbi() {
 		// TODO Auto-generated method stub
 		Integer result = Integer.MAX_VALUE;
@@ -208,7 +188,6 @@ public class ChorbiService {
 		Assert.notNull(a);
 		Assert.isTrue(a instanceof Chorbi);
 		final Chorbi chor = (Chorbi) a;
-		chor.setAge(chorbi.getAge());
 		chor.setBirth(chorbi.getBirth());
 		chor.setDescription(chorbi.getDescription());
 		Coordinates coordinates = chor.getCoordinates();

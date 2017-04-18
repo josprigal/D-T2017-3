@@ -191,17 +191,17 @@ public class ChorbiController {
 			result = this.createEditView(chorbi, "wrong");
 		else if (actual.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR) < 18)
 			result = this.createEditView(chorbi, "wrongbirth");
-		else
-			try {
+		else {
+            try {
 
-				final Chorbi chorbi1 = this.chorbiService.reconstruct(chorbi);
+                final Chorbi chorbi1 = this.chorbiService.reconstruct(chorbi);
 
-				result = this.createEditView(chorbi1, null);
-			} catch (final Throwable oops) {
-				System.out.println(oops.getMessage());
-				result = this.createEditView(chorbi, "wrong");
-			}
-
+                result = this.createEditView(chorbi1, null);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                result = this.createEditView(chorbi, "wrong");
+            }
+        }
 		return result;
 	}
 
