@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 
+import domain.Actor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -22,12 +23,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.ChorbiService;
 import services.LikesService;
 import domain.Chorbi;
 import domain.Chorbi.Gender;
 import domain.Chorbi.Relationship;
 import domain.Likes;
+import services.LikesService;
+import services.SearchTemplateService;
+
 
 @Controller
 @RequestMapping("/chorbi")
@@ -40,7 +45,14 @@ public class ChorbiController {
 	ChorbiService		chorbiService;
 
 	@Autowired
-	LikesService		likesService;
+	SearchTemplateService searchTemplateService;
+
+	@Autowired
+	LikesService likesService;
+
+	@Autowired
+	private ActorService actorService;
+
 
 
 	@RequestMapping(value = "/chorbies", method = RequestMethod.GET)
@@ -50,6 +62,10 @@ public class ChorbiController {
 		final Collection<Chorbi> chorbies = this.chorbiService.findAll();
 
 		result.addObject("chorbies", chorbies);
+		Actor actor = actorService.findActorByPrincipal();
+		if(actor instanceof Chorbi){
+			result.addObject("principal", actor);
+		}
 		result.addObject("requestURI", "chorbies.do");
 
 		return result;
@@ -71,6 +87,7 @@ public class ChorbiController {
 
 		return result;
 	}
+
 	@RequestMapping(value = "/register")
 	public ModelAndView index() {
 		return this.createEditModelAndView(new Chorbi(), null);
@@ -186,7 +203,69 @@ public class ChorbiController {
 			}
 
 		return result;
+	}
+
+    @RequestMapping(value = "/search")
+	public ModelAndView createResultsSearchView() {
+
+		ModelAndView result;
+		Chorbi chorbi = chorbiService.findByPrincipal();
+		result = new ModelAndView("chorbies/search");
+		Assert.notNull(chorbi);
+		if(chorbi.getCreditCard().checkValidity()){
+			result.addObject("chorbies",searchTemplateService.search());
+			result.addObject("requestURI","chorbi/search.do");
+		}else{
+			result.addObject("creditcard","notvalid");
+		}
+
+		return result;
 
 	}
+
+	@RequestMapping(value = "/like/{chorbi}")
+	public ModelAndView likeView(@PathVariable Chorbi chorbi, @ModelAttribute("likes") Likes likes) {
+		return createLikeView(new Likes(),null);
+	}
+
+	@RequestMapping(value = "/dislike/{chorbi}")
+	public ModelAndView dislike(@PathVariable Chorbi chorbi) {
+
+		ModelAndView result = new ModelAndView("redirect:/chorbi/chorbies.do");
+		Assert.notNull(chorbi);
+		Chorbi principal = chorbiService.findByPrincipal();
+		Assert.isTrue(chorbi.getId() != principal.getId());
+
+        likesService.dislike(chorbi);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/like/{chorbi}",method = RequestMethod.POST)
+	public ModelAndView like(@PathVariable Chorbi chorbi, @ModelAttribute("likes") Likes likes) {
+
+		ModelAndView result = new ModelAndView("redirect:/chorbi/chorbies.do");
+		Assert.notNull(chorbi);
+		Assert.notNull(likes);
+		Chorbi principal = chorbiService.findByPrincipal();
+		Assert.isTrue(chorbi.getId() != principal.getId());
+		try{
+			likes.setRecipent(chorbi);
+			likesService.like(likes);
+		}catch (Exception e){
+		    System.out.println(e.getMessage());
+			return createLikeView(likes,null);
+		}
+			return result;
+	}
+
+	private ModelAndView createLikeView(Likes likes, String message) {
+		ModelAndView result = new ModelAndView("chorbies/likeDo");
+		result.addObject("likes",likes);
+		result.addObject("message",message);
+
+		return result;
+	}
+
 
 }

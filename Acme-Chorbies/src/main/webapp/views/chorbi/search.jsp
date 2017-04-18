@@ -8,8 +8,13 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
+
+<jstl:if test="${not empty creditcard}">
+    <spring:message code="${creditcard}" />
+</jstl:if>
+
+<jstl:if test="${empty creditcard}">
 
 <display:table pagesize="5" class="displaytag" keepStatus="true" name="chorbies" requestURI="${requestURI}" id="row">
 
@@ -30,7 +35,7 @@
     <display:column property="picture" title="${picture}" sortable="false"/>
     
     <spring:message code="chorbie.relationship" var="relationship"/>
-    <display:column property="relationship" title="${relationshipx}" sortable="false"/>
+    <display:column property="relationship" title="${relationship}" sortable="false"/>
     
      <spring:message code="chorbie.gender" var="gender"/>
     <display:column property="gender" title="${gender}" sortable="false"/>
@@ -41,25 +46,7 @@
 				<spring:message	code="chorbie.likes" />
 			</a>
 	</display:column>
-    <display:column property="gender" title="${gender}" sortable="false"/>
-    <jstl:if test="${principal ne null and principal.id ne row.id}">
-    <spring:message code="chorbie.like" var="like"/>
-    <display:column title="${like}">
-        <jstl:set var="liked" value="false"/>
-        <jstl:forEach items="${row.userLikedYou}" var="user">
-            <jstl:if test="${user.sender.id eq principal.id}">
-                <jstl:set var="liked" value="true"/>
-            </jstl:if>
-        </jstl:forEach>
-        <jstl:if test="${liked eq false}">
-            <a href="chorbi/like/${row.id}.do"><spring:message code="like" /></a>
-        </jstl:if>
-        <jstl:if test="${liked eq true}">
-            <a href="chorbi/dislike/${row.id}.do"><spring:message code="dislike" /></a>
-        </jstl:if>
-        </display:column>
-    </jstl:if>
 
 
 </display:table>
-
+</jstl:if>

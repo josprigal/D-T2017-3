@@ -37,6 +37,9 @@
 					<li class="arrow"></li>
 					<li><a href="chorbi/edit.do"><spring:message code="editprofile" /></a></li>
 					<li><a href="chorbi/searchtemplate/edit.do"><spring:message code="editsearchtemplate" /></a> </li>
+					<li><a href="chorbi/search.do"><spring:message code="search" /></a> </li>
+					<li><a href="chirp/list.do">Chirps</a> </li>
+					<li><a href="creditcard/edit.do"><spring:message code="editcreditcard" /> </a> </li>
 				</ul>
 			</li>
 		</security:authorize>

@@ -18,6 +18,7 @@ public class AdministratorService {
 
 	@Autowired
 	AdministratorRepository	administratorRepository;
+
 	@Autowired
 	ActorService			actorService;
 

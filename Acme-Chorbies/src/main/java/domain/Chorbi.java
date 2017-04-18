@@ -1,14 +1,10 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -56,6 +52,10 @@ public class Chorbi extends Actor {
 	private Relationship	relationship;
 	private Gender			gender;
 	private Integer			age;
+	private Collection<Likes> userLikedYou;
+	private Collection<Likes> likedUsers;
+	private Collection<Chirp> chirpsReceived;
+	private Collection<Chirp> chirpsSents;
 
 
 	@NotNull
@@ -168,4 +168,39 @@ public class Chorbi extends Actor {
 		return period.getYears();
 	}
 
+	@OneToMany(mappedBy = "recipent")
+	public Collection<Likes> getUserLikedYou() {
+		return userLikedYou;
+	}
+
+	public void setUserLikedYou(Collection<Likes> userLikedYou) {
+		this.userLikedYou = userLikedYou;
+	}
+
+	@OneToMany(mappedBy = "sender")
+	public Collection<Likes> getLikedUsers() {
+		return likedUsers;
+	}
+
+	public void setLikedUsers(Collection<Likes> likedUsers) {
+		this.likedUsers = likedUsers;
+	}
+
+	@OneToMany(mappedBy = "recipent")
+	public Collection<Chirp> getChirpsReceived() {
+		return chirpsReceived;
+	}
+
+	public void setChirpsReceived(Collection<Chirp> chirpsReceived) {
+		this.chirpsReceived = chirpsReceived;
+	}
+
+	@OneToMany(mappedBy = "sender")
+    public Collection<Chirp> getChirpsSents() {
+        return chirpsSents;
+    }
+
+    public void setChirpsSents(Collection<Chirp> chirpsSents) {
+        this.chirpsSents = chirpsSents;
+    }
 }

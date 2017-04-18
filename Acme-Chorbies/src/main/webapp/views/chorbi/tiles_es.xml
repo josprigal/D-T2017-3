@@ -25,4 +25,20 @@
 		<put-attribute name="title" value="Chorbies-Like" />
 		<put-attribute name="body" value="/views/chorbi/chorbiesLike.jsp" />
 	</definition>
+
+	<definition name="chorbies/likeDo" extends="master.page">
+		<put-attribute name="title" value="Me gusta Chorbi" />
+		<put-attribute name="body" value="/views/chorbi/likes.jsp" />
+	</definition>
+
+	<definition name="chorbies/search" extends="master.page">
+		<put-attribute name="title" value="Busqueda de Chorbies" />
+		<put-attribute name="body" value="/views/chorbi/search.jsp" />
+	</definition>
+
+
+	<definition name="creditcard/edit" extends="master.page">
+		<put-attribute name="title" value="Editar Tarjeta de Crédito" />
+		<put-attribute name="body" value="/views/chorbi/creditcard.jsp" />
+	</definition>
 </tiles-definitions>

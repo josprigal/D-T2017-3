@@ -3,10 +3,7 @@ package domain;
 
 import java.util.Date;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -19,7 +16,7 @@ public class Chirp extends DomainEntity {
 
 	public Chirp() {
 		super();
-		// TODO Auto-generated constructor stub
+		sent = new Date();
 	}
 
 
@@ -69,7 +66,7 @@ public class Chirp extends DomainEntity {
 	private Chorbi	recipent;
 
 
-	@OneToOne
+	@ManyToOne
 	public Chorbi getSender() {
 		return this.sender;
 	}
@@ -77,7 +74,7 @@ public class Chirp extends DomainEntity {
 	public void setSender(final Chorbi sender) {
 		this.sender = sender;
 	}
-	@OneToOne
+	@ManyToOne
 	public Chorbi getRecipent() {
 		return this.recipent;
 	}

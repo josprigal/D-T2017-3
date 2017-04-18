@@ -1,7 +1,10 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import domain.Chorbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +19,9 @@ public class LikesService {
 
 	@Autowired
 	LikesRepository likesRepository;
+
+	@Autowired
+	ChorbiService chorbiService;
 
 	public LikesService() {
 		super();
@@ -48,4 +54,20 @@ public class LikesService {
 		this.likesRepository.delete(likes);
 	}
 
+    public void like(Likes likes) {
+		Chorbi principal = chorbiService.findByPrincipal();
+		Assert.isTrue(likes.getRecipent().getId() != principal.getId());
+		Assert.isNull(likesRepository.findChorbiByLikes(likes.getRecipent(),principal));
+		likes.setSender(principal);
+		save(likes);
+    }
+
+    public void dislike(Chorbi chorbi){
+        Chorbi principal = chorbiService.findByPrincipal();
+        Assert.isTrue(chorbi.getId() != principal.getId());
+        Assert.notNull(likesRepository.findChorbiByLikes(chorbi,principal));
+        Likes likes = likesRepository.findLikesByChorbies(chorbi,principal);
+
+        delete(likes);
+    }
 }

@@ -32,6 +32,7 @@ public class ChorbiService {
 
 	@Autowired
 	ChirpService			chirpService;
+
 	@Autowired
 	LikesService			likesService;
 

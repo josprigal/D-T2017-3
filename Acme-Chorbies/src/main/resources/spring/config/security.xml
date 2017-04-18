@@ -53,10 +53,20 @@
 		<security:intercept-url pattern="/chorbi/edit.do"
 								access="hasAnyRole('CHORBI')" />
 
+		<security:intercept-url pattern="/chorbi/like/**"
+								access="hasAnyRole('CHORBI')" />
+
+		<security:intercept-url pattern="/creditcard/**"
+								access="hasAnyRole('CHORBI')" />
+
+		<security:intercept-url pattern="/chirp/**"
+								access="hasAnyRole('CHORBI')" />
+
 		<security:intercept-url pattern="/chorbi/searchtemplate/**"
 								access="hasAnyRole('CHORBI')" />
 
-		
+		<security:intercept-url pattern="/chorbi/search.do"
+								access="hasAnyRole('CHORBI')" />
 
 
 		<security:intercept-url pattern="/chorbi/**"

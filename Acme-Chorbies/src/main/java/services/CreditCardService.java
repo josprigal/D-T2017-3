@@ -5,11 +5,14 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
+import domain.Chorbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import repositories.CreditCardRepository;
 import domain.CreditCard;
 
@@ -19,6 +22,12 @@ public class CreditCardService {
 
 	@Autowired
 	CreditCardRepository	creditCardRepository;
+
+	@Autowired
+	ChorbiService chorbiService;
+
+	@Autowired
+	Validator validator;
 
 
 	public CreditCardService() {
@@ -63,4 +72,22 @@ public class CreditCardService {
 		return res;
 	}
 
+    public CreditCard reconstruct(CreditCard creditCard, BindingResult bindingResult) {
+		Chorbi principal = chorbiService.findByPrincipal();
+		CreditCard uCreditCard = principal.getCreditCard();
+		if(uCreditCard==null){
+			creditCard.setChorbi(principal);
+			return creditCard;
+		}
+		uCreditCard.setBrandName(creditCard.getBrandName());
+		uCreditCard.setCvvCode(creditCard.getCvvCode());
+		uCreditCard.setExpirationMonth(creditCard.getExpirationMonth());
+		uCreditCard.setExpirationYear(creditCard.getExpirationYear());
+		uCreditCard.setHolderName(creditCard.getHolderName());
+		uCreditCard.setNumber(creditCard.getNumber());
+
+		validator.validate(uCreditCard, bindingResult);
+
+		return uCreditCard;
+    }
 }

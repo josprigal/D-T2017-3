@@ -18,6 +18,7 @@ public class ActorService {
 
 	@Autowired
 	ActorRepository actorRepository;
+
 	public ActorService() {
 		super();
 	}

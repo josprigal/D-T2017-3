@@ -37,8 +37,7 @@ public class SearchWithTemplateUseCaseTest extends AbstractTest {
 	@Autowired
 	CreditCardService		creditCardService;
 
-	@Autowired
-	private SessionFactory	sessionFactory;
+
 
 
 	/*
@@ -59,8 +58,7 @@ public class SearchWithTemplateUseCaseTest extends AbstractTest {
 
 		Assert.notNull(chorbi.getCreditCard());
 		Assert.isTrue(this.creditCardService.isValid(chorbi.getCreditCard()));
-		final Session session = this.sessionFactory.openSession();
-		Assert.notNull(this.searchTemplateService.search(session));
+		Assert.notNull(searchTemplateService.search());
 
 		super.unauthenticate();
 	}

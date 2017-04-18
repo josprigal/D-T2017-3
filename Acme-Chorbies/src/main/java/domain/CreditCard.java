@@ -1,15 +1,16 @@
 
 package domain;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.data.annotation.Transient;
+
+import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -40,7 +41,8 @@ public class CreditCard extends DomainEntity {
 
 
 	@NotNull
-	public BrandName getBrandName() {
+    @Enumerated(EnumType.STRING)
+    public BrandName getBrandName() {
 		return this.brandName;
 	}
 
@@ -106,6 +108,16 @@ public class CreditCard extends DomainEntity {
 
 	public void setChorbi(final Chorbi chorbi) {
 		this.chorbi = chorbi;
+	}
+
+	@Transient
+	public boolean checkValidity(){
+        Date now = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+        int monthnow = calendar.get(Calendar.MONTH);
+        int yearnow = calendar.get(Calendar.YEAR);
+        return yearnow == this.expirationYear && monthnow < this.expirationMonth || (yearnow < expirationYear);
 	}
 
 }
