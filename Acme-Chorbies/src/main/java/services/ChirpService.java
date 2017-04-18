@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Collection;
@@ -15,7 +16,8 @@ import domain.Chirp;
 public class ChirpService {
 
 	@Autowired
-	ChirpRepository chirpRepository;
+	ChirpRepository	chirpRepository;
+
 
 	public ChirpService() {
 		super();
@@ -36,9 +38,9 @@ public class ChirpService {
 		return result;
 	}
 
-	public void save(final Chirp chirp) {
+	public Chirp save(final Chirp chirp) {
 		Assert.notNull(this.chirpRepository);
-		this.chirpRepository.save(chirp);
+		return this.chirpRepository.save(chirp);
 	}
 
 	public void delete(final Chirp chirp) {
