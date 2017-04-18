@@ -36,10 +36,10 @@ public class CoordinatesService {
 		return result;
 	}
 
-	public void save(final Coordinates coordinates) {
+	public Coordinates save(final Coordinates coordinates) {
 		Assert.notNull(this.coordinatesRepository);
-		this.coordinatesRepository.save(coordinates);
-	}
+		return this.coordinatesRepository.save(coordinates);
+    }
 
 	public void delete(final Coordinates coordinates) {
 		Assert.notNull(coordinates);

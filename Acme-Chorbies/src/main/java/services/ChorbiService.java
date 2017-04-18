@@ -42,6 +42,9 @@ public class ChorbiService {
 	@Autowired
 	SearchTemplateService	searchTemplateService;
 
+	@Autowired
+    CoordinatesService coordinatesService;
+
 
 	public ChorbiService() {
 		super();
@@ -86,6 +89,12 @@ public class ChorbiService {
 		searchTemplate = this.searchTemplateService.save(searchTemplate);
 		chorbi.setSearchTemplate(searchTemplate);
 		Assert.notNull(chorbi);
+		Coordinates coordinates = new Coordinates();
+		if(chorbi.getCoordinates()!=null) {
+		    coordinates = chorbi.getCoordinates();
+        }
+		    coordinates = coordinatesService.save(coordinates);
+		    chorbi.setCoordinates(coordinates);
 		this.chorbiRepository.save(chorbi);
 	}
 
