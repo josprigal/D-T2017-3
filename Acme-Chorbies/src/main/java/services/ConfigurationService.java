@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Collection;
@@ -15,7 +16,8 @@ import domain.Configuration;
 public class ConfigurationService {
 
 	@Autowired
-	ConfigurationRepository configurationRepository;
+	ConfigurationRepository	configurationRepository;
+
 
 	public ConfigurationService() {
 		super();
@@ -36,9 +38,9 @@ public class ConfigurationService {
 		return result;
 	}
 
-	public void save(final Configuration configuration) {
+	public Configuration save(final Configuration configuration) {
 		Assert.notNull(this.configurationRepository);
-		this.configurationRepository.save(configuration);
+		return this.configurationRepository.save(configuration);
 	}
 
 	public void delete(final Configuration configuration) {
@@ -48,11 +50,11 @@ public class ConfigurationService {
 		this.configurationRepository.delete(configuration);
 	}
 
-    public void reconstruct(Configuration configuration, Configuration configuration1) {
+	public void reconstruct(final Configuration configuration, final Configuration configuration1) {
 		configuration1.setHours(configuration.getHours());
 		configuration1.setMinutes(configuration.getMinutes());
 		configuration1.setSeconds(configuration.getSeconds());
 
-		save(configuration1);
-    }
+		this.save(configuration1);
+	}
 }

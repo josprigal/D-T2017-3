@@ -1,6 +1,9 @@
+
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +18,8 @@ import domain.CreditCard;
 public class CreditCardService {
 
 	@Autowired
-	CreditCardRepository creditCardRepository;
+	CreditCardRepository	creditCardRepository;
+
 
 	public CreditCardService() {
 		super();
@@ -46,6 +50,17 @@ public class CreditCardService {
 		Assert.isTrue(creditCard.getId() != 0);
 		Assert.isTrue(this.creditCardRepository.exists(creditCard.getId()));
 		this.creditCardRepository.delete(creditCard);
+	}
+	@SuppressWarnings("deprecation")
+	public boolean isValid(final CreditCard c) {
+		boolean res = true;
+		final Date d = Calendar.getInstance().getTime();
+		if (d.getYear() > c.getExpirationYear())
+			res = false;
+		else if (d.getYear() == c.getExpirationYear())
+			if (d.getMonth() > c.getExpirationMonth())
+				res = false;
+		return res;
 	}
 
 }

@@ -3,6 +3,8 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +17,10 @@ import org.springframework.util.Assert;
 import repositories.ChorbiRepository;
 import security.Authority;
 import domain.Actor;
+import domain.Chirp;
 import domain.Chorbi;
 import domain.Coordinates;
+import domain.Likes;
 import domain.SearchTemplate;
 
 @Service
@@ -25,6 +29,11 @@ public class ChorbiService {
 
 	@Autowired
 	ChorbiRepository		chorbiRepository;
+
+	@Autowired
+	ChirpService			chirpService;
+	@Autowired
+	LikesService			likesService;
 
 	@Autowired
 	ActorService			actorService;
@@ -116,47 +125,81 @@ public class ChorbiService {
 
 	public Integer minLikesChorbi() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.minLikesChorbi();
+		Integer result = Integer.MAX_VALUE;
+		for (final Chorbi c : this.findAll())
+			if (this.receivedLikes(c).size() < result)
+				result = this.receivedLikes(c).size();
+		return result;
 	}
 
 	public Integer maxLikesChorbi() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.maxLikesChorbi();
+		Integer result = 0;
+		for (final Chorbi c : this.findAll())
+			if (this.receivedLikes(c).size() > result)
+				result = this.receivedLikes(c).size();
+		return result;
 	}
 
 	public Double avgLikesChorbi() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.avgLikesChorbi();
+		Double number = 0.;
+		for (final Chorbi c : this.findAll())
+			number += this.receivedLikes(c).size();
+		return number / this.findAll().size();
 	}
 
 	public Integer minChirpsChorbiSent() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.minChirpsChorbiSent();
+		Integer result = Integer.MAX_VALUE;
+		for (final Chorbi c : this.findAll())
+			if (this.sentChirps(c).size() < result)
+				result = this.sentChirps(c).size();
+		return result;
 	}
 
 	public Integer maxChirpsChorbiSent() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.maxChirpsChorbiSent();
+		Integer result = 0;
+		for (final Chorbi c : this.findAll())
+			if (this.sentChirps(c).size() > result)
+				result = this.sentLikes(c).size();
+		return result;
 	}
 
 	public Double avgChirpsChorbiSent() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.avgChirpsChorbiSent();
+		Double number = 0.;
+		for (final Chorbi c : this.findAll())
+			number += this.sentChirps(c).size();
+		return number / this.findAll().size();
 	}
 
 	public Integer minChirpsChorbiReceived() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.minChirpsChorbiReceived();
+		Integer result = Integer.MAX_VALUE;
+		for (final Chorbi c : this.findAll())
+			if (this.receivedChirps(c).size() < result)
+				result = this.receivedChirps(c).size();
+		return result;
 	}
 
 	public Double avgChirpsChorbiReceived() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.avgChirpsChorbiReceived();
+		Double number = 0.;
+		for (final Chorbi c : this.findAll())
+			number += this.receivedChirps(c).size();
+		return number / this.findAll().size();
+
 	}
 
 	public Integer maxChirpsChorbiReceived() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.maxChirpsChorbiReceived();
+		Integer result = 0;
+		for (final Chorbi c : this.findAll())
+			if (this.receivedChirps(c).size() > result)
+				result = this.receivedLikes(c).size();
+		return result;
 	}
 
 	public Chorbi reconstruct(final Chorbi chorbi) {
@@ -217,17 +260,44 @@ public class ChorbiService {
 	}
 	public Collection<Chorbi> listChorbiesNumberOfLikes() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.listChorbiesNumberOfLikes();
+		final List<Chorbi> chorbies = (List<Chorbi>) this.findAll();
+		Collections.sort(chorbies, new Comparator<Chorbi>() {
+
+			@Override
+			public int compare(final Chorbi lhs, final Chorbi rhs) {
+				// -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+				return ChorbiService.this.receivedLikes(lhs).size() > ChorbiService.this.receivedLikes(rhs).size() ? -1 : (ChorbiService.this.receivedLikes(lhs).size() > ChorbiService.this.receivedLikes(rhs).size()) ? 1 : 0;
+			}
+		});
+		return chorbies;
 	}
 
 	public Collection<Chorbi> listChorbiesMoreChirpsReceived() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.listChorbiesMoreChirpsReceived();
+		final List<Chorbi> chorbies = (List<Chorbi>) this.findAll();
+		Collections.sort(chorbies, new Comparator<Chorbi>() {
+
+			@Override
+			public int compare(final Chorbi lhs, final Chorbi rhs) {
+				// -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+				return ChorbiService.this.receivedChirps(lhs).size() > ChorbiService.this.receivedChirps(rhs).size() ? -1 : (ChorbiService.this.receivedChirps(lhs).size() > ChorbiService.this.receivedChirps(rhs).size()) ? 1 : 0;
+			}
+		});
+		return chorbies;
 	}
 
 	public Collection<Chorbi> listChorbiesMoreChirpsSent() {
 		// TODO Auto-generated method stub
-		return this.chorbiRepository.listChorbiesMoreChirpsSent();
+		final List<Chorbi> chorbies = (List<Chorbi>) this.findAll();
+		Collections.sort(chorbies, new Comparator<Chorbi>() {
+
+			@Override
+			public int compare(final Chorbi lhs, final Chorbi rhs) {
+				// -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+				return ChorbiService.this.sentChirps(lhs).size() > ChorbiService.this.sentChirps(rhs).size() ? -1 : (ChorbiService.this.sentChirps(lhs).size() > ChorbiService.this.sentChirps(rhs).size()) ? 1 : 0;
+			}
+		});
+		return chorbies;
 	}
 	public Double ratioNotCreditCard() {
 		Double res = 0.;
@@ -255,4 +325,36 @@ public class ChorbiService {
 		return res;
 	}
 
+	public Collection<Chirp> sentChirps(final Chorbi principal) {
+		final Collection<Chirp> all = this.chirpService.findAll();
+		final Collection<Chirp> sentChirps = new ArrayList<Chirp>();
+		for (final Chirp c : all)
+			if (c.getSender().getId() == principal.getId())
+				sentChirps.add(c);
+		return sentChirps;
+	}
+	public Collection<Chirp> receivedChirps(final Chorbi principal) {
+		final Collection<Chirp> all = this.chirpService.findAll();
+		final Collection<Chirp> receivedChirps = new ArrayList<Chirp>();
+		for (final Chirp c : all)
+			if (c.getRecipent().getId() == principal.getId())
+				receivedChirps.add(c);
+		return receivedChirps;
+	}
+	public Collection<Likes> sentLikes(final Chorbi principal) {
+		final Collection<Likes> all = this.likesService.findAll();
+		final Collection<Likes> sentLikes = new ArrayList<Likes>();
+		for (final Likes c : all)
+			if (c.getRecipent().getId() == principal.getId())
+				sentLikes.add(c);
+		return sentLikes;
+	}
+	public Collection<Likes> receivedLikes(final Chorbi principal) {
+		final Collection<Likes> all = this.likesService.findAll();
+		final Collection<Likes> receivedLikes = new ArrayList<Likes>();
+		for (final Likes c : all)
+			if (c.getRecipent().getId() == principal.getId())
+				receivedLikes.add(c);
+		return receivedLikes;
+	}
 }

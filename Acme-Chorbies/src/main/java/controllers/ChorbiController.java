@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ChorbiService;
+import services.LikesService;
 import domain.Chorbi;
 import domain.Chorbi.Gender;
 import domain.Chorbi.Relationship;
+import domain.Likes;
 
 @Controller
 @RequestMapping("/chorbi")
@@ -36,6 +38,9 @@ public class ChorbiController {
 
 	@Autowired
 	ChorbiService		chorbiService;
+
+	@Autowired
+	LikesService		likesService;
 
 
 	@RequestMapping(value = "/chorbies", method = RequestMethod.GET)
@@ -54,21 +59,18 @@ public class ChorbiController {
 	public ModelAndView listLikes(@PathVariable final Chorbi chorbi) {
 		final ModelAndView result = new ModelAndView("chorbies/likes");
 
-		final Collection<Chorbi> chorbies = this.chorbiService.findAll();
+		final Collection<Likes> likes = this.likesService.findAll();
 		final Collection<Chorbi> chorbiesLike = new ArrayList<Chorbi>();
-		/*
-		 * for (final Chorbi c : chorbies)
-		 * for (final Likes l : chorbi.getReceivedLikes())
-		 * if (c.getSentLikes().contains(l))
-		 * chorbiesLike.add(c);
-		 */
+
+		for (final Likes l : likes)
+			if (l.getRecipent().equals(chorbi))
+				chorbiesLike.add(l.getSender());
 
 		result.addObject("chorbiesLike", chorbiesLike);
 		result.addObject("requestURI", "chorbies/likes.do");
 
 		return result;
 	}
-
 	@RequestMapping(value = "/register")
 	public ModelAndView index() {
 		return this.createEditModelAndView(new Chorbi(), null);
