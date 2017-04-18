@@ -28,33 +28,45 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	@Query("select c from Chorbi c where c.relationship='0'")
 	Collection<Chorbi> chorbiActivities();
 
-	@Query("select min(c.receivedLikes.size) from Chorbi c")
-	Integer minLikesChorbi();
-	@Query("select max(c.receivedLikes.size) from Chorbi c")
-	Integer maxLikesChorbi();
-	@Query("select avg(c.receivedLikes.size) from Chorbi c")
-	Double avgLikesChorbi();
-	@Query("select min(c.sentChirps.size) from Chorbi c")
-	Integer minChirpsChorbiSent();
-	@Query("select max(c.sentChirps.size) from Chorbi c")
-	Integer maxChirpsChorbiSent();
-	@Query("select avg(c.sentChirps.size) from Chorbi c")
-	Double avgChirpsChorbiSent();
-	@Query("select min(c.receivedChirps.size) from Chorbi c")
-	Integer minChirpsChorbiReceived();
-	@Query("select avg(c.receivedChirps.size) from Chorbi c")
-	Double avgChirpsChorbiReceived();
-	@Query("select max(c.receivedChirps.size) from Chorbi c")
-	Integer maxChirpsChorbiReceived();
-
-	//	Integer numberOfChorbiesPerCity();
-
-	//	Integer numberOfChorbiesPerCountry();
-	@Query("select u from Chorbi u order by u.receivedLikes.size")
-	Collection<Chorbi> listChorbiesNumberOfLikes();
-	@Query("select u from Chorbi u order by u.receivedChirps.size")
-	Collection<Chorbi> listChorbiesMoreChirpsReceived();
-	@Query("select u from Chorbi u order by u.sentChirps.size")
-	Collection<Chorbi> listChorbiesMoreChirpsSent();
-
+	/*
+	 * @Query("select min(c.receivedLikes.size) from Chorbi c")
+	 * Integer minLikesChorbi();
+	 * 
+	 * @Query("select max(c.receivedLikes.size) from Chorbi c")
+	 * Integer maxLikesChorbi();
+	 * 
+	 * @Query("select avg(c.receivedLikes.size) from Chorbi c")
+	 * Double avgLikesChorbi();
+	 * 
+	 * @Query("select min(c.sentChirps.size) from Chorbi c")
+	 * Integer minChirpsChorbiSent();
+	 * 
+	 * @Query("select max(c.sentChirps.size) from Chorbi c")
+	 * Integer maxChirpsChorbiSent();
+	 * 
+	 * @Query("select avg(c.sentChirps.size) from Chorbi c")
+	 * Double avgChirpsChorbiSent();
+	 * 
+	 * @Query("select min(c.receivedChirps.size) from Chorbi c")
+	 * Integer minChirpsChorbiReceived();
+	 * 
+	 * @Query("select avg(c.receivedChirps.size) from Chorbi c")
+	 * Double avgChirpsChorbiReceived();
+	 * 
+	 * @Query("select max(c.receivedChirps.size) from Chorbi c")
+	 * Integer maxChirpsChorbiReceived();
+	 * 
+	 * // Integer numberOfChorbiesPerCity();
+	 * 
+	 * // Integer numberOfChorbiesPerCountry();
+	 * 
+	 * @Query("select u from Chorbi u order by u.receivedLikes.size")
+	 * Collection<Chorbi> listChorbiesNumberOfLikes();
+	 * 
+	 * @Query("select u from Chorbi u order by u.receivedChirps.size")
+	 * Collection<Chorbi> listChorbiesMoreChirpsReceived();
+	 * 
+	 * @Query("select u from Chorbi u order by u.sentChirps.size")
+	 * Collection<Chorbi> listChorbiesMoreChirpsSent();
+	 */
 }

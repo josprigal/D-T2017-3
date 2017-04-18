@@ -68,26 +68,7 @@
 
 	
 	
-	<bean id="chirp1" class="domain.Chirp">
-		<property name="sent" value="1/1/2017" />
-		<property name="subject" value="Subject 1" />
-		<property name="text" value="Text 1" />
-		<property name="attachments" value="https://qph.ec.quoracdn.net/main-thumb-t-1800-200-lOn8kKfhqfcTcKdt2GwaLfGnC0jEjHmV.jpeg" />
-	</bean>
 	
-	<bean id="chirp2" class="domain.Chirp">
-		<property name="sent" value="1/2/2017" />
-		<property name="subject" value="Subject 2" />
-		<property name="text" value="Text 2" />
-		<property name="attachments" value="https://qph.ec.quoracdn.net/main-thumb-t-1800-200-lOn8kKfhqfcTcKdt2GwaLfGnC0jEjHmV.jpeg" />
-	</bean>
-	
-	<bean id="chirp3" class="domain.Chirp">
-		<property name="sent" value="1/3/2017" />
-		<property name="subject" value="Subject 3" />
-		<property name="text" value="Text 3" />
-		<property name="attachments" value="https://qph.ec.quoracdn.net/main-thumb-t-1800-200-lOn8kKfhqfcTcKdt2GwaLfGnC0jEjHmV.jpeg" />
-	</bean>
 	
 		<bean id="coordinates1" class="domain.Coordinates">
 		<property name="city" value="Algeciras" />
@@ -237,6 +218,33 @@
 		<property name="moment" value="2/2/2017" />
 		<property name="comment" value="Comment 2" />
 	</bean> -->
+	
+	<bean id="chirp1" class="domain.Chirp">
+		<property name="sent" value="1/1/2017" />
+		<property name="subject" value="Subject 1" />
+		<property name="text" value="Text 1" />
+		<property name="attachments" value="https://qph.ec.quoracdn.net/main-thumb-t-1800-200-lOn8kKfhqfcTcKdt2GwaLfGnC0jEjHmV.jpeg" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipent" ref="chorbi1" />
+	</bean>
+	
+	<bean id="chirp2" class="domain.Chirp">
+		<property name="sent" value="1/2/2017" />
+		<property name="subject" value="Subject 2" />
+		<property name="text" value="Text 2" />
+		<property name="attachments" value="https://qph.ec.quoracdn.net/main-thumb-t-1800-200-lOn8kKfhqfcTcKdt2GwaLfGnC0jEjHmV.jpeg" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipent" ref="chorbi1" />
+	</bean>
+	
+	<bean id="chirp3" class="domain.Chirp">
+		<property name="sent" value="1/3/2017" />
+		<property name="subject" value="Subject 3" />
+		<property name="text" value="Text 3" />
+		<property name="attachments" value="https://qph.ec.quoracdn.net/main-thumb-t-1800-200-lOn8kKfhqfcTcKdt2GwaLfGnC0jEjHmV.jpeg" />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipent" ref="chorbi2" />
+	</bean>
 
 	<bean id="banner1" class="domain.Banner">
 		<property name="url" value="http://i.imgur.com/LQKfAcY.png" />
