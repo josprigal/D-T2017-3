@@ -188,7 +188,7 @@ public class ChorbiController {
 		ModelAndView result;
 
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(chorbi, "wrong");
+			result = this.createEditView(chorbi, "wrong");
 		else if (actual.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR) < 18)
 			result = this.createEditView(chorbi, "wrongbirth");
 		else
@@ -199,7 +199,7 @@ public class ChorbiController {
 				result = this.createEditView(chorbi1, null);
 			} catch (final Throwable oops) {
 				System.out.println(oops.getMessage());
-				result = this.createEditModelAndView(chorbi, "wrong");
+				result = this.createEditView(chorbi, "wrong");
 			}
 
 		return result;
