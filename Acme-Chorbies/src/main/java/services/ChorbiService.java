@@ -143,7 +143,10 @@ public class ChorbiService {
 
 	public Double avgLikesChorbi() {
 		// TODO Auto-generated method stub
-		return 1.;
+		Double number = 0.;
+		for (final Chorbi c : this.findAll())
+			number += this.receivedLikes(c).size();
+		return number / this.findAll().size();
 	}
 
 	public Integer minChirpsChorbiSent() {
@@ -166,7 +169,10 @@ public class ChorbiService {
 
 	public Double avgChirpsChorbiSent() {
 		// TODO Auto-generated method stub
-		return 1.;
+		Double number = 0.;
+		for (final Chorbi c : this.findAll())
+			number += this.sentChirps(c).size();
+		return number / this.findAll().size();
 	}
 
 	public Integer minChirpsChorbiReceived() {
@@ -180,7 +186,11 @@ public class ChorbiService {
 
 	public Double avgChirpsChorbiReceived() {
 		// TODO Auto-generated method stub
-		return 1.;
+		Double number = 0.;
+		for (final Chorbi c : this.findAll())
+			number += this.receivedChirps(c).size();
+		return number / this.findAll().size();
+
 	}
 
 	public Integer maxChirpsChorbiReceived() {

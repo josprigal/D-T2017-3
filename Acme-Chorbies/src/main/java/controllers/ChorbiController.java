@@ -64,7 +64,7 @@ public class ChorbiController {
 
 		for (final Likes l : likes)
 			if (l.getRecipent().equals(chorbi))
-				chorbiesLike.add(l.getRecipent());
+				chorbiesLike.add(l.getSender());
 
 		result.addObject("chorbiesLike", chorbiesLike);
 		result.addObject("requestURI", "chorbies/likes.do");
