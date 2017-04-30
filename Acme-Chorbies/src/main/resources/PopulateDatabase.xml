@@ -47,6 +47,17 @@
 		</property>
 	</bean>
 	
+		<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="manager" />
+		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 	<!-- Other domain beans come here -->	
 	
 	
@@ -199,12 +210,33 @@
 		<property name="searchTemplate" ref="searchTemplate2" />
 
 	</bean>
+	
+	<bean id="manager1" class="domain.Manager">
+		<property name="name" value="Leticia" />
+		<property name="surname" value="Sabater" />
+		<property name="email" value="leticia@love.com" />
+		<property name="phone" value="123456789" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="company" value="Microsoft" />
+		<property name="vatNumber" value="123456789" />
+		
+		<property name="creditCard" ref="creditCard2" />
+		<property name="events">
+			<list>
+				
+			<ref bean="event1" />	
+			<ref bean="event2" />	
+			</list>
+		</property>
+
+	</bean>
 
 	<bean id="likes1" class="domain.Likes">
 		<property name="moment" value="3/3/2017" />
 		<property name="comment" value="Comment 1" />
 		<property name="sender" ref="chorbi1" />
 		<property name="recipent" ref="chorbi2" />
+		<property name="stars" value="3" />
 	</bean>
 	
 	<bean id="likes2" class="domain.Likes">
@@ -212,6 +244,7 @@
 		<property name="comment" value="Comment 2" />
 		<property name="sender" ref="chorbi2" />
 		<property name="recipent" ref="chorbi1" />
+		<property name="stars" value="2" />
 	</bean>
 	
 	<!-- <bean id="likes3" class="domain.Likes">
@@ -262,5 +295,29 @@
 		<property name="hours" value="12"/>
 		<property name="minutes" value="0" />
 		<property name="seconds" value="0" />
+	</bean>
+	
+	<bean id="event1" class="domain.Event">
+		<property name="title" value="Title 1" />
+		<property name="description" value="Description 1" />
+		<property name="moment" value="10/10/2017" />
+		<property name="picture" value="http://www.dreambeach.es/2016/wp-content/uploads/2015/11/logo2016.png" />
+		<property name="seats" value="100" />
+	</bean>
+	
+	<bean id="event2" class="domain.Event">
+		<property name="title" value="Title 2" />
+		<property name="description" value="Description 2" />
+		<property name="moment" value="01/10/2017" />
+		<property name="picture" value="http://www.dodmagazine.es/wp-content/uploads/2015/11/festival-leyendas-rock-2017.jpg" />
+		<property name="seats" value="150" />
+	</bean>
+	
+	<bean id="event3" class="domain.Event">
+		<property name="title" value="Title 3" />
+		<property name="description" value="Description 3" />
+		<property name="moment" value="11/11/2017" />
+		<property name="picture" value="http://estaticos.elmundo.es/blogs/elmundo/momen-tvs/imagenes_posts/2016/04/27/167657_540x303.jpg" />
+		<property name="seats" value="200" />
 	</bean>
 </beans>

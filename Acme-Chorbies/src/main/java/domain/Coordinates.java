@@ -5,8 +5,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 @Entity
 @Access(AccessType.PROPERTY)
 public class Coordinates extends DomainEntity {
@@ -38,7 +36,6 @@ public class Coordinates extends DomainEntity {
 	public void setCountry(final String country) {
 		this.country = country;
 	}
-
 
 	public String getState() {
 		return this.state;

@@ -4,9 +4,12 @@ package domain;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -14,13 +17,13 @@ public class Results extends DomainEntity {
 
 	public Results() {
 		super();
-		moment = new Date();
+		this.moment = new Date();
 	}
 
 
-	private Date	moment;
-	private Collection<Chorbi> chorbis;
-	private SearchTemplate searchTemplate;
+	private Date				moment;
+	private Collection<Chorbi>	chorbis;
+	private SearchTemplate		searchTemplate;
 
 
 	@NotNull
@@ -34,19 +37,19 @@ public class Results extends DomainEntity {
 
 	@OneToMany
 	public Collection<Chorbi> getChorbis() {
-		return chorbis;
+		return this.chorbis;
 	}
 
-	public void setChorbis(Collection<Chorbi> chorbis) {
+	public void setChorbis(final Collection<Chorbi> chorbis) {
 		this.chorbis = chorbis;
 	}
 
 	@OneToOne
-    public SearchTemplate getSearchTemplate() {
-        return searchTemplate;
-    }
+	public SearchTemplate getSearchTemplate() {
+		return this.searchTemplate;
+	}
 
-    public void setSearchTemplate(SearchTemplate searchTemplate) {
-        this.searchTemplate = searchTemplate;
-    }
+	public void setSearchTemplate(final SearchTemplate searchTemplate) {
+		this.searchTemplate = searchTemplate;
+	}
 }

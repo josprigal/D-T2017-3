@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Event {
+public class Event extends DomainEntity {
 
 	public Event() {
 		super();

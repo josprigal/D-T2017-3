@@ -1,14 +1,11 @@
 
 package domain;
 
-import org.hibernate.validator.constraints.Range;
-
-import java.sql.Time;
-import java.sql.Timestamp;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -16,41 +13,41 @@ public class Configuration extends DomainEntity {
 
 	public Configuration() {
 		super();
-		minutes = 0;
-		seconds = 0;
-		hours = 0;
+		this.minutes = 0;
+		this.seconds = 0;
+		this.hours = 0;
 	}
 
 
-	private Integer hours;
-	private Integer minutes;
-	private Integer seconds;
+	private Integer	hours;
+	private Integer	minutes;
+	private Integer	seconds;
 
 
 	@Range(min = 12)
 	public Integer getHours() {
-		return hours;
+		return this.hours;
 	}
 
-	public void setHours(Integer hours) {
+	public void setHours(final Integer hours) {
 		this.hours = hours;
 	}
 
 	@Range(min = 0, max = 60)
 	public Integer getMinutes() {
-		return minutes;
+		return this.minutes;
 	}
 
-	public void setMinutes(Integer minutes) {
+	public void setMinutes(final Integer minutes) {
 		this.minutes = minutes;
 	}
 
-    @Range(min = 0, max = 60)
+	@Range(min = 0, max = 60)
 	public Integer getSeconds() {
-		return seconds;
+		return this.seconds;
 	}
 
-	public void setSeconds(Integer seconds) {
+	public void setSeconds(final Integer seconds) {
 		this.seconds = seconds;
 	}
 }
