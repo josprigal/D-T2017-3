@@ -43,7 +43,7 @@ public class ChorbiService {
 	SearchTemplateService	searchTemplateService;
 
 	@Autowired
-    CoordinatesService coordinatesService;
+	CoordinatesService		coordinatesService;
 
 
 	public ChorbiService() {
@@ -90,11 +90,10 @@ public class ChorbiService {
 		chorbi.setSearchTemplate(searchTemplate);
 		Assert.notNull(chorbi);
 		Coordinates coordinates = new Coordinates();
-		if(chorbi.getCoordinates()!=null) {
-		    coordinates = chorbi.getCoordinates();
-        }
-		    coordinates = coordinatesService.save(coordinates);
-		    chorbi.setCoordinates(coordinates);
+		if (chorbi.getCoordinates() != null)
+			coordinates = chorbi.getCoordinates();
+		coordinates = this.coordinatesService.save(coordinates);
+		chorbi.setCoordinates(coordinates);
 		this.chorbiRepository.save(chorbi);
 	}
 
@@ -345,5 +344,35 @@ public class ChorbiService {
 			if (c.getRecipent().getId() == principal.getId())
 				receivedLikes.add(c);
 		return receivedLikes;
+	}
+
+	public Collection<Chorbi> listChorbiesMoreEventsRegistered() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Collection<Chorbi> listChorbiesFees() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Collection<Chorbi> listChorbiesAvgStars() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double avgStarsChorbi() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer maxStarsChorbi() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer minStarsChorbi() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

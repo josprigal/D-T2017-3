@@ -158,6 +158,65 @@
 	<display:column property="name" title="${name}" sortable="true" />
 </display:table>
 
+<%-- This is part of version 2.0 from Acme-Chorbies --%>
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="listManagersMoreEventsCreated" requestURI="${requestURI}"
+	id="listManagersMoreEventsCreated">
+	<spring:message code="administrator.listManagersMoreEventsCreated"
+		var="name" />
+	<display:column property="name" title="${name}" sortable="true" />
+</display:table>
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="listManagersFees" requestURI="${requestURI}"
+	id="listManagersFees">
+	<spring:message code="administrator.listManagersFees"
+		var="name" />
+	<display:column property="name" title="${name}" sortable="true" />
+</display:table>
 
 
+
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="listChorbiesMoreEventsRegistered" requestURI="${requestURI}"
+	id="listChorbiesMoreEventsRegistered">
+	<spring:message code="administrator.listChorbiesMoreEventsRegistered"
+		var="name" />
+	<display:column property="name" title="${name}" sortable="true" />
+</display:table>
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="listChorbiesFees" requestURI="${requestURI}"
+	id="listChorbiesFees">
+	<spring:message code="administrator.listChorbiesFees"
+		var="name" />
+	<display:column property="name" title="${name}" sortable="true" />
+</display:table>
+
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="listChorbiesAvgStars" requestURI="${requestURI}"
+	id="listChorbiesAvgStars">
+	<spring:message code="administrator.listChorbiesAvgStars"
+		var="name" />
+	<display:column property="name" title="${name}" sortable="true" />
+</display:table>
+
+<p>
+	<spring:message code="administrator.avgStarsChorbi" />
+	${avgStarsChorbi}
+</p>
+<br>
+<p>
+	<spring:message code="administrator.maxStarsChorbi" />
+	${maxStarsChorbi}
+</p>
+<br>
+<p>
+	<spring:message code="administrator.minStarsChorbi" />
+	${minStarsChorbi}
+</p>
+<br>
 <br>

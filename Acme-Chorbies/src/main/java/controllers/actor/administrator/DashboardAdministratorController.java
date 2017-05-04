@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ChorbiService;
+import services.ManagerService;
 import controllers.AbstractController;
 import domain.Chorbi;
+import domain.Manager;
 
 @Controller
 @RequestMapping("/administrator/dashboard")
@@ -22,6 +24,8 @@ public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private ChorbiService	chorbiService;
+	@Autowired
+	private ManagerService	managerService;
 
 
 	// Constructor
@@ -62,15 +66,26 @@ public class DashboardAdministratorController extends AbstractController {
 		final Collection<Chorbi> listChorbiesMoreChirpsReceived = this.chorbiService.listChorbiesMoreChirpsReceived();
 		final Collection<Chorbi> listChorbiesMoreChirpsSent = this.chorbiService.listChorbiesMoreChirpsSent();
 
+		final Collection<Manager> listManagersMoreEventsCreated = this.managerService.listManagersMoreEventsCreated();
+		final Collection<Manager> listManagersFees = this.managerService.listManagersFees();
+		final Collection<Chorbi> listChorbiesMoreEventsRegistered = this.chorbiService.listChorbiesMoreEventsRegistered();
+		final Collection<Chorbi> listChorbiesFees = this.chorbiService.listChorbiesFees();
+		final Collection<Chorbi> listChorbiesAvgStars = this.chorbiService.listChorbiesAvgStars();
+		final Double avgStarsChorbi = this.chorbiService.avgStarsChorbi();
+		final Integer maxStarsChorbi = this.chorbiService.maxStarsChorbi();
+		final Integer minStarsChorbi = this.chorbiService.minStarsChorbi();
+
 		result = this.createDashboardModelAndView(minimunAgeChorbies, maximunAgeChorbies, avgAgeChorbies, ratioNotCreditCard, ratioLove, ratioFriendship, ratioActivities, minLikesChorbi, maxLikesChorbi, avgLikesChorbi, minChirpsChorbiSent,
 			maxChirpsChorbiSent, avgChirpsChorbiSent, minChirpsChorbiReceived, maxChirpsChorbiReceived, avgChirpsChorbiReceived, numberOfChorbiesPerCity, numberOfChorbiesPerCountry, listChorbiesNumberOfLikes, listChorbiesMoreChirpsReceived,
-			listChorbiesMoreChirpsSent);
+			listChorbiesMoreChirpsSent, listManagersMoreEventsCreated, listManagersFees, listChorbiesMoreEventsRegistered, listChorbiesFees, listChorbiesAvgStars, avgStarsChorbi, maxStarsChorbi, minStarsChorbi);
 		return result;
 	}
 	protected ModelAndView createDashboardModelAndView(final Integer minimunAgeChorbies, final Integer maximunAgeChorbies, final Double avgAgeChorbies, final Double ratioNotCreditCard, final Double ratioLove, final Double ratioFriendship,
 		final Double ratioActivities, final Integer minLikesChorbi, final Integer maxLikesChorbi, final Double avgLikesChorbi, final Integer minChirpsChorbiSent, final Integer maxChirpsChorbiSent, final Double avgChirpsChorbiSent,
 		final Integer minChirpsChorbiReceived, final Integer maxChirpsChorbiReceived, final Double avgChirpsChorbiReceived, final Map<String, Integer> numberOfChorbiesPerCity, final Map<String, Integer> numberOfChorbiesPerCountry,
-		final Collection<Chorbi> listChorbiesNumberOfLikes, final Collection<Chorbi> listChorbiesMoreChirpsReceived, final Collection<Chorbi> listChorbiesMoreChirpsSent) {
+		final Collection<Chorbi> listChorbiesNumberOfLikes, final Collection<Chorbi> listChorbiesMoreChirpsReceived, final Collection<Chorbi> listChorbiesMoreChirpsSent, final Collection<Manager> listManagersMoreEventsCreated,
+		final Collection<Manager> listManagersFees, final Collection<Chorbi> listChorbiesMoreEventsRegistered, final Collection<Chorbi> listChorbiesFees, final Collection<Chorbi> listChorbiesAvgStars, final Double avgStarsChorbi,
+		final Integer maxStarsChorbi, final Integer minStarsChorbi) {
 		ModelAndView result;
 
 		result = new ModelAndView("administrator/dashboard");
@@ -97,6 +112,15 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("listChorbiesNumberOfLikes", listChorbiesNumberOfLikes);
 		result.addObject("listChorbiesMoreChirpsReceived", listChorbiesMoreChirpsReceived);
 		result.addObject("listChorbiesMoreChirpsSent", listChorbiesMoreChirpsSent);
+
+		result.addObject("listManagersMoreEventsCreated", listManagersMoreEventsCreated);
+		result.addObject("listManagersFees", listManagersFees);
+		result.addObject("listChorbiesMoreEventsRegistered", listChorbiesMoreEventsRegistered);
+		result.addObject("listChorbiesFees", listChorbiesFees);
+		result.addObject("listChorbiesAvgStars", listChorbiesAvgStars);
+		result.addObject("avgStarsChorbi", avgStarsChorbi);
+		result.addObject("maxStarsChorbi", maxStarsChorbi);
+		result.addObject("minStarsChorbi", minStarsChorbi);
 
 		result.addObject("requestURI", "administrator/dashboard.do");
 
