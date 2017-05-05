@@ -60,7 +60,12 @@
 	</bean>
 	<!-- Other domain beans come here -->	
 	
+	<bean id="fee1" class="domain.Fee">
+		<property name="feeChorbieMonth" value="1.0" />
+		<property name="feeManagerEvent" value="1.0" />
+	</bean>
 	
+
 	<bean id="results1" class="domain.Results">
 		<property name="moment" value="11/11/2016" />
 		

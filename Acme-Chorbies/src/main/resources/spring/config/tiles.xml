@@ -26,6 +26,7 @@
 		<value>/views/administrator/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>
 		<value>/views/chorbi/tiles.xml</value>
+		<value>/views/event/tiles.xml</value>
 		<value>/views/searchtemplate/tiles.xml</value>
 	</util:list>
 

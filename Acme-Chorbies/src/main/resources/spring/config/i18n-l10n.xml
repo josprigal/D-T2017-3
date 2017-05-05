@@ -22,6 +22,7 @@
 		<value>/views/customer/messages</value>
 		<value>/views/profile/messages</value>
 		<value>/views/chorbi/messages</value>
+		<value>/views/event/messages</value>
 		<value>/views/searchtemplate/messages</value>
 	</util:list>
 
