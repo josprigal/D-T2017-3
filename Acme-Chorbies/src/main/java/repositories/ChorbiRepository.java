@@ -28,6 +28,9 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	@Query("select c from Chorbi c where c.relationship='0'")
 	Collection<Chorbi> chorbiActivities();
 
+	@Query("select m from Chorbi m order by m.events.size")
+	Collection<Chorbi> listChorbiesMoreEventsRegistered();
+
 	/*
 	 * @Query("select min(c.receivedLikes.size) from Chorbi c")
 	 * Integer minLikesChorbi();
@@ -46,6 +49,8 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	 * 
 	 * @Query("select avg(c.sentChirps.size) from Chorbi c")
 	 * Double avgChirpsChorbiSent();
+	 * 
+	 * 
 	 * 
 	 * @Query("select min(c.receivedChirps.size) from Chorbi c")
 	 * Integer minChirpsChorbiReceived();

@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,18 @@ public class EventService {
 
 	@Autowired
 	private EventRepository	eventRepository;
+	@Autowired
+	private ChorbiService	chorbiService;
 
 
 	public EventService() {
 		super();
 	}
 
+	public void save(final Event event) {
+		Assert.notNull(this.eventRepository);
+		this.eventRepository.save(event);
+	}
 	public Collection<Event> findAll() {
 		Collection<Event> result;
 		result = this.eventRepository.findAll();
@@ -54,7 +61,30 @@ public class EventService {
 
 		return listAvailableEvents;
 	}
-	public void register(final Chorbi c) {
+	public void register(final Event e) {
+		Assert.isTrue(e.getSeats() != 0);
+		Assert.isTrue(!(e.getChorbies().contains(this.chorbiService.findByPrincipal())));
+
+		final List<Chorbi> chorbies = e.getChorbies();
+
+		chorbies.add(this.chorbiService.findByPrincipal());
+		e.setSeats(e.getSeats() - 1);
+		e.setChorbies(chorbies);
+
+		this.save(e);
+
+	}
+
+	public void unregister(final Event e) {
+		Assert.isTrue(e.getChorbies().contains(this.chorbiService.findByPrincipal()));
+
+		final List<Chorbi> chorbies = e.getChorbies();
+
+		chorbies.remove(this.chorbiService.findByPrincipal());
+		e.setSeats(e.getSeats() + 1);
+		e.setChorbies(chorbies);
+
+		this.save(e);
 
 	}
 }

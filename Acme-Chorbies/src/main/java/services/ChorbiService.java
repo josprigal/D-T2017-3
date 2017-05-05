@@ -348,7 +348,7 @@ public class ChorbiService {
 
 	public Collection<Chorbi> listChorbiesMoreEventsRegistered() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.chorbiRepository.listChorbiesMoreEventsRegistered();
 	}
 
 	public Collection<Chorbi> listChorbiesFees() {
