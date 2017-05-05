@@ -3,8 +3,16 @@ package domain;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -45,17 +53,17 @@ public class Chorbi extends Actor {
 	}
 
 
-	private String			description;
-	private Date			birth;
-	private boolean			banned;
-	private String			picture;
-	private Relationship	relationship;
-	private Gender			gender;
-	private Integer			age;
-	private Collection<Likes> userLikedYou;
-	private Collection<Likes> likedUsers;
-	private Collection<Chirp> chirpsReceived;
-	private Collection<Chirp> chirpsSents;
+	private String				description;
+	private Date				birth;
+	private boolean				banned;
+	private String				picture;
+	private Relationship		relationship;
+	private Gender				gender;
+	private Integer				age;
+	private Collection<Likes>	userLikedYou;
+	private Collection<Likes>	likedUsers;
+	private Collection<Chirp>	chirpsReceived;
+	private Collection<Chirp>	chirpsSents;
 
 
 	@NotNull
@@ -170,37 +178,51 @@ public class Chorbi extends Actor {
 
 	@OneToMany(mappedBy = "recipent")
 	public Collection<Likes> getUserLikedYou() {
-		return userLikedYou;
+		return this.userLikedYou;
 	}
 
-	public void setUserLikedYou(Collection<Likes> userLikedYou) {
+	public void setUserLikedYou(final Collection<Likes> userLikedYou) {
 		this.userLikedYou = userLikedYou;
 	}
 
 	@OneToMany(mappedBy = "sender")
 	public Collection<Likes> getLikedUsers() {
-		return likedUsers;
+		return this.likedUsers;
 	}
 
-	public void setLikedUsers(Collection<Likes> likedUsers) {
+	public void setLikedUsers(final Collection<Likes> likedUsers) {
 		this.likedUsers = likedUsers;
 	}
 
 	@OneToMany(mappedBy = "recipent")
 	public Collection<Chirp> getChirpsReceived() {
-		return chirpsReceived;
+		return this.chirpsReceived;
 	}
 
-	public void setChirpsReceived(Collection<Chirp> chirpsReceived) {
+	public void setChirpsReceived(final Collection<Chirp> chirpsReceived) {
 		this.chirpsReceived = chirpsReceived;
 	}
 
 	@OneToMany(mappedBy = "sender")
-    public Collection<Chirp> getChirpsSents() {
-        return chirpsSents;
-    }
+	public Collection<Chirp> getChirpsSents() {
+		return this.chirpsSents;
+	}
 
-    public void setChirpsSents(Collection<Chirp> chirpsSents) {
-        this.chirpsSents = chirpsSents;
-    }
+	public void setChirpsSents(final Collection<Chirp> chirpsSents) {
+		this.chirpsSents = chirpsSents;
+	}
+
+
+	private List<Event>	events;
+
+
+	@ManyToMany()
+	public List<Event> getEvents() {
+		return this.events;
+	}
+
+	public void setEvents(final List<Event> events) {
+		this.events = events;
+	}
+
 }

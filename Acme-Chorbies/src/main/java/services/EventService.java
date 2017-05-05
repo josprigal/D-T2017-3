@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.EventRepository;
+import domain.Chorbi;
 import domain.Event;
 
 @Service
@@ -52,5 +53,8 @@ public class EventService {
 		}
 
 		return listAvailableEvents;
+	}
+	public void register(final Chorbi c) {
+
 	}
 }

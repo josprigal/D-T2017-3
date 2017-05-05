@@ -2,10 +2,12 @@
 package domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -67,6 +69,19 @@ public class Event extends DomainEntity {
 
 	public void setSeats(final Integer seats) {
 		this.seats = seats;
+	}
+
+
+	private List<Chorbi>	chorbies;
+
+
+	@ManyToMany()
+	public List<Chorbi> getChorbies() {
+		return this.chorbies;
+	}
+
+	public void setChorbies(final List<Chorbi> chorbies) {
+		this.chorbies = chorbies;
 	}
 
 }

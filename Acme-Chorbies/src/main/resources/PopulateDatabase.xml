@@ -187,6 +187,13 @@
 		<property name="creditCard" ref="creditCard2" />
 		<property name="coordinates" ref="coordinates1" />
 		<property name="searchTemplate" ref="searchTemplate1" />
+		<property name="events">
+			<list>
+				
+			<ref bean="event1" />	
+			<ref bean="event2" />	
+			</list>
+		</property>
 		
 		
 		
@@ -208,6 +215,14 @@
 		<property name="creditCard" ref="creditCard1" />
 		<property name="coordinates" ref="coordinates2" />
 		<property name="searchTemplate" ref="searchTemplate2" />
+		
+		<property name="events">
+			<list>
+				
+			<ref bean="event1" />	
+			<ref bean="event2" />	
+			</list>
+		</property>
 
 	</bean>
 	
@@ -303,6 +318,13 @@
 		<property name="moment" value="10/10/2017" />
 		<property name="picture" value="http://www.dreambeach.es/2016/wp-content/uploads/2015/11/logo2016.png" />
 		<property name="seats" value="100" />
+		<property name="chorbies">
+			<list>
+				
+			<ref bean="chorbi1" />	
+			<ref bean="chorbi2" />	
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="event2" class="domain.Event">
@@ -311,6 +333,14 @@
 		<property name="moment" value="01/10/2017" />
 		<property name="picture" value="http://www.dodmagazine.es/wp-content/uploads/2015/11/festival-leyendas-rock-2017.jpg" />
 		<property name="seats" value="150" />
+		
+		<property name="chorbies">
+			<list>
+				
+			<ref bean="chorbi1" />	
+			<ref bean="chorbi2" />	
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="event3" class="domain.Event">
@@ -319,5 +349,10 @@
 		<property name="moment" value="11/11/2017" />
 		<property name="picture" value="http://estaticos.elmundo.es/blogs/elmundo/momen-tvs/imagenes_posts/2016/04/27/167657_540x303.jpg" />
 		<property name="seats" value="200" />
+		
+		<property name="chorbies">
+			<list>
+			</list>
+		</property>
 	</bean>
 </beans>
