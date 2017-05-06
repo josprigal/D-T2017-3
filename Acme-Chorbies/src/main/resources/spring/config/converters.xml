@@ -12,16 +12,16 @@
 	">
 
 	<util:list id="converters">
-	
+
 		<bean class="converters.ActorToStringConverter" />
 		<bean class="converters.StringToActorConverter" />
 
-		<bean class="converters.BannerToStringConverter"/>
-		<bean class="converters.StringToBannerConverter" />
-
 		<bean class="converters.AdministratorToStringConverter" />
 		<bean class="converters.StringToAdministratorConverter" />
-		
+
+		<bean class="converters.BannerToStringConverter" />
+		<bean class="converters.StringToBannerConverter" />
+
 		<bean class="converters.ChirpToStringConverter" />
 		<bean class="converters.StringToChirpConverter" />
 
@@ -33,12 +33,21 @@
 
 		<bean class="converters.CoordinatesToStringConverter" />
 		<bean class="converters.StringToCoordinatesConverter" />
-	
+
 		<bean class="converters.CreditCardToStringConverter" />
 		<bean class="converters.StringToCreditCardConverter" />
+		
+		<bean class="converters.EventToStringConverter" />
+		<bean class="converters.StringToEventConverter" />
+
+		<bean class="converters.FeeToStringConverter" />
+		<bean class="converters.StringToFeeConverter" />
 
 		<bean class="converters.LikesToStringConverter" />
 		<bean class="converters.StringToLikesConverter" />
+		
+		<bean class="converters.ManagerToStringConverter" />
+		<bean class="converters.StringToManagerConverter" />
 
 		<bean class="converters.ResultsToStringConverter" />
 		<bean class="converters.StringToResultsConverter" />
