@@ -1,6 +1,7 @@
 
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Access;
@@ -17,7 +18,7 @@ public class Manager extends Actor {
 
 	public Manager() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.events = new ArrayList<Event>();
 	}
 
 

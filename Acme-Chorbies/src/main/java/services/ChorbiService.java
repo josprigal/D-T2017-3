@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 
 import repositories.ChorbiRepository;
 import security.Authority;
+import utilities.MapUtil;
 import domain.Actor;
 import domain.Chirp;
 import domain.Chorbi;
@@ -347,7 +348,6 @@ public class ChorbiService {
 	}
 
 	public Collection<Chorbi> listChorbiesMoreEventsRegistered() {
-		// TODO Auto-generated method stub
 		return this.chorbiRepository.listChorbiesMoreEventsRegistered();
 	}
 
@@ -357,22 +357,78 @@ public class ChorbiService {
 	}
 
 	public Collection<Chorbi> listChorbiesAvgStars() {
-		// TODO Auto-generated method stub
-		return null;
+		final Map<Chorbi, Double> mapa = new HashMap<Chorbi, Double>();
+		Collection<Chorbi> chorbies = new ArrayList<Chorbi>();
+		chorbies = this.findAll();
+		Collection<Likes> likes = new ArrayList<Likes>();
+		likes = this.likesService.findAll();
+		for (final Chorbi ch : chorbies) {
+			double stars = 0;
+			int numberLikes = 0;
+			for (final Likes li : likes)
+				if (li.getRecipent().getId() == (ch.getId())) {
+					numberLikes++;
+					stars += li.getStars();
+				}
+			mapa.put(ch, (stars / numberLikes));
+		}
+		return MapUtil.sortByValue(mapa).keySet();
 	}
-
 	public Double avgStarsChorbi() {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<Chorbi> chorbies = new ArrayList<Chorbi>();
+		chorbies = this.findAll();
+		Collection<Likes> likes = new ArrayList<Likes>();
+		likes = this.likesService.findAll();
+		double stars = 0;
+		int numberLikes = 0;
+		for (final Chorbi ch : chorbies)
+			for (final Likes li : likes)
+				if (li.getRecipent().getId() == (ch.getId())) {
+					numberLikes++;
+					stars += li.getStars();
+				}
+		return (stars / numberLikes);
 	}
 
-	public Integer maxStarsChorbi() {
-		// TODO Auto-generated method stub
-		return null;
+	public Double maxStarsChorbi() {
+		final Map<Chorbi, Double> mapa = new HashMap<Chorbi, Double>();
+		Collection<Chorbi> chorbies = new ArrayList<Chorbi>();
+		chorbies = this.findAll();
+		Collection<Likes> likes = new ArrayList<Likes>();
+		likes = this.likesService.findAll();
+		Double maxAvgStars = 0.;
+		for (final Chorbi ch : chorbies) {
+			double stars = 0;
+			int numberLikes = 0;
+			for (final Likes li : likes)
+				if (li.getRecipent().getId() == (ch.getId())) {
+					numberLikes++;
+					stars += li.getStars();
+				}
+			if (maxAvgStars < (stars / numberLikes))
+				maxAvgStars = (stars / numberLikes);
+		}
+		return maxAvgStars;
 	}
 
-	public Integer minStarsChorbi() {
-		// TODO Auto-generated method stub
-		return null;
+	public Double minStarsChorbi() {
+		final Map<Chorbi, Double> mapa = new HashMap<Chorbi, Double>();
+		Collection<Chorbi> chorbies = new ArrayList<Chorbi>();
+		chorbies = this.findAll();
+		Collection<Likes> likes = new ArrayList<Likes>();
+		likes = this.likesService.findAll();
+		Double minAvgStars = 4.;
+		for (final Chorbi ch : chorbies) {
+			double stars = 0;
+			int numberLikes = 0;
+			for (final Likes li : likes)
+				if (li.getRecipent().getId() == (ch.getId())) {
+					numberLikes++;
+					stars += li.getStars();
+				}
+			if (minAvgStars > (stars / numberLikes))
+				minAvgStars = (stars / numberLikes);
+		}
+		return minAvgStars;
 	}
 }

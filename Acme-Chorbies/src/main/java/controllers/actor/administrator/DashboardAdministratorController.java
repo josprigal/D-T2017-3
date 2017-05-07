@@ -72,8 +72,8 @@ public class DashboardAdministratorController extends AbstractController {
 		final Collection<Chorbi> listChorbiesFees = this.chorbiService.listChorbiesFees();
 		final Collection<Chorbi> listChorbiesAvgStars = this.chorbiService.listChorbiesAvgStars();
 		final Double avgStarsChorbi = this.chorbiService.avgStarsChorbi();
-		final Integer maxStarsChorbi = this.chorbiService.maxStarsChorbi();
-		final Integer minStarsChorbi = this.chorbiService.minStarsChorbi();
+		final Double maxStarsChorbi = this.chorbiService.maxStarsChorbi();
+		final Double minStarsChorbi = this.chorbiService.minStarsChorbi();
 
 		result = this.createDashboardModelAndView(minimunAgeChorbies, maximunAgeChorbies, avgAgeChorbies, ratioNotCreditCard, ratioLove, ratioFriendship, ratioActivities, minLikesChorbi, maxLikesChorbi, avgLikesChorbi, minChirpsChorbiSent,
 			maxChirpsChorbiSent, avgChirpsChorbiSent, minChirpsChorbiReceived, maxChirpsChorbiReceived, avgChirpsChorbiReceived, numberOfChorbiesPerCity, numberOfChorbiesPerCountry, listChorbiesNumberOfLikes, listChorbiesMoreChirpsReceived,
@@ -85,7 +85,7 @@ public class DashboardAdministratorController extends AbstractController {
 		final Integer minChirpsChorbiReceived, final Integer maxChirpsChorbiReceived, final Double avgChirpsChorbiReceived, final Map<String, Integer> numberOfChorbiesPerCity, final Map<String, Integer> numberOfChorbiesPerCountry,
 		final Collection<Chorbi> listChorbiesNumberOfLikes, final Collection<Chorbi> listChorbiesMoreChirpsReceived, final Collection<Chorbi> listChorbiesMoreChirpsSent, final Collection<Manager> listManagersMoreEventsCreated,
 		final Collection<Manager> listManagersFees, final Collection<Chorbi> listChorbiesMoreEventsRegistered, final Collection<Chorbi> listChorbiesFees, final Collection<Chorbi> listChorbiesAvgStars, final Double avgStarsChorbi,
-		final Integer maxStarsChorbi, final Integer minStarsChorbi) {
+		final Double maxStarsChorbi, final Double minStarsChorbi) {
 		ModelAndView result;
 
 		result = new ModelAndView("administrator/dashboard");
