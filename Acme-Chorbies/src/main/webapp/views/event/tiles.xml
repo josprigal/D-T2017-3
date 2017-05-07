@@ -9,11 +9,11 @@
 
 	 <definition name="event/listAvailableEvents" extends="master.page">
         <put-attribute name="title" value="List of near events available" />
-        <put-attribute name="body" value="/views/chirp/listAvailableEvents.jsp" />
+        <put-attribute name="body" value="/views/event/listAvailableEvents.jsp" />
     </definition>
     
-    <definition name="event/listAvailableEvents" extends="master.page">
+    <definition name="event/listRegisteredEvents" extends="master.page">
         <put-attribute name="title" value="List of registered events" />
-        <put-attribute name="body" value="/views/chirp/listRegisteredEvents.jsp" />
+        <put-attribute name="body" value="/views/event/listRegisteredEvents.jsp" />
     </definition>
 </tiles-definitions>

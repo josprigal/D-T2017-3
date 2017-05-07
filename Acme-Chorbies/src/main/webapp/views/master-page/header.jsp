@@ -35,6 +35,7 @@
 			<li><a class="fNiv">CHORBI</a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="event/listRegisteredEvents.do"><spring:message code="listRegisteredEvents" /></a></li>
 					<li><a href="chorbi/edit.do"><spring:message code="editprofile" /></a></li>
 					<li><a href="chorbi/searchtemplate/edit.do"><spring:message code="editsearchtemplate" /></a> </li>
 					<li><a href="chorbi/search.do"><spring:message code="search" /></a> </li>
@@ -46,6 +47,7 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="event/listAvailableEvents.do"><spring:message code="master.page.listAvailableEvents" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
