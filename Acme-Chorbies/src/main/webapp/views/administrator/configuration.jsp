@@ -9,6 +9,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<a href="administrator/configuration/chargeChorbies.do"><spring:message code="chargechorbies" /> </a>
+<br>
 <h1>Banners</h1>
 <jstl:forEach var="var" items="${banners}" varStatus="i">
     <div>
@@ -26,6 +28,15 @@
     <acme:textbox path="hours" code="hours" />
     <acme:textbox path="minutes" code="minutes" />
     <acme:textbox path="seconds" code="seconds" />
+    <br>
+    <acme:submit name="save" code="save" />
+</form:form>
+<h1><spring:message code="fees" /> </h1>
+
+<form:form method="post" modelAttribute="fee" action="administrator/configuration/edit/fee.do">
+    <acme:textbox path="feeChorbieMonth" code="feeChorbieMonth" />
+    <br>
+    <acme:textbox path="feeManagerEvent" code="feeManagerEvent" />
     <br>
     <acme:submit name="save" code="save" />
 </form:form>

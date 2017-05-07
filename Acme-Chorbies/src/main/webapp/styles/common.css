@@ -17,3 +17,13 @@
 	color: red;
 	font-weight: bolder;
 }
+
+.grey{
+	background-color: grey;
+	color:black;
+}
+
+.highlight{
+	background-color: #def836;
+	color:black;
+}

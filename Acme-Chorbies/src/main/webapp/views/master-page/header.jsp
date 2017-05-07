@@ -40,14 +40,29 @@
 					<li><a href="chorbi/searchtemplate/edit.do"><spring:message code="editsearchtemplate" /></a> </li>
 					<li><a href="chorbi/search.do"><spring:message code="search" /></a> </li>
 					<li><a href="chirp/list.do">Chirps</a> </li>
-					<li><a href="creditcard/edit.do"><spring:message code="editcreditcard" /> </a> </li>
+					<li><a href="like/chorbiesLikedMe.do"><spring:message code="usersLikedMe" /> </a> </li>
 				</ul>
 			</li>
 		</security:authorize>
-		
+
+        <security:authorize access="hasRole('MANAGER')">
+            <li><a class="fNiv">MANAGER</a>
+                <ul>
+                    <li class="arrow"></li>
+                    <li><a href="manager/event/all.do"><spring:message code="yourmanagedevents"/> </a> </li>
+                </ul>
+            </li>
+        </security:authorize>
+
+			<li><a class="fNiv">MENU</a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="event/all.do"><spring:message code="allevents" /></a></li>
+					<li><a href="event/listAvailableEvents.do"><spring:message code="master.page.listAvailableEvents" /></a></li>
+				</ul>
+			</li>
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
-			<li><a class="fNiv" href="event/listAvailableEvents.do"><spring:message code="master.page.listAvailableEvents" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -58,11 +73,10 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					
+            <security:authorize access="hasAnyRole('CHORBI','MANAGER')">
+                    <li><a href="creditcard/edit.do"><spring:message code="editcreditcard" /> </a> </li>
+            </security:authorize>
 					<li><a href="chorbi/chorbies.do"><spring:message code="master.page.chorbies" /></a></li>
-					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>

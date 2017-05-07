@@ -57,11 +57,12 @@
 								access="hasAnyRole('CHORBI')" />
 
 		<security:intercept-url pattern="/creditcard/**"
-								access="hasAnyRole('CHORBI')" />
+								access="hasAnyRole('CHORBI','MANAGER')" />
 
 		<security:intercept-url pattern="/chirp/**"
-								access="hasAnyRole('CHORBI')" />
-
+								access="hasAnyRole('CHORBI','MANAGER')" />
+        <security:intercept-url pattern="/chirp/broadcast.do"
+                                access="hasAnyRole('MANAGER')" />
 		<security:intercept-url pattern="/chorbi/searchtemplate/**"
 								access="hasAnyRole('CHORBI')" />
 
@@ -71,7 +72,21 @@
 
 		<security:intercept-url pattern="/chorbi/**"
 			access="isAuthenticated()" />
-			
+
+		<security:intercept-url pattern="/like/**"
+								access="hasRole('CHORBI')" />
+
+
+		<security:intercept-url pattern="/event/all.do"
+			access="permitAll" />
+		<security:intercept-url pattern="/event/listAvailableEvents.do"
+								access="permitAll" />
+
+		<security:intercept-url pattern="/manager/**"
+								access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/event/**"
+								access="isAuthenticated()" />
+
 		<security:intercept-url pattern="/event/listAvailableEvents.do"
 			access="permitAll" />
 		<security:intercept-url pattern="/event/listRegisteredEvents.do"

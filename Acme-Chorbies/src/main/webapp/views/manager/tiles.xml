@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="manager/event/all" extends="master.page">
+		<put-attribute name="title" value="Manager: Your events" />
+		<put-attribute name="body" value="/views/manager/list.jsp" />
+	</definition>
+
+
+	<definition name="manager/event/new" extends="master.page">
+		<put-attribute name="title" value="Manager: New Event" />
+		<put-attribute name="body" value="/views/manager/newevent.jsp" />
+	</definition>
+
+</tiles-definitions>

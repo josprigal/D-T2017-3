@@ -10,10 +10,7 @@
 
 package controllers;
 
-import domain.Actor;
-import domain.Banner;
-import domain.Chorbi;
-import domain.Configuration;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -22,10 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import services.ActorService;
-import services.BannerService;
-import services.ChorbiService;
-import services.ConfigurationService;
+import services.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,6 +29,9 @@ import java.util.Collection;
 public class AdministratorController extends AbstractController {
 	@Autowired
 	private ActorService actorService;
+
+	@Autowired
+	private FeeService feeServive;
 
 	// Constructors -----------------------------------------------------------
 	
@@ -49,6 +46,9 @@ public class AdministratorController extends AbstractController {
 	ChorbiService chorbiService;
 
 	@Autowired
+	BillService billService;
+
+	@Autowired
     ConfigurationService configurationService;
 
 	@RequestMapping("/configuration/edit")
@@ -57,6 +57,7 @@ public class AdministratorController extends AbstractController {
 		result = new ModelAndView("administrator/configuration");
 		result.addObject("banners",bannerService.findAll());
 		result.addObject("configuration", new ArrayList<>(configurationService.findAll()).get(0));
+		result.addObject("fee",feeServive.findFirst());
 		int i = 0;
 		for(Banner e: bannerService.findAll()){
 			result.addObject("banner"+i, e);
@@ -95,6 +96,26 @@ public class AdministratorController extends AbstractController {
             return new ModelAndView("redirect:/administrator/configuration/edit.do");
         }
     }
+	@RequestMapping(value = "/configuration/chargeChorbies")
+	public ModelAndView chargeChorbies() {
+		billService.billMonthlyChorbies();
+
+		return new ModelAndView("redirect:edit.do");
+	}
+
+	@RequestMapping(value = "/configuration/edit/fee", method = RequestMethod.POST)
+	public ModelAndView editFeePst(@ModelAttribute("fee")Fee fee) {
+		Fee fee1 = feeServive.findFirst();
+		Assert.notNull(fee);
+		try{
+			fee1.setFeeChorbieMonth(fee.getFeeChorbieMonth());
+			fee1.setFeeManagerEvent(fee.getFeeManagerEvent());
+			feeServive.save(fee1);
+			return new ModelAndView("redirect:/administrator/configuration/edit.do");
+		}catch (Exception e){
+			return new ModelAndView("redirect:/administrator/configuration/edit.do");
+		}
+	}
 
 	@RequestMapping(value = "/ban")
     public ModelAndView banView(){

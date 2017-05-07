@@ -103,26 +103,26 @@ public class CreditCard extends DomainEntity {
 	}
 
 
-	private Chorbi	chorbi;
-
+	private CreditCardUser creditCardUser;
 
 	@OneToOne
-	public Chorbi getChorbi() {
-		return this.chorbi;
-	}
+    public CreditCardUser getCreditCardUser() {
+        return creditCardUser;
+    }
 
-	public void setChorbi(final Chorbi chorbi) {
-		this.chorbi = chorbi;
-	}
+    public void setCreditCardUser(CreditCardUser creditCardUser) {
+        this.creditCardUser = creditCardUser;
+    }
 
-	@Transient
+    @Transient
 	public boolean checkValidity() {
 		final Date now = new Date();
 		final Calendar calendar = Calendar.getInstance();
 		calendar.setTime(now);
-		final int monthnow = calendar.get(Calendar.MONTH);
+		final int monthnow = calendar.get(Calendar.MONTH) +1;
 		final int yearnow = calendar.get(Calendar.YEAR);
-		return yearnow == this.expirationYear && monthnow < this.expirationMonth || (yearnow < this.expirationYear);
+
+		return (yearnow == this.expirationYear && monthnow < this.expirationMonth) || (yearnow < this.expirationYear);
 	}
 
 }

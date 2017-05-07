@@ -2,7 +2,12 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
+import domain.Chorbi;
+import domain.Event;
+import domain.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +22,12 @@ public class ChirpService {
 
 	@Autowired
 	ChirpRepository	chirpRepository;
+
+	@Autowired
+	private EventService eventService;
+
+	@Autowired
+	private ManagerService managerService;
 
 
 	public ChirpService() {
@@ -50,4 +61,18 @@ public class ChirpService {
 		this.chirpRepository.delete(chirp);
 	}
 
+    public void broadcast(Chirp chirp) {
+		Manager manager = managerService.findByPrincipal();
+		List<Chorbi> chorbis = eventService.findAllChorbiesRelatedToManager();
+		for (Chorbi e:chorbis){
+			Chirp nc = new Chirp();
+			nc.setSent(new Date());
+			nc.setText(chirp.getText());
+			nc.setSubject(chirp.getSubject());
+			nc.setAttachments(chirp.getAttachments());
+			nc.setRecipent(e);
+			nc.setSender(manager);
+			save(nc);
+		}
+    }
 }

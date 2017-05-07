@@ -13,6 +13,9 @@
 
 	<util:list id="converters">
 
+		<bean class="converters.CreditCardUserToStringConverter" />
+		<bean class="converters.StringToCreditCardUserConverter" />
+
 		<bean class="converters.ActorToStringConverter" />
 		<bean class="converters.StringToActorConverter" />
 

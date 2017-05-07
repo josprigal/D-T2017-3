@@ -1,16 +1,17 @@
 
 package domain;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -28,7 +29,7 @@ public class Event extends DomainEntity {
 	private Date	moment;
 	private String	picture;
 	private Integer	seats;
-
+	private Manager manager;
 
 	@NotBlank
 	public String getTitle() {
@@ -63,6 +64,7 @@ public class Event extends DomainEntity {
 		this.picture = picture;
 	}
 	@NotNull
+	@Range(min = 0)
 	public Integer getSeats() {
 		return this.seats;
 	}
@@ -75,7 +77,7 @@ public class Event extends DomainEntity {
 	private List<Chorbi>	chorbies;
 
 
-	@ManyToMany()
+	@ManyToMany
 	public List<Chorbi> getChorbies() {
 		return this.chorbies;
 	}
@@ -84,4 +86,36 @@ public class Event extends DomainEntity {
 		this.chorbies = chorbies;
 	}
 
+	@Transient
+	public Boolean isAvailable(){
+        Date date = new Date();
+
+        return moment.after(date);
+	}
+
+
+
+    @Transient
+    public Integer getSeatsAvailable(){
+	    return seats - chorbies.size();
+    }
+    @Transient
+	public Boolean isHighlighted(){
+	    Date date = new Date();
+        Calendar calMoment = Calendar.getInstance();
+        calMoment.setTime(date);
+        calMoment.add(Calendar.MONTH,1);
+
+        return moment.before(calMoment.getTime()) && moment.after(date) && this.seats>0;
+    }
+
+    @ManyToOne
+
+	public Manager getManager() {
+		return manager;
+	}
+
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
 }

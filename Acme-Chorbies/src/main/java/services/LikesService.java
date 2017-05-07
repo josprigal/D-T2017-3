@@ -13,6 +13,8 @@ import org.springframework.util.Assert;
 import repositories.LikesRepository;
 import domain.Likes;
 
+import javax.print.attribute.standard.Chromaticity;
+
 @Service
 @Transactional
 public class LikesService {
@@ -70,4 +72,12 @@ public class LikesService {
 
         delete(likes);
     }
+
+    public Collection<Chorbi> findChorbiesLikedPrincipal(Chorbi chorbi){
+    	Assert.notNull(chorbi);
+    	Collection<Chorbi> result = likesRepository.findChorbiesLikedPrincipal(chorbi);
+    	Assert.notNull(result);
+
+    	return result;
+	}
 }

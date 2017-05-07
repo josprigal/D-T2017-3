@@ -22,7 +22,7 @@
 
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="chorbi" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="password" value="f846a318a93a9d68c1a3a6ade6f08f61" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -49,7 +49,7 @@
 	
 		<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="manager" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="password" value="1d0258c2440a8d19e716292b231e3190" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -149,8 +149,17 @@
 		<property name="userAccount" ref="userAccount1" />
 		
 	</bean>
-	
-	
+
+
+    <bean id="creditCard3" class="domain.CreditCard">
+        <property name="brandName" value="VISA" />
+        <property name="holderName" value="Holder Name 1" />
+        <property name="number" value="4916410161778424" />
+        <property name="expirationMonth" value="11" />
+        <property name="expirationYear" value="2018" />
+        <property name="creditCardUser" ref="chorbi2"/>
+        <property name="cvvCode" value="103" />
+    </bean>
 	
 	<bean id="creditCard1" class="domain.CreditCard">
 		<property name="brandName" value="VISA" />
@@ -158,10 +167,8 @@
 		<property name="number" value="4916410161778424" />
 		<property name="expirationMonth" value="11" />
 		<property name="expirationYear" value="2018" />
+        <property name="creditCardUser" ref="manager1"/>
 		<property name="cvvCode" value="103" />
-		<property name="chorbi" ref="chorbi1" />
-		
-
 	</bean>
 	
 	<bean id="creditCard2" class="domain.CreditCard">
@@ -172,8 +179,7 @@
 		<property name="expirationMonth" value="11" />
 		<property name="expirationYear" value="2018" />
 		<property name="cvvCode" value="103" />
-		
-		
+        <property name="creditCardUser" ref="chorbi1"/>
 
 	</bean>
 	
@@ -192,15 +198,7 @@
 		<property name="creditCard" ref="creditCard2" />
 		<property name="coordinates" ref="coordinates1" />
 		<property name="searchTemplate" ref="searchTemplate1" />
-		<property name="events">
-			<list>
-				
-			<ref bean="event1" />	
-			<ref bean="event2" />	
-			</list>
-		</property>
-		
-		
+
 		
 	</bean>
 	
@@ -220,14 +218,7 @@
 		<property name="creditCard" ref="creditCard1" />
 		<property name="coordinates" ref="coordinates2" />
 		<property name="searchTemplate" ref="searchTemplate2" />
-		
-		<property name="events">
-			<list>
-				
-			<ref bean="event1" />	
-			<ref bean="event2" />	
-			</list>
-		</property>
+
 
 	</bean>
 	
@@ -241,13 +232,6 @@
 		<property name="vatNumber" value="123456789" />
 		
 		<property name="creditCard" ref="creditCard2" />
-		<property name="events">
-			<list>
-				
-			<ref bean="event1" />	
-			<ref bean="event2" />	
-			</list>
-		</property>
 
 	</bean>
 
@@ -300,15 +284,15 @@
 	</bean>
 
 	<bean id="banner1" class="domain.Banner">
-		<property name="url" value="http://i.imgur.com/LQKfAcY.png" />
+		<property name="url" value="https://image.ibb.co/kMvGak/padthai.png" />
 	</bean>
 
 	<bean id="banner2" class="domain.Banner">
-		<property name="url" value="http://i.imgur.com/fTEHXuT.png" />
+		<property name="url" value="https://image.ibb.co/kRKL1Q/carngo.png" />
 	</bean>
 
 	<bean id="banner3" class="domain.Banner">
-		<property name="url" value="http://i.imgur.com/f6qfigu.png" />
+		<property name="url" value="https://image.ibb.co/ffsJo5/bnb.png" />
 	</bean>
 
 	<bean id="configuration1" class="domain.Configuration">
@@ -320,9 +304,10 @@
 	<bean id="event1" class="domain.Event">
 		<property name="title" value="Title 1" />
 		<property name="description" value="Description 1" />
-		<property name="moment" value="10/10/2017" />
+		<property name="moment" value="6/4/2017" />
 		<property name="picture" value="http://www.dreambeach.es/2016/wp-content/uploads/2015/11/logo2016.png" />
 		<property name="seats" value="100" />
+		<property name="manager" ref="manager1"/>
 		<property name="chorbies">
 			<list>
 				
@@ -338,7 +323,7 @@
 		<property name="moment" value="01/10/2017" />
 		<property name="picture" value="http://www.dodmagazine.es/wp-content/uploads/2015/11/festival-leyendas-rock-2017.jpg" />
 		<property name="seats" value="150" />
-		
+		<property name="manager" ref="manager1"/>
 		<property name="chorbies">
 			<list>
 				
@@ -354,7 +339,7 @@
 		<property name="moment" value="11/11/2017" />
 		<property name="picture" value="http://estaticos.elmundo.es/blogs/elmundo/momen-tvs/imagenes_posts/2016/04/27/167657_540x303.jpg" />
 		<property name="seats" value="200" />
-		
+		<property name="manager" ref="manager1"/>
 		<property name="chorbies">
 			<list>
 			</list>

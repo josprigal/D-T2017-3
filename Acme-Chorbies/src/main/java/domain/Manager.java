@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Manager extends Actor {
+public class Manager extends CreditCardUser {
 
 	public Manager() {
 		super();
@@ -25,7 +25,7 @@ public class Manager extends Actor {
 	private String				company;
 	private String				vatNumber;
 	private Collection<Event>	events;
-	private CreditCard			creditCard;
+
 
 
 	@NotBlank
@@ -44,7 +44,7 @@ public class Manager extends Actor {
 	public void setVatNumber(final String vatNumber) {
 		this.vatNumber = vatNumber;
 	}
-	@OneToMany
+	@OneToMany(mappedBy = "manager")
 	public Collection<Event> getEvents() {
 		return this.events;
 	}
@@ -52,13 +52,6 @@ public class Manager extends Actor {
 	public void setEvents(final Collection<Event> events) {
 		this.events = events;
 	}
-	@OneToOne
-	public CreditCard getCreditCard() {
-		return this.creditCard;
-	}
 
-	public void setCreditCard(final CreditCard creditCard) {
-		this.creditCard = creditCard;
-	}
 
 }

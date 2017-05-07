@@ -212,12 +212,15 @@ public class ChorbiController {
 		Chorbi chorbi = chorbiService.findByPrincipal();
 		result = new ModelAndView("chorbies/search");
 		Assert.notNull(chorbi);
+		if(chorbi.getCreditCard() == null){
+			result.addObject("creditcard","notvalid");
+		}else{
 		if(chorbi.getCreditCard().checkValidity()){
 			result.addObject("chorbies",searchTemplateService.search());
 			result.addObject("requestURI","chorbi/search.do");
 		}else{
 			result.addObject("creditcard","notvalid");
-		}
+		}}
 
 		return result;
 

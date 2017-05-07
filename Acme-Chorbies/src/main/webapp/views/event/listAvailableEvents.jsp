@@ -17,7 +17,7 @@
 	<spring:message code="event.NearEvents" />
 </h1>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="listAvailableEvents" requestURI="${requestURI}" id="row">
+	name="listAvailableEvents" requestURI="${RequestURI}" id="row">
 
 
 	<spring:message code="event.title" var="titleHeader" />

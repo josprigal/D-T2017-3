@@ -24,7 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Chorbi extends Actor {
+public class Chorbi extends CreditCardUser {
 
 	public enum Gender {
 		MALE, FEMALE;
@@ -62,8 +62,7 @@ public class Chorbi extends Actor {
 	private Integer				age;
 	private Collection<Likes>	userLikedYou;
 	private Collection<Likes>	likedUsers;
-	private Collection<Chirp>	chirpsReceived;
-	private Collection<Chirp>	chirpsSents;
+
 
 
 	@NotNull
@@ -126,17 +125,6 @@ public class Chorbi extends Actor {
 	}
 
 
-	private CreditCard	creditCard;
-
-
-	@OneToOne
-	public CreditCard getCreditCard() {
-		return this.creditCard;
-	}
-
-	public void setCreditCard(final CreditCard creditCard) {
-		this.creditCard = creditCard;
-	}
 
 
 	private Coordinates		coordinates;
@@ -194,29 +182,13 @@ public class Chorbi extends Actor {
 		this.likedUsers = likedUsers;
 	}
 
-	@OneToMany(mappedBy = "recipent")
-	public Collection<Chirp> getChirpsReceived() {
-		return this.chirpsReceived;
-	}
 
-	public void setChirpsReceived(final Collection<Chirp> chirpsReceived) {
-		this.chirpsReceived = chirpsReceived;
-	}
-
-	@OneToMany(mappedBy = "sender")
-	public Collection<Chirp> getChirpsSents() {
-		return this.chirpsSents;
-	}
-
-	public void setChirpsSents(final Collection<Chirp> chirpsSents) {
-		this.chirpsSents = chirpsSents;
-	}
 
 
 	private List<Event>	events;
 
 
-	@ManyToMany()
+	@ManyToMany(mappedBy = "chorbies")
 	public List<Event> getEvents() {
 		return this.events;
 	}

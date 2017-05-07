@@ -13,11 +13,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
-<h1>
-	<spring:message code="event.NearEvents" />
-</h1>
+
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="listRegisteredEvents" requestURI="${requestURI}" id="row">
+	name="listRegisteredEvents" requestURI="${RequestURI}" id="row">
 
 
 	<spring:message code="event.title" var="titleHeader" />

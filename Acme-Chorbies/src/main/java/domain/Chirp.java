@@ -62,24 +62,24 @@ public class Chirp extends DomainEntity {
 	}
 
 
-	private Chorbi	sender;
-	private Chorbi	recipent;
+	private CreditCardUser	sender;
+	private CreditCardUser	recipent;
 
 
 	@ManyToOne
-	public Chorbi getSender() {
+	public CreditCardUser getSender() {
 		return this.sender;
 	}
 
-	public void setSender(final Chorbi sender) {
+	public void setSender(final CreditCardUser sender) {
 		this.sender = sender;
 	}
 	@ManyToOne
-	public Chorbi getRecipent() {
+	public CreditCardUser getRecipent() {
 		return this.recipent;
 	}
 
-	public void setRecipent(final Chorbi recipent) {
+	public void setRecipent(final CreditCardUser recipent) {
 		this.recipent = recipent;
 	}
 }

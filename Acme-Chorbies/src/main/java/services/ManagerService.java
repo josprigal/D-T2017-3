@@ -3,6 +3,8 @@ package services;
 
 import java.util.Collection;
 
+import domain.Actor;
+import domain.Chorbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,9 @@ public class ManagerService {
 	@Autowired
 	ManagerRepository	managerRepository;
 
+	@Autowired
+	ActorService actorService;
+
 
 	public ManagerService() {
 		super();
@@ -30,5 +35,14 @@ public class ManagerService {
 	public Collection<Manager> listManagersFees() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+    public Manager findByPrincipal() {
+		final Actor result = actorService.findActorByPrincipal();
+		if(!(result instanceof Manager)){
+			return null;
+		}
+
+		return (Manager) result;
 	}
 }

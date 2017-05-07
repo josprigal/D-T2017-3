@@ -12,6 +12,6 @@
 
 <form:form modelAttribute="likes" name="likes">
     <acme:textbox path="comment" code="comment"/>
-
+    <acme:textbox path="stars" code="stars"/>
     <acme:submit name="save" code="like"/>
 </form:form>

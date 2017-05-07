@@ -221,9 +221,10 @@ public class ChorbiService {
 
 	public Chorbi findByPrincipal() {
 		final Actor result = this.actorService.findActorByPrincipal();
-		Assert.isTrue(result instanceof Chorbi);
+		if(!(result instanceof Chorbi)){
+			return null;
+		}
 		final Chorbi result2 = (Chorbi) result;
-		Assert.notNull(result2);
 
 		return result2;
 	}

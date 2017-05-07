@@ -5,7 +5,9 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
+import domain.Actor;
 import domain.Chorbi;
+import domain.CreditCardUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,9 @@ public class CreditCardService {
 
 	@Autowired
 	Validator validator;
+
+	@Autowired
+	private ActorService actorService;
 
 
 	public CreditCardService() {
@@ -73,10 +78,12 @@ public class CreditCardService {
 	}
 
     public CreditCard reconstruct(CreditCard creditCard, BindingResult bindingResult) {
-		Chorbi principal = chorbiService.findByPrincipal();
-		CreditCard uCreditCard = principal.getCreditCard();
+		Actor actor = actorService.findActorByPrincipal();
+		Assert.isTrue(actor instanceof CreditCardUser);
+		CreditCardUser principal = (CreditCardUser) actor;
+		CreditCard uCreditCard = ((CreditCardUser) actor).getCreditCard();
 		if(uCreditCard==null){
-			creditCard.setChorbi(principal);
+			creditCard.setCreditCardUser(principal);
 			return creditCard;
 		}
 		uCreditCard.setBrandName(creditCard.getBrandName());
