@@ -107,7 +107,6 @@ public class EventService {
 
 	public void delete(final Event event) {
 		Assert.notNull(event);
-
 		this.eventRepository.delete(event);
 	}
 
@@ -119,6 +118,7 @@ public class EventService {
 		Assert.isTrue(saved.getManager() == manager);
 		//Notificacion chirp
 		for (final Chorbi ch : event.getChorbies()) {
+			ch.getEvents().remove(event);
 			Chirp chirp = new Chirp();
 			chirp.setSent(new Date());
 			chirp.setSubject("Event " + event.getTitle() + " has been edited.");
