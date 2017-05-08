@@ -4,11 +4,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -52,6 +48,8 @@ public class Manager extends CreditCardUser {
 	public void setEvents(final Collection<Event> events) {
 		this.events = events;
 	}
+
+
 
 
 }

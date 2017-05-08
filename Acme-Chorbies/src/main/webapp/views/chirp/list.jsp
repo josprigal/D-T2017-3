@@ -48,7 +48,7 @@
     </display:column>
 
     <display:column>
-        <a class="delete" href="chirp/delete/${row.id}.do"><spring:message code="delete"/> </a>
+        <a class="delete"  href="chirp/delete/${row.id}.do"><spring:message code="delete"/> </a>
     </display:column>
 
 </display:table>
