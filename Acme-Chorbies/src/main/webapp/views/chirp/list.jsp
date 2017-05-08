@@ -48,7 +48,7 @@
     </display:column>
 
     <display:column>
-        <a href="chirp/delete/${row.id}.do"><spring:message code="delete"/> </a>
+        <a class="delete" href="chirp/delete/${row.id}.do"><spring:message code="delete"/> </a>
     </display:column>
 
 </display:table>
@@ -91,8 +91,19 @@
     </display:column>
 
     <display:column>
-        <a href="chirp/delete/${row.id}.do"><spring:message code="delete"/> </a>
+        <a class="delete" href="chirp/delete/${row.id}.do"><spring:message code="delete"/> </a>
     </display:column>
 
 </display:table>
+
+
+<script>
+    $(".delete").on("click",function(e){
+        var txt;
+        var r = confirm("<spring:message code="doyouwanttodelete"/>");
+        if (r === false) {
+            e.preventDefault();
+        }
+    });
+</script>
 
