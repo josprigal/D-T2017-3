@@ -3,13 +3,13 @@ package services;
 
 import java.util.Collection;
 
-import domain.Actor;
-import domain.Chorbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import repositories.ManagerRepository;
+import domain.Actor;
 import domain.Manager;
 
 @Service
@@ -20,13 +20,16 @@ public class ManagerService {
 	ManagerRepository	managerRepository;
 
 	@Autowired
-	ActorService actorService;
+	ActorService		actorService;
 
 
 	public ManagerService() {
 		super();
 	}
-
+	public Manager save(final Manager manager) {
+		Assert.notNull(this.managerRepository);
+		return this.managerRepository.save(manager);
+	}
 	public Collection<Manager> listManagersMoreEventsCreated() {
 		// TODO Auto-generated method stub
 		return this.managerRepository.listManagersMoreEventsCreated();
@@ -37,11 +40,10 @@ public class ManagerService {
 		return null;
 	}
 
-    public Manager findByPrincipal() {
-		final Actor result = actorService.findActorByPrincipal();
-		if(!(result instanceof Manager)){
+	public Manager findByPrincipal() {
+		final Actor result = this.actorService.findActorByPrincipal();
+		if (!(result instanceof Manager))
 			return null;
-		}
 
 		return (Manager) result;
 	}

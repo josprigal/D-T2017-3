@@ -6,16 +6,16 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import domain.Chirp;
-import domain.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.EventRepository;
+import domain.Chirp;
 import domain.Chorbi;
 import domain.Event;
+import domain.Manager;
 
 @Service
 @Transactional
@@ -25,12 +25,15 @@ public class EventService {
 	private EventRepository	eventRepository;
 	@Autowired
 	private ChorbiService	chorbiService;
+	@Autowired
+	private ChirpService	chirpService;
 
 	@Autowired
-	private ManagerService managerService;
+	private ManagerService	managerService;
 
 	@Autowired
-	BillService billService;
+	BillService				billService;
+
 
 	public EventService() {
 		super();
@@ -57,13 +60,11 @@ public class EventService {
 
 	public Object listAvailableEvents() {
 
-		Collection<Event> listEvents = this.findAll();
-		Collection<Event> listAvailableEvents = new ArrayList<>();
-		for (Event e : listEvents) {
-			if(e.isHighlighted()){
+		final Collection<Event> listEvents = this.findAll();
+		final Collection<Event> listAvailableEvents = new ArrayList<>();
+		for (final Event e : listEvents)
+			if (e.isHighlighted())
 				listAvailableEvents.add(e);
-			}
-		}
 
 		return listAvailableEvents;
 	}
@@ -94,52 +95,78 @@ public class EventService {
 
 	}
 
-    public void newEvent(Event event) {
+	public void newEvent(final Event event) {
 		Assert.notNull(event);
-		Manager manager = managerService.findByPrincipal();
+		final Manager manager = this.managerService.findByPrincipal();
 		Assert.notNull(manager);
 		event.setManager(manager);
-		billService.billNewEvent();
+		this.billService.billNewEvent();
 
-		save(event);
-    }
-
-	public void delete(Event event) {
-		Assert.notNull(event);
-
-		eventRepository.delete(event);
+		this.save(event);
 	}
 
-	public void editEvent(Event event, Event saved) {
+	public void delete(final Event event) {
+		Assert.notNull(event);
+		this.eventRepository.delete(event);
+	}
 
-	    //Aquí iría lo de crear un chirp cuando se ha cambiado un evento
+	public void editEvent(final Event event, final Event saved) {
 
 		Assert.notNull(event);
-		Manager manager = managerService.findByPrincipal();
+		final Manager manager = this.managerService.findByPrincipal();
 		Assert.notNull(manager);
-		Assert.isTrue(saved.getManager()==manager);
+		Assert.isTrue(saved.getManager() == manager);
+		//Notificacion chirp
+		for (final Chorbi ch : event.getChorbies()) {
+			ch.getEvents().remove(event);
+			Chirp chirp = new Chirp();
+			chirp.setSent(new Date());
+			chirp.setSubject("Event " + event.getTitle() + " has been edited.");
+			chirp.setText("The manager " + manager.getName() + " has edited the event " + event.getTitle());
+			chirp.setSender(manager);
+			chirp.setRecipent(ch);
+			chirp = this.chirpService.save(chirp);
+			ch.getChirpsReceived().add(chirp);
+			manager.getChirpsSents().add(chirp);
+			this.managerService.save(manager);
+			this.chorbiService.save(ch);
+		}
 		saved.setDescription(event.getDescription());
 		saved.setMoment(event.getMoment());
 		saved.setPicture(event.getPicture());
 		saved.setTitle(event.getTitle());
 		saved.setSeats(event.getSeats());
 
-		save(saved);
+		this.save(saved);
 
 	}
 
-    public List<Chorbi> findAllChorbiesRelatedToManager() {
-		Manager manager = managerService.findByPrincipal();
+	public List<Chorbi> findAllChorbiesRelatedToManager() {
+		final Manager manager = this.managerService.findByPrincipal();
 		Assert.notNull(manager);
-		List<Chorbi> result = eventRepository.findAllChorbiesRelatedToManager(manager);
-
+		final List<Chorbi> result = this.eventRepository.findAllChorbiesRelatedToManager(manager);
 
 		return result;
-    }
+	}
 
-    public void deleteChirp(Event event) {
-	    //Aquí iría lo de crear un chirp y enviarselo a todos los usuarios del evento
-
-        delete(event);
-    }
+	public void deleteChirp(final Event event) {
+		//Aquí iría lo de crear un chirp y enviarselo a todos los usuarios del evento
+		//Notificacion chirp
+		final Manager manager = this.managerService.findByPrincipal();
+		Assert.notNull(manager);
+		for (final Chorbi ch : event.getChorbies()) {
+			Chirp chirp = new Chirp();
+			chirp.setSent(new Date());
+			chirp.setSubject("Event " + event.getTitle() + " has been deleted.");
+			chirp.setText("The manager " + manager.getName() + " has deleted the event " + event.getTitle());
+			chirp.setSender(manager);
+			chirp.setRecipent(ch);
+			chirp = this.chirpService.save(chirp);
+			ch.getChirpsReceived().add(chirp);
+			manager.getChirpsSents().add(chirp);
+			this.managerService.save(manager);
+			this.chorbiService.save(ch);
+		}
+		this.delete(event);
+	}
 }
