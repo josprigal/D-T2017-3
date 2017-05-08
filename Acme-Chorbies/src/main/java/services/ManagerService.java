@@ -26,6 +26,12 @@ public class ManagerService {
 	public ManagerService() {
 		super();
 	}
+	public Collection<Manager> findAll() {
+		Collection<Manager> result;
+		result = this.managerRepository.findAll();
+		Assert.notNull(result);
+		return result;
+	}
 	public Manager save(final Manager manager) {
 		Assert.notNull(this.managerRepository);
 		return this.managerRepository.save(manager);
@@ -33,11 +39,6 @@ public class ManagerService {
 	public Collection<Manager> listManagersMoreEventsCreated() {
 		// TODO Auto-generated method stub
 		return this.managerRepository.listManagersMoreEventsCreated();
-	}
-
-	public Collection<Manager> listManagersFees() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public Manager findByPrincipal() {

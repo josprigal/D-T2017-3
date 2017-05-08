@@ -221,9 +221,8 @@ public class ChorbiService {
 
 	public Chorbi findByPrincipal() {
 		final Actor result = this.actorService.findActorByPrincipal();
-		if(!(result instanceof Chorbi)){
+		if (!(result instanceof Chorbi))
 			return null;
-		}
 		final Chorbi result2 = (Chorbi) result;
 
 		return result2;
@@ -350,11 +349,6 @@ public class ChorbiService {
 
 	public Collection<Chorbi> listChorbiesMoreEventsRegistered() {
 		return this.chorbiRepository.listChorbiesMoreEventsRegistered();
-	}
-
-	public Collection<Chorbi> listChorbiesFees() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public Collection<Chorbi> listChorbiesAvgStars() {

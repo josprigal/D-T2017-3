@@ -173,7 +173,11 @@
 	id="listManagersFees">
 	<spring:message code="administrator.listManagersFees"
 		var="name" />
+		<spring:message code="administrator.fee"
+		var="fee" />
 	<display:column property="name" title="${name}" sortable="true" />
+		<display:column title="${fee}" sortable="true" >${listManagersFees.getDue()}</display:column>
+	
 </display:table>
 
 
@@ -192,7 +196,10 @@
 	id="listChorbiesFees">
 	<spring:message code="administrator.listChorbiesFees"
 		var="name" />
+		<spring:message code="administrator.fee"
+		var="fee" />
 	<display:column property="name" title="${name}" sortable="true" />
+	<display:column title="${fee}" sortable="true" >${listChorbiesFees.getDue()}</display:column>
 </display:table>
 
 

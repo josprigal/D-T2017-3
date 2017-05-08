@@ -67,9 +67,9 @@ public class DashboardAdministratorController extends AbstractController {
 		final Collection<Chorbi> listChorbiesMoreChirpsSent = this.chorbiService.listChorbiesMoreChirpsSent();
 
 		final Collection<Manager> listManagersMoreEventsCreated = this.managerService.listManagersMoreEventsCreated();
-		final Collection<Manager> listManagersFees = this.managerService.listManagersFees();
+		final Collection<Manager> listManagersFees = this.managerService.findAll();
 		final Collection<Chorbi> listChorbiesMoreEventsRegistered = this.chorbiService.listChorbiesMoreEventsRegistered();
-		final Collection<Chorbi> listChorbiesFees = this.chorbiService.listChorbiesFees();
+		final Collection<Chorbi> listChorbiesFees = this.chorbiService.findAll();
 		final Collection<Chorbi> listChorbiesAvgStars = this.chorbiService.listChorbiesAvgStars();
 		final Double avgStarsChorbi = this.chorbiService.avgStarsChorbi();
 		final Double maxStarsChorbi = this.chorbiService.maxStarsChorbi();
