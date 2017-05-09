@@ -108,7 +108,7 @@ public class ManagerController {
         Assert.isTrue(event.getManager() == manager);
         try{
             eventService.deleteChirp(event);
-            return new ModelAndView("redirect:../all.do");
+            return new ModelAndView("redirect:../../../");
         } catch (Exception e){
             return newEventView(event,"wrong");
         }

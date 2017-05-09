@@ -10,13 +10,13 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<jstl:if test="${hascreditcard eq false}">
-    <spring:message code="nocreditcard" />
-    <br>
-    <a href="creditcard/edit.do"><spring:message code="edit" /> <spring:message code="creditcard" /> </a>
-</jstl:if>
+<%--<jstl:if test="${hascreditcard eq false}">--%>
+    <%--<spring:message code="nocreditcard" />--%>
+    <%--<br>--%>
+    <%--<a href="creditcard/edit.do"><spring:message code="edit" /> <spring:message code="creditcard" /> </a>--%>
+<%--</jstl:if>--%>
 
-    <jstl:if test="${hascreditcard eq true}">
+    <%--<jstl:if test="${hascreditcard eq true}">--%>
     <form:form modelAttribute="event" name="event" method="POST">
         <acme:textbox path="title" code="title" />
         <acme:textbox path="description" code="description" />
@@ -26,4 +26,4 @@
 
         <acme:submit name="send" code="send" />
     </form:form>
-    </jstl:if>
+    <%--</jstl:if>--%>

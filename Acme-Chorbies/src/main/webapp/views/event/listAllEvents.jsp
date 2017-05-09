@@ -23,7 +23,7 @@
     <spring:message code="event.title" var="titleHeader" />
     <display:column title="${titleHeader}" sortable="false" >
         <jstl:if test="${row.isHighlighted() eq true}">
-            <jstl:set var="style" value="highlight"/>
+            <jstl:set var="style" value=""/>
         </jstl:if>
         <jstl:if test="${row.isAvailable() eq false}">
             <jstl:set var="style" value="grey"/>

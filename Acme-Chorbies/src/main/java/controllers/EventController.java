@@ -45,7 +45,7 @@ public class EventController extends AbstractController {
 
 		result.addObject("listAvailableEvents", this.eventService.listAvailableEvents());
 
-		result.addObject("RequestURI", "event/listAvailableEvents.do");
+		result.addObject("RequestURI", "event/all.do");
 
 		return result;
 	}

@@ -42,9 +42,9 @@
 			</a>
 	</display:column>
     <display:column property="gender" title="${gender}" sortable="false"/>
-    <jstl:if test="${principal ne null and principal.id ne row.id}">
     <spring:message code="chorbie.like" var="like"/>
     <display:column title="${like}">
+        <jstl:if test="${principal ne null and principal.id ne row.id}">
         <jstl:set var="liked" value="false"/>
         <jstl:forEach items="${row.userLikedYou}" var="user">
             <jstl:if test="${user.sender.id eq principal.id}">
@@ -57,8 +57,9 @@
         <jstl:if test="${liked eq true}">
             <a href="chorbi/dislike/${row.id}.do"><spring:message code="dislike" /></a>
         </jstl:if>
+        </jstl:if>
         </display:column>
-    </jstl:if>
+
 
 
 </display:table>
