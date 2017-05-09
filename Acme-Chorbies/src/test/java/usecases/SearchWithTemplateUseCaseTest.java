@@ -1,8 +1,6 @@
 
 package usecases;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +36,6 @@ public class SearchWithTemplateUseCaseTest extends AbstractTest {
 	CreditCardService		creditCardService;
 
 
-
-
 	/*
 	 * An actor who is authenticated as a chorbi must be able to:
 	 * 
@@ -58,12 +54,12 @@ public class SearchWithTemplateUseCaseTest extends AbstractTest {
 
 		Assert.notNull(chorbi.getCreditCard());
 		Assert.isTrue(this.creditCardService.isValid(chorbi.getCreditCard()));
-		Assert.notNull(searchTemplateService.search());
+		Assert.notNull(this.searchTemplateService.search());
 
 		super.unauthenticate();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void testNoAuthenticated() {
 		//Buscar sin estar autentificado
 		super.authenticate(null);
