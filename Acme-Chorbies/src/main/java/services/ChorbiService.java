@@ -290,8 +290,13 @@ public class ChorbiService {
 	}
 	public Double ratioNotCreditCard() {
 		Double res = 0.;
-		if (!this.findAll().isEmpty())
-			res = (double) this.chorbiRepository.chorbiNotCreditCard().size() / this.findAll().size();
+		final List<Chorbi> noCC = new ArrayList<Chorbi>();
+		if (!this.findAll().isEmpty()) {
+			for (final Chorbi c : this.findAll())
+				if (c.getCreditCard() == null)
+					noCC.add(c);
+			res = (double) noCC.size() / this.findAll().size();
+		}
 		return res;
 	}
 
