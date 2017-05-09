@@ -176,7 +176,7 @@
 		<spring:message code="administrator.fee"
 		var="fee" />
 	<display:column property="name" title="${name}" sortable="true" />
-		<display:column title="${fee}" sortable="true" >${listManagersFees.getDue()}</display:column>
+		<display:column title="${fee}" sortable="true" >-1</display:column>
 	
 </display:table>
 
