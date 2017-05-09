@@ -67,9 +67,9 @@ public class EventController extends AbstractController {
 		Assert.notNull(c);
 		try{
 			eventService.register(event);
-			return new ModelAndView("redirect:/event/all.do");
+			return new ModelAndView("redirect:../all.do");
 		} catch (Exception e){
-			return new ModelAndView("redirect:/event/all.do");
+			return new ModelAndView("redirect:../all.do");
         }
 	}
 
@@ -79,9 +79,9 @@ public class EventController extends AbstractController {
         Assert.notNull(c);
         try{
             eventService.unregister(event);
-			return new ModelAndView("redirect:/event/all.do");
-        } catch (Exception e){
-			return new ModelAndView("redirect:/event/all.do");
+			return new ModelAndView("redirect:../all.do");
+		} catch (Exception e){
+			return new ModelAndView("redirect:../all.do");
         }
     }
 }

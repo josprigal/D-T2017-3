@@ -49,6 +49,7 @@ public class ManagerController {
 
             return new ModelAndView("redirect:../all.do");
         } catch (Exception e){
+            System.out.println(e.getMessage());
             return newEventView(event,"wrong");
         }
     }

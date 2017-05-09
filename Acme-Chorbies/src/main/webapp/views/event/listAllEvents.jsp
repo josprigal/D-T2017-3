@@ -48,10 +48,10 @@
     <spring:message code="register" var="register" />
     <display:column title="${register}">
         <jstl:if test="${row.chorbies.contains(principal) eq false and principal ne null}">
-            <a href="/event/register/${row.id}.do"><spring:message code="register" /> </a>
+            <a href="event/register/${row.id}.do"><spring:message code="register" /> </a>
         </jstl:if>
         <jstl:if test="${row.chorbies.contains(principal) eq true and principal ne null}">
-        <a href="/event/unregister/${row.id}.do"><spring:message code="unregister" /></a>
+        <a href="event/unregister/${row.id}.do"><spring:message code="unregister" /></a>
         </jstl:if>
     </display:column>
 
