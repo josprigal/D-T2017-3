@@ -49,7 +49,7 @@
             <li><a class="fNiv">MANAGER</a>
                 <ul>
                     <li class="arrow"></li>
-                    <li><a href="manager/event/all.do"><spring:message code="yourmanagedevents"/> </a> </li>
+                    <li><a href="managing/event/all.do"><spring:message code="yourmanagedevents"/> </a> </li>
                 </ul>
             </li>
         </security:authorize>

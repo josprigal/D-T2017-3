@@ -82,7 +82,7 @@
 		<security:intercept-url pattern="/event/listAvailableEvents.do"
 								access="permitAll" />
 
-		<security:intercept-url pattern="/manager/**"
+		<security:intercept-url pattern="/managing/**"
 								access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/event/**"
 								access="isAuthenticated()" />

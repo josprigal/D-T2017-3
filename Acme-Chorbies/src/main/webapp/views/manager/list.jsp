@@ -13,7 +13,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <a href="chirp/broadcast.do"><spring:message code="broadcast" /> </a>
 <br>
-<a href="manager/event/new.do"> <spring:message code="newevent" /></a>
+<a href="managing/event/new.do"> <spring:message code="newevent" /></a>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
                name="events" requestURI="${requestURI}" id="row">
 
@@ -38,8 +38,8 @@
                     sortable="true" />
     <spring:message code="edit" var="edit" />
     <display:column title="">
-        <a href="manager/event/edit/${row.id}.do"><spring:message code="edit" /> </a>
-        | <a href="manager/event/delete/${row.id}.do"><spring:message code="delete" /> </a>
+        <a href="managing/event/edit/${row.id}.do"><spring:message code="edit" /> </a>
+        | <a href="managing/event/delete/${row.id}.do"><spring:message code="delete" /> </a>
     </display:column>
 
 </display:table>

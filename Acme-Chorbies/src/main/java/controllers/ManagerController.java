@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/managing")
 public class ManagerController {
 
     @Autowired
