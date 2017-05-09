@@ -87,8 +87,7 @@
 		<security:intercept-url pattern="/event/**"
 								access="isAuthenticated()" />
 
-		<security:intercept-url pattern="/event/listAvailableEvents.do"
-			access="permitAll" />
+
 		<security:intercept-url pattern="/event/listRegisteredEvents.do"
 			access="hasAnyRole('CHORBI')"  />
 		<security:intercept-url pattern="/profile/action-1.do"

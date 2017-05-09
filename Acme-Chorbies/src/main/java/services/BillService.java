@@ -1,65 +1,71 @@
 
 package services;
 
-import domain.*;
+import java.util.Collection;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import repositories.BillRepository;
-import repositories.ChirpRepository;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import repositories.BillRepository;
+import domain.Bill;
+import domain.Chorbi;
+import domain.Fee;
+import domain.Manager;
 
 @Service
 @Transactional
 public class BillService {
 
 	@Autowired
-	BillRepository billRepository;
+	BillRepository	billRepository;
 
 	@Autowired
-    FeeService feeService;
+	FeeService		feeService;
 
 	@Autowired
-    ManagerService managerService;
+	ManagerService	managerService;
 
 	@Autowired
-    ChorbiService chorbiService;
+	ChorbiService	chorbiService;
 
-	public Bill save(Bill b){
+
+	public Bill save(final Bill b) {
 		Assert.notNull(b);
 
-		return billRepository.save(b);
+		return this.billRepository.save(b);
+	}
+	public Collection<Bill> findAll() {
+		Collection<Bill> result;
+		result = this.billRepository.findAll();
+		Assert.notNull(result);
+		return result;
+	}
+	public void billNewEvent() {
+		final Manager manager = this.managerService.findByPrincipal();
+		Assert.notNull(manager);
+		final Fee fee = this.feeService.findFirst();
+		final Bill bill = new Bill();
+		bill.setAmount(fee.getFeeManagerEvent());
+		bill.setMoment(new Date());
+		bill.setReceiver(manager);
+
+		this.save(bill);
 	}
 
-	public void billNewEvent(){
-        Manager manager = managerService.findByPrincipal();
-        Assert.notNull(manager);
-        Fee fee = feeService.findFirst();
-        Bill bill = new Bill();
-        bill.setAmount(fee.getFeeManagerEvent());
-        bill.setMoment(new Date());
-        bill.setReceiver(manager);
+	public void billMonthlyChorbies() {
+		final Collection<Chorbi> chorbis = this.chorbiService.findAll();
+		final Fee fee = this.feeService.findFirst();
+		for (final Chorbi e : chorbis) {
+			final Bill bill = new Bill();
+			bill.setAmount(fee.getFeeChorbieMonth());
+			bill.setMoment(new Date());
+			bill.setReceiver(e);
 
-        save(bill);
-    }
+			this.save(bill);
+		}
 
-
-    public void billMonthlyChorbies(){
-        Collection<Chorbi> chorbis = chorbiService.findAll();
-        Fee fee = feeService.findFirst();
-        for(Chorbi e: chorbis){
-            Bill bill = new Bill();
-            bill.setAmount(fee.getFeeChorbieMonth());
-            bill.setMoment(new Date());
-            bill.setReceiver(e);
-
-
-            save(bill);
-        }
-
-    }
+	}
 }
