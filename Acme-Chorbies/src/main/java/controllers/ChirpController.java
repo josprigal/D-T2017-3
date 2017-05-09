@@ -16,6 +16,7 @@ import services.ChorbiService;
 import services.ManagerService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -105,7 +106,7 @@ public class ChirpController extends AbstractController {
     }
 
     @RequestMapping(value = "/new",method = RequestMethod.POST)
-    public ModelAndView createNewChirPost(@ModelAttribute Chirp chirp, BindingResult bindingResult){
+    public ModelAndView createNewChirPost(@ModelAttribute @Valid Chirp chirp, BindingResult bindingResult){
         Actor actor = actorService.findActorByPrincipal();
         Assert.notNull(actor);
         Assert.isTrue(actor instanceof CreditCardUser);
