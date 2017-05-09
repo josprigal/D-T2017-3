@@ -54,7 +54,7 @@ public class ChangeTemplateUseCaseTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void testNoAuthenticated() {
 		//Intentar cambiar su template sin estar conectado
 		super.authenticate(null);

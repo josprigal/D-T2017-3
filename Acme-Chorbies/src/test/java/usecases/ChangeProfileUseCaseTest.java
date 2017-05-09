@@ -49,7 +49,7 @@ public class ChangeProfileUseCaseTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void testNoAuthenticated() {
 		//Intentar cambiar el perfil sin estar conectado
 		super.authenticate(null);

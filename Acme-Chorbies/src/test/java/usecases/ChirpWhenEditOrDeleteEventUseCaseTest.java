@@ -56,6 +56,8 @@ public class ChirpWhenEditOrDeleteEventUseCaseTest extends AbstractTest {
 		}
 		if (event != null) {
 			this.eventService.editEvent(event, event);
+			System.out.println(event.getChorbies().size());
+			System.out.println(manager.getChirpsSents());
 			Assert.isTrue(manager.getChirpsSents().size() == (size + event.getChorbies().size()));
 			size = manager.getChirpsSents().size();
 			final int size2 = (size + event.getChorbies().size());

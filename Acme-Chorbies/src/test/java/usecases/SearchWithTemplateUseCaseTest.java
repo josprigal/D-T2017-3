@@ -63,7 +63,7 @@ public class SearchWithTemplateUseCaseTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void testNoAuthenticated() {
 		//Buscar sin estar autentificado
 		super.authenticate(null);

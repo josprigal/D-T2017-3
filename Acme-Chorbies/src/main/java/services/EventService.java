@@ -116,7 +116,6 @@ public class EventService {
 		final Manager manager = this.managerService.findByPrincipal();
 		Assert.notNull(manager);
 		Assert.isTrue(saved.getManager() == manager);
-		//Notificacion chirp
 			for (Chorbi ch : saved.getChorbies()) {
 				Chirp chirp = new Chirp();
 				chirp.setSent(new Date());
@@ -126,8 +125,8 @@ public class EventService {
 				chirp.setSender(manager);
 				chirp.setRecipent(ch);
 				chirp = this.chirpService.save(chirp);
-
 			}
+
 		saved.setDescription(event.getDescription());
 		saved.setMoment(event.getMoment());
 		saved.setPicture(event.getPicture());

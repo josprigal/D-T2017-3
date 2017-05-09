@@ -45,7 +45,7 @@ public class EventController extends AbstractController {
 
 		result.addObject("listAvailableEvents", this.eventService.listAvailableEvents());
 
-		result.addObject("RequestURI", "event/all.do");
+		result.addObject("RequestURI", "event/listAvailableEvents.do");
 
 		return result;
 	}
@@ -67,9 +67,9 @@ public class EventController extends AbstractController {
 		Assert.notNull(c);
 		try{
 			eventService.register(event);
-			return new ModelAndView("redirect:../all.do");
+			return new ModelAndView("redirect:../../");
 		} catch (Exception e){
-			return new ModelAndView("redirect:../all.do");
+			return new ModelAndView("redirect:../../");
         }
 	}
 
@@ -78,7 +78,7 @@ public class EventController extends AbstractController {
         final Chorbi c = this.chorbiService.findByPrincipal();
         Assert.notNull(c);
         try{
-            eventService.unregister(event);
+            //eventService.unregister(event);
 			return new ModelAndView("redirect:../all.do");
 		} catch (Exception e){
 			return new ModelAndView("redirect:../all.do");

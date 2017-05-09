@@ -79,7 +79,7 @@ public class ChangeBannerAndTimeUseCaseTest extends AbstractTest {
 		this.unauthenticate();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void testNoAuthenticated() {
 		//Cambiar banner sin estar autentificado
 

@@ -65,7 +65,7 @@ public class LikeAChorbiUseCaseTest extends AbstractTest {
 		Assert.isTrue(size2 > size1);
 		super.unauthenticate();
 	}
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void testNoAuthenticated() {
 		//Dar un like a otro chorbi sin login
 		super.authenticate(null);

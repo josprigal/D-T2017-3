@@ -69,7 +69,7 @@ public class BanOrUnbanAChorbiUseCaseTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void testNoAuthenticated() {
 		//Banear un chorbi y desbanearlo sin autentificacion
 		super.authenticate(null);

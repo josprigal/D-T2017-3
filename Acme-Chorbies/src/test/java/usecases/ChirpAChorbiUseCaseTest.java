@@ -76,7 +76,7 @@ public class ChirpAChorbiUseCaseTest extends AbstractTest {
 		Assert.isTrue(size2 > size3); //¿Se ha borrado?
 		super.unauthenticate();
 	}
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void testNoAuthenticated() {
 		///Dar un chirp a otro chorbi sin estar autentificado 
 		super.authenticate(null);
