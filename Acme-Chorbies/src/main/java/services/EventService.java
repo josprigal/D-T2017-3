@@ -116,17 +116,18 @@ public class EventService {
 		final Manager manager = this.managerService.findByPrincipal();
 		Assert.notNull(manager);
 		Assert.isTrue(saved.getManager() == manager);
-			for (Chorbi ch : saved.getChorbies()) {
-				Chirp chirp = new Chirp();
-				chirp.setSent(new Date());
-				chirp.setSubject("Event " + saved.getTitle() + " has been edited.");
-				chirp.setText("The manager " + manager.getName() + " has edited the event " + saved.getTitle());
-				chirp.setAttachments("http://google.es");
-				chirp.setSender(manager);
-				chirp.setRecipent(ch);
-				chirp = this.chirpService.save(chirp);
-			}
+		//Notificacion chirp
+		for (final Chorbi ch : saved.getChorbies()) {
+			Chirp chirp = new Chirp();
+			chirp.setSent(new Date(System.currentTimeMillis() - 1));
+			chirp.setSubject("Event " + saved.getTitle() + " has been edited.");
+			chirp.setText("The manager " + manager.getName() + " has edited the event " + saved.getTitle());
+			chirp.setAttachments("http://google.es");
+			chirp.setSender(manager);
+			chirp.setRecipent(ch);
+			chirp = this.chirpService.save(chirp);
 
+		}
 		saved.setDescription(event.getDescription());
 		saved.setMoment(event.getMoment());
 		saved.setPicture(event.getPicture());
@@ -152,11 +153,11 @@ public class EventService {
 		Assert.notNull(manager);
 		for (final Chorbi ch : event.getChorbies()) {
 			Chirp chirp = new Chirp();
-			chirp.setSent(new Date());
+			chirp.setSent(new Date(System.currentTimeMillis() - 1));
 			chirp.setSubject("Event " + event.getTitle() + " has been deleted.");
 			chirp.setText("The manager " + manager.getName() + " has deleted the event " + event.getTitle());
 			chirp.setSender(manager);
-            chirp.setAttachments("http://google.es");
+			chirp.setAttachments("http://google.es");
 			chirp.setRecipent(ch);
 			chirp = this.chirpService.save(chirp);
 		}

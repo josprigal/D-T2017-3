@@ -49,20 +49,18 @@ public class ChirpWhenEditOrDeleteEventUseCaseTest extends AbstractTest {
 		final Manager manager = this.managerService.findByPrincipal();
 		Assert.notNull(manager);
 		Event event = null;
-		int size = manager.getChirpsSents().size();
+		int size = this.chirpService.findAll().size();
 		for (final Event ev : manager.getEvents()) {
 			event = ev;
 			break;
 		}
 		if (event != null) {
 			this.eventService.editEvent(event, event);
-			System.out.println(event.getChorbies().size());
-			System.out.println(manager.getChirpsSents());
-			Assert.isTrue(manager.getChirpsSents().size() == (size + event.getChorbies().size()));
-			size = manager.getChirpsSents().size();
+			Assert.isTrue(this.chirpService.findAll().size() == (size + event.getChorbies().size()));
+			size = this.chirpService.findAll().size();
 			final int size2 = (size + event.getChorbies().size());
 			this.eventService.deleteChirp(event);
-			Assert.isTrue(manager.getChirpsSents().size() == size2);
+			Assert.isTrue(this.chirpService.findAll().size() == size2);
 		}
 		super.unauthenticate();
 	}
